@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Study Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--p:#FBF5E6;--p2:#F5EDD4;--wh:#FFFDF7;--dk:#2C1810;--md:#6B4423;--gd:#C4872A;--gl:#E8C97A;--gp:#FBF0D0;--tn:#D4B896;--tl:#EBD9BE;--rd:#8B3A3A;--tl2:#2A7B6B;--in:#3A4A8B;--pl:#6B3A7B}
+body{font-family:Lato,sans-serif;background:var(--p);color:var(--dk);min-height:100vh;display:flex;flex-direction:column}
+a{text-decoration:none;color:inherit}
+
+/* HEADER */
+.hdr{background:var(--dk);color:#FDF8EE;padding:1rem 1.5rem;display:flex;align-items:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.logo{font-family:Caveat,cursive;font-size:1.7rem;font-weight:700;color:var(--gl)}
+.sub{font-size:.7rem;color:#C4A47A;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+.bdg{margin-left:auto;background:rgba(196,135,42,.25);border:1px solid var(--gd);color:var(--gl);font-size:.7rem;padding:.25rem .65rem;border-radius:20px;letter-spacing:.08em;text-transform:uppercase}
+
+/* HERO */
+.hero{text-align:center;padding:3rem 1.5rem 2rem;max-width:760px;margin:0 auto}
+.hero h1{font-family:Caveat,cursive;font-size:3rem;color:var(--dk);margin-bottom:.5rem;line-height:1.1}
+.hero p{font-family:'Playfair Display',serif;font-style:italic;font-size:1.15rem;color:var(--md);line-height:1.7}
+
+/* CONTENT */
+.wrap{flex:1;max-width:980px;width:100%;margin:0 auto;padding:0 1.5rem 3rem}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-family:Caveat,cursive;font-size:1.5rem;color:var(--dk);font-weight:700;margin:1.5rem 0 1.1rem}
+.sec-icon{width:30px;height:30px;background:var(--dk);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+
+/* STUDY GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem}
+
+/* AVAILABLE STUDY CARD (a link) */
+.card{display:block;background:var(--wh);border:1.5px solid var(--tn);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--gd);border-radius:16px 16px 0 0}
+.card:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(44,24,16,.18)}
+.card .emoji{font-size:2.4rem;display:block;margin-bottom:.6rem}
+.card .ctitle{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--dk);line-height:1.25;margin-bottom:.4rem}
+.card .cdesc{font-size:.85rem;color:var(--md);line-height:1.65;margin-bottom:1rem}
+.card .meta{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.tag{background:var(--gp);border:1px solid var(--gd);color:var(--md);font-size:.68rem;padding:.2rem .55rem;border-radius:14px;font-weight:700}
+.card .open{display:inline-flex;align-items:center;gap:.4rem;background:var(--dk);color:var(--gl);font-size:.82rem;font-weight:700;padding:.5rem .9rem;border-radius:9px;transition:background .15s}
+.card:hover .open{background:var(--md)}
+
+/* COMING SOON CARD */
+.soon{background:var(--p2);border:1.5px dashed var(--tn);border-radius:16px;padding:1.5rem;opacity:.8}
+.soon .emoji{font-size:2.4rem;display:block;margin-bottom:.6rem;filter:grayscale(.4)}
+.soon .ctitle{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--md);line-height:1.25;margin-bottom:.4rem}
+.soon .cdesc{font-size:.85rem;color:var(--md);line-height:1.65;margin-bottom:1rem}
+.soon .badge2{display:inline-block;background:var(--tn);color:var(--dk);font-size:.7rem;font-weight:700;padding:.3rem .7rem;border-radius:9px}
+
+/* FOOTER */
+.foot{background:var(--dk);color:#C4A47A;text-align:center;padding:1.4rem;font-size:.78rem;line-height:1.7}
+.foot a{color:var(--gl);text-decoration:underline}
+
+@media(max-width:600px){.hero h1{font-size:2.2rem}.hero p{font-size:1rem}.wrap{padding:0 1rem 2rem}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div>
+    <div class="logo">&#128218; Bible Study Library</div>
+    <div class="sub">Interactive studies for growth &amp; small groups</div>
+  </div>
+  <span class="bdg">Free &amp; Offline-Ready</span>
+</header>
+
+<section class="hero">
+  <h1>Bible Study Library</h1>
+  <p>A growing collection of interactive, book-by-book Bible studies &mdash; designed for personal Christian maturity and small-group discussion. Choose a study below to begin.</p>
+</section>
+
+<main class="wrap">
+
+  <div class="sec-title"><span class="sec-icon">&#128214;</span> Available Studies</div>
+  <div class="grid">
+
+    <!-- ===================== ROMANS (LIVE) ===================== -->
+    <a class="card" href="romans-study.html">
+      <span class="emoji">&#128220;</span>
+      <div class="ctitle">&#128220; The Book of Romans &mdash; Interactive Bible Study</div>
+      <div class="cdesc">All 16 chapters of Paul&rsquo;s letter to Rome &mdash; concept cards, key verses, teaching notes, discussion questions, and full-text reading.</div>
+      <div class="meta">
+        <span class="tag">16 Chapters</span>
+        <span class="tag">Small Group</span>
+        <span class="tag">NIV link + KJV</span>
+      </div>
+      <span class="open">Open Study &rarr;</span>
+    </a>
+
+    <!--
+      ============================================================
+      HOW TO ADD ANOTHER STUDY LATER
+      ============================================================
+      1. Upload the new study file to this repo (e.g. john-study.html).
+      2. Copy the <a class="card"> ... </a> block above.
+      3. Change href="john-study.html", the emoji, title, description,
+         and tags. Move it into this "Available Studies" grid.
+      4. (Optional) Remove the matching "Coming soon" card below.
+      ============================================================
+    -->
+
+  </div>
+
+  <div class="sec-title"><span class="sec-icon">&#9203;</span> Coming Soon</div>
+  <div class="grid">
+
+    <div class="soon">
+      <span class="emoji">&#10010;</span>
+      <div class="ctitle">The Gospel of John</div>
+      <div class="cdesc">&ldquo;That you may believe that Jesus is the Christ&rdquo; &mdash; 21 chapters on the life and identity of Jesus.</div>
+      <span class="badge2">Coming soon</span>
+    </div>
+
+    <div class="soon">
+      <span class="emoji">&#127793;</span>
+      <div class="ctitle">Genesis</div>
+      <div class="cdesc">Beginnings &mdash; creation, the fall, the patriarchs, and the foundations of God&rsquo;s redemptive plan.</div>
+      <span class="badge2">Coming soon</span>
+    </div>
+
+    <div class="soon">
+      <span class="emoji">&#9876;&#65039;</span>
+      <div class="ctitle">Ephesians</div>
+      <div class="cdesc">Our identity in Christ and the calling to walk worthy &mdash; 6 chapters on grace, unity, and spiritual armor.</div>
+      <span class="badge2">Coming soon</span>
+    </div>
+
+    <div class="soon">
+      <span class="emoji">&#127931;</span>
+      <div class="ctitle">Psalms</div>
+      <div class="cdesc">The prayer book of the Bible &mdash; songs of praise, lament, trust, and worship for every season of life.</div>
+      <span class="badge2">Coming soon</span>
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="foot">
+  Bible Study Library &middot; Built for Christian maturity and small-group study<br>
+  Embedded scripture is public domain (KJV &amp; Bible in Basic English). NIV text is linked via
+  <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a>.<br>
+  <em>To God be the glory &mdash; Romans 16:27</em>
+</footer>
+
+</body>
+</html>
