@@ -248,3 +248,11 @@ figcaption a:hover{text-decoration:underline}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+/* graceful image fallback: if a figure has no image, show caption as a styled placeholder */
+figure.noimg{
+  border:1px dashed var(--rule);border-radius:6px;
+  padding:1.4rem;background:rgba(46,58,120,.04);
+}
+figure.noimg figcaption{margin-top:0;font-size:1rem;color:var(--crimson)}
+figure.noimg figcaption::before{content:"\1F5BC  ";opacity:.6}
