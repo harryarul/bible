@@ -1,0 +1,140 @@
+/* ===========================================================
+   THE FOUR GOSPELS — shared stylesheet
+   Matches the Bible Study Library parchment / wine / gold system.
+   Used by matthew.html, mark.html, luke.html, john.html
+   =========================================================== */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --p:#FBF5E6;--p2:#F5EDD4;--wh:#FFFDF7;--dk:#2C1810;--md:#6B4423;
+  --gd:#C4872A;--gl:#E8C97A;--gp:#FBF0D0;--tn:#D4B896;--tl:#EBD9BE;
+  --rd:#8B3A3A;--tl2:#2A7B6B;--in:#3A4A8B;--pl:#6B3A7B;
+  /* category accents */
+  --c-birth:#C4872A;   /* gold      */
+  --c-ministry:#2A7B6B;/* teal      */
+  --c-miracle:#2A7B6B;
+  --c-teaching:#3A4A8B;/* indigo    */
+  --c-journey:#6B4423; /* brown     */
+  --c-passion:#6B3A7B; /* purple    */
+  --c-cross:#8B3A3A;   /* wine      */
+  --c-resurr:#C4872A;
+  --c-comm:#2A7B6B;
+  --c-ending:#6B4423;
+}
+html{scroll-behavior:smooth}
+body{font-family:Lato,sans-serif;background:var(--p);color:var(--dk);min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
+a{text-decoration:none;color:inherit}
+:focus-visible{outline:3px solid var(--gd);outline-offset:2px;border-radius:4px}
+
+/* HEADER */
+.hdr{background:var(--dk);color:#FDF8EE;padding:.9rem 1.3rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:30;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.hdr .back{font-size:.78rem;color:var(--gl);border:1px solid var(--gd);padding:.3rem .7rem;border-radius:20px;white-space:nowrap;transition:background .15s}
+.hdr .back:hover{background:rgba(196,135,42,.25)}
+.hdr .logo{font-family:Caveat,cursive;font-size:1.45rem;font-weight:700;color:var(--gl);line-height:1}
+.hdr .sub{font-size:.62rem;color:#C4A47A;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+.hdr .right{margin-left:auto;display:flex;gap:.4rem}
+.hdr .gnav{font-size:.8rem;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,253,247,.06);border:1px solid rgba(232,201,122,.25);transition:.15s}
+.hdr .gnav:hover{background:rgba(196,135,42,.3)}
+.hdr .gnav.on{background:var(--gd);color:var(--dk);font-weight:700;border-color:var(--gl)}
+
+/* HERO */
+.hero{position:relative;text-align:center;padding:2.6rem 1.5rem 2rem;max-width:860px;margin:0 auto;overflow:hidden}
+.hero .symbol{margin:0 auto 1rem;width:118px;height:118px}
+.hero .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gd);font-weight:700}
+.hero h1{font-family:Caveat,cursive;font-size:3.3rem;color:var(--dk);margin:.2rem 0 .1rem;line-height:1}
+.hero .greek{font-family:'Playfair Display',serif;font-style:italic;color:var(--md);font-size:1.05rem}
+.hero .lede{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--md);margin:.9rem auto 0;max-width:620px;line-height:1.7}
+.facts{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin:1.3rem auto 0;max-width:680px}
+.fact{background:var(--wh);border:1px solid var(--tn);border-radius:12px;padding:.45rem .8rem;font-size:.78rem;color:var(--md)}
+.fact b{color:var(--dk)}
+.keyverse{max-width:620px;margin:1.4rem auto 0;background:var(--gp);border:1px solid var(--gd);border-left:5px solid var(--gd);border-radius:12px;padding:1rem 1.2rem;font-family:'Playfair Display',serif;font-style:italic;color:var(--dk)}
+.keyverse .ref{display:block;margin-top:.4rem;font-style:normal;font-family:Lato;font-size:.78rem;font-weight:700;color:var(--gd);letter-spacing:.05em}
+
+/* WRAP */
+.wrap{flex:1;max-width:920px;width:100%;margin:0 auto;padding:.5rem 1.3rem 3rem}
+
+/* JUMP BAR */
+.jump{position:sticky;top:54px;z-index:20;display:flex;gap:.4rem;overflow-x:auto;padding:.6rem .2rem;background:linear-gradient(var(--p),var(--p) 72%,transparent);margin-bottom:.5rem;-webkit-overflow-scrolling:touch}
+.jump a{flex:0 0 auto;font-size:.74rem;font-weight:700;color:var(--md);background:var(--wh);border:1px solid var(--tn);padding:.32rem .7rem;border-radius:20px;transition:.15s}
+.jump a:hover{background:var(--dk);color:var(--gl);border-color:var(--dk)}
+
+/* SECTION HEADER */
+.act{display:flex;align-items:center;gap:.7rem;margin:2.4rem 0 1.1rem;scroll-margin-top:110px}
+.act .num{font-family:Caveat,cursive;font-size:1.1rem;font-weight:700;color:var(--gd);background:var(--dk);width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.act h2{font-family:Caveat,cursive;font-size:1.85rem;color:var(--dk);line-height:1}
+.act p{font-size:.82rem;color:var(--md);margin-top:1px}
+.act .line{flex:1;height:1px;background:linear-gradient(90deg,var(--tn),transparent)}
+
+/* EVENT CARD */
+.ev{position:relative;background:var(--wh);border:1.5px solid var(--tn);border-radius:15px;padding:1.15rem 1.25rem 1.1rem;margin-bottom:1rem;scroll-margin-top:120px;border-left:5px solid var(--cat,var(--gd));transition:box-shadow .2s,transform .2s}
+.ev:target{box-shadow:0 0 0 3px var(--gl),0 10px 26px rgba(44,24,16,.16);transform:translateY(-2px)}
+.ev:target::after{content:"↗ jumped here";position:absolute;top:.7rem;right:.9rem;font-size:.62rem;font-weight:700;color:var(--gd);letter-spacing:.06em;text-transform:uppercase;animation:fade 3.5s forwards}
+@keyframes fade{0%,70%{opacity:1}100%{opacity:0}}
+.ev .top{display:flex;align-items:flex-start;gap:.7rem;flex-wrap:wrap}
+.ev .cat{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--cat,var(--gd));padding:.22rem .55rem;border-radius:20px;white-space:nowrap}
+.ev h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--dk);line-height:1.25;flex:1;min-width:160px}
+.ev .here{font-size:.74rem;font-weight:700;color:var(--cat,var(--gd));white-space:nowrap;background:var(--gp);border:1px solid var(--gl);padding:.18rem .5rem;border-radius:8px}
+.ev .body{font-size:.9rem;color:var(--md);line-height:1.7;margin-top:.6rem}
+.ev .body b{color:var(--dk)}
+.ev .note{margin-top:.6rem;font-size:.82rem;font-style:italic;color:var(--rd);background:#FBEFEF;border:1px dashed var(--rd);border-radius:9px;padding:.45rem .7rem}
+
+/* MIRACLE / cross-gospel INTERLINKS */
+.links{margin-top:.75rem;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem}
+.links .lbl{font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--md);margin-right:.1rem}
+.xlink{display:inline-flex;align-items:center;gap:.32rem;font-size:.74rem;font-weight:700;background:var(--gp);border:1px solid var(--gd);color:var(--md);padding:.26rem .55rem;border-radius:8px;transition:.15s}
+.xlink:hover{background:var(--dk);color:var(--gl);border-color:var(--dk)}
+.xlink .dot{width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:#fff;flex-shrink:0}
+.xlink.self{background:var(--dk);color:var(--gl);border-color:var(--dk);cursor:default}
+.d-matthew{background:#3A4A8B}.d-mark{background:#8B3A3A}.d-luke{background:#2A7B6B}.d-john{background:#6B3A7B}
+.allfour{display:inline-block;margin-left:.2rem;font-size:.62rem;font-weight:700;color:#fff;background:var(--gd);padding:.18rem .5rem;border-radius:20px;letter-spacing:.04em}
+
+/* SVG SCENE inside cards */
+.scene{display:block;width:100%;max-width:340px;height:auto;margin:.9rem auto .2rem;background:var(--p2);border:1px solid var(--tn);border-radius:12px}
+
+/* SEVEN WORDS */
+.words{display:grid;gap:.7rem;grid-template-columns:1fr 1fr}
+.word{background:var(--wh);border:1.5px solid var(--tn);border-radius:14px;padding:1rem 1.1rem;border-top:5px solid var(--rd);position:relative}
+.word.dim{opacity:.55}
+.word .n{font-family:Caveat,cursive;font-size:1.6rem;color:var(--rd);font-weight:700;line-height:1}
+.word .say{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--dk);margin:.3rem 0 .5rem;line-height:1.4}
+.word .src{display:flex;flex-wrap:wrap;gap:.35rem}
+.word .badge{font-size:.66rem;font-weight:700;color:#fff;padding:.18rem .5rem;border-radius:7px}
+.word .mine{position:absolute;top:.7rem;right:.8rem;font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--rd)}
+
+/* CALLOUT (Great Commission, harmony, etc.) */
+.callout{background:linear-gradient(135deg,var(--dk),#3d2415);color:#FDF8EE;border-radius:18px;padding:1.6rem 1.5rem;margin:1rem 0;border:1px solid var(--gd)}
+.callout h3{font-family:Caveat,cursive;color:var(--gl);font-size:1.9rem;line-height:1;margin-bottom:.5rem}
+.callout .verse{font-family:'Playfair Display',serif;font-style:italic;font-size:1.12rem;line-height:1.7;color:#FBF0D0}
+.callout .ref{display:inline-block;margin-top:.6rem;font-size:.74rem;font-weight:700;color:var(--gl);letter-spacing:.05em}
+.callout .alt{margin-top:1rem;border-top:1px solid rgba(232,201,122,.3);padding-top:.9rem;display:grid;gap:.5rem}
+.callout .alt a{font-size:.82rem;color:#FBF0D0;display:flex;gap:.5rem;align-items:baseline}
+.callout .alt a:hover{color:var(--gl)}
+.callout .alt b{color:var(--gl);font-size:.74rem;white-space:nowrap;min-width:78px}
+
+/* HARMONY (endings) compare grid */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:.4rem}
+.cmp{background:var(--wh);border:1.5px solid var(--tn);border-radius:14px;padding:1rem 1.1rem;border-top:5px solid var(--cc)}
+.cmp h4{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--dk);display:flex;align-items:center;gap:.45rem}
+.cmp h4 .sy{font-size:1.1rem}
+.cmp .ref{font-size:.7rem;font-weight:700;color:var(--md);margin:.15rem 0 .5rem}
+.cmp p{font-size:.85rem;color:var(--md);line-height:1.65}
+.cmp.is-here{box-shadow:0 0 0 2px var(--gl)}
+
+/* READ LINKS */
+.read{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.4rem 0 .5rem}
+.read a{font-size:.82rem;font-weight:700;padding:.5rem .9rem;border-radius:9px;background:var(--dk);color:var(--gl);transition:background .15s}
+.read a.alt{background:var(--wh);color:var(--md);border:1.5px solid var(--tn)}
+.read a:hover{background:var(--md);color:var(--gl)}
+
+/* FOOTER */
+.foot{background:var(--dk);color:#C4A47A;text-align:center;padding:1.4rem;font-size:.78rem;line-height:1.7;margin-top:1rem}
+.foot a{color:var(--gl);text-decoration:underline}
+.foot .symrow{display:flex;justify-content:center;gap:1.1rem;margin-bottom:.7rem;font-size:1.3rem}
+
+@media(max-width:640px){
+  .hero h1{font-size:2.5rem}
+  .hero .symbol{width:96px;height:96px}
+  .act h2{font-size:1.5rem}
+  .words{grid-template-columns:1fr}
+  .compare{grid-template-columns:1fr}
+  .hdr .sub{display:none}
+}
