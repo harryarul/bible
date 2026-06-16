@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Song of Solomon — A Study of the Song of Songs</title>
+<meta name="description" content="A chapter-by-chapter study of the Song of Solomon: the bride and the bridegroom, the garden of love, and the seal upon the heart. KJV references, highlighted moments, and reflections.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#F4ECD9;
+    --parchment-deep:#EADFC4;
+    --card:#FBF6E9;
+    --ink:#2C2722;
+    --ink-soft:#5A5048;
+    --indigo:#25274D;
+    --indigo-soft:#3A3D6B;
+    --wine:#7A2B39;
+    --gold:#AE8338;
+    --gold-soft:#C9A85C;
+    --sage:#646E4C;
+    --line:#D9CBA6;
+    --shadow:rgba(37,39,77,.10);
+    --display:"Cormorant Garamond",Georgia,serif;
+    --body:"EB Garamond",Georgia,serif;
+    --label:"Figtree",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:19px;
+    line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  /* subtle parchment grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background:
+      radial-gradient(circle at 18% 30%, rgba(174,131,56,.05), transparent 40%),
+      radial-gradient(circle at 82% 70%, rgba(122,43,57,.04), transparent 42%);
+  }
+  .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 24px}
+  a{color:inherit}
+
+  .label{
+    font-family:var(--label);font-weight:600;text-transform:uppercase;
+    letter-spacing:.22em;font-size:.7rem;color:var(--gold);
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(244,236,217,.86);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .row{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;padding:12px 24px;max-width:1080px;margin:0 auto;
+  }
+  .back{
+    font-family:var(--label);font-weight:500;font-size:.82rem;
+    text-decoration:none;color:var(--indigo);display:inline-flex;align-items:center;gap:8px;
+  }
+  .back svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.6}
+  .back:hover{color:var(--wine)}
+  .chapnav{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .chapnav a{
+    font-family:var(--label);font-size:.78rem;font-weight:500;text-decoration:none;
+    color:var(--indigo);width:30px;height:30px;display:grid;place-items:center;
+    border:1px solid var(--line);border-radius:50%;transition:.18s;
+  }
+  .chapnav a:hover{background:var(--indigo);color:var(--parchment);border-color:var(--indigo)}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;text-align:center;padding:72px 0 56px}
+  .hero .seal{width:118px;height:118px;margin:0 auto 22px;display:block}
+  .hero .seal *{transition:none}
+  .hero .booktitle{
+    font-family:var(--display);font-weight:600;color:var(--indigo);
+    font-size:clamp(3rem,9vw,6.2rem);line-height:.96;letter-spacing:.01em;
+  }
+  .hero .hebrew{
+    font-family:var(--display);font-style:italic;color:var(--wine);
+    font-size:clamp(1.2rem,3.4vw,1.8rem);margin-top:6px;
+  }
+  .rule{display:flex;align-items:center;justify-content:center;gap:14px;margin:26px auto;max-width:340px}
+  .rule .ln{height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold))}
+  .rule .ln.r{background:linear-gradient(90deg,var(--gold),transparent)}
+  .rule .dot{width:7px;height:7px;border:1px solid var(--gold);transform:rotate(45deg)}
+  .hero .verse{
+    font-family:var(--display);font-style:italic;font-weight:500;
+    font-size:clamp(1.4rem,4vw,2.2rem);line-height:1.35;color:var(--ink);
+    max-width:660px;margin:0 auto;
+  }
+  .hero .ref{font-family:var(--label);font-size:.78rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-top:16px}
+
+  /* ---------- intro ---------- */
+  .intro{padding:18px 0 8px}
+  .intro p{max-width:720px;margin:0 auto 18px;text-align:center;color:var(--ink-soft);font-size:1.12rem}
+  .intro p .lead{color:var(--ink)}
+
+  /* orientation cards */
+  .orient{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:44px 0 8px}
+  .ocard{
+    background:var(--card);border:1px solid var(--line);border-radius:4px;
+    padding:24px 22px;box-shadow:0 1px 0 var(--shadow);
+  }
+  .ocard h3{font-family:var(--display);color:var(--indigo);font-size:1.5rem;font-weight:600;margin-bottom:8px}
+  .ocard p{font-size:1rem;color:var(--ink-soft)}
+  .ocard .who{margin-top:10px;font-size:.98rem}
+  .ocard .who b{color:var(--wine);font-weight:600}
+
+  .sectionhead{text-align:center;margin:74px 0 8px}
+  .sectionhead .label{display:block;margin-bottom:10px}
+  .sectionhead h2{font-family:var(--display);color:var(--indigo);font-weight:600;font-size:clamp(2rem,5vw,2.8rem)}
+
+  /* ---------- chapter spine ---------- */
+  .chapters{position:relative;padding:40px 0 20px}
+  .spine{
+    position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-1px);
+    background:linear-gradient(180deg,transparent,var(--gold-soft) 6%,var(--gold-soft) 94%,transparent);
+    z-index:0;
+  }
+  .chapter{
+    position:relative;z-index:1;display:grid;grid-template-columns:1fr 96px 1fr;
+    align-items:start;gap:0;margin:0 0 18px;
+  }
+  .chapter .node{
+    grid-column:2;justify-self:center;width:72px;height:72px;border-radius:50%;
+    background:var(--parchment);border:1.5px solid var(--gold);
+    display:grid;place-items:center;box-shadow:0 0 0 7px var(--parchment);
+  }
+  .chapter .node svg{width:42px;height:42px}
+  .chapter .num{
+    position:absolute;top:-30px;left:50%;transform:translateX(-50%);
+    font-family:var(--display);font-style:italic;color:var(--gold);font-size:1rem;letter-spacing:.1em;
+  }
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:5px;
+    padding:26px 28px;box-shadow:0 6px 22px -16px var(--shadow);
+  }
+  .chapter.left .card{grid-column:1;margin-right:18px}
+  .chapter.right .card{grid-column:3;margin-left:18px}
+  .chapter.left .card{text-align:left}
+  .card .kicker{font-family:var(--label);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .card h3{font-family:var(--display);color:var(--indigo);font-weight:600;font-size:1.85rem;line-height:1.1;margin:4px 0 14px}
+  .card .key{
+    border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin:0 0 16px;
+    font-family:var(--display);font-style:italic;font-size:1.28rem;line-height:1.4;color:var(--ink);
+  }
+  .card .key .kref{display:block;font-family:var(--label);font-style:normal;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--wine);margin-top:8px}
+  .card .body{font-size:1.02rem;color:var(--ink-soft)}
+  .card .body p{margin-bottom:12px}
+  .card .moments{list-style:none;margin:6px 0 16px}
+  .card .moments li{position:relative;padding-left:22px;margin-bottom:9px;font-size:1rem;color:var(--ink)}
+  .card .moments li::before{
+    content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;
+    background:var(--wine);transform:rotate(45deg);
+  }
+  .card .moments li .m-ref{color:var(--gold);font-family:var(--label);font-size:.72rem;letter-spacing:.04em}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+  .tag{
+    font-family:var(--label);font-size:.7rem;font-weight:500;letter-spacing:.04em;
+    background:rgba(100,110,76,.12);color:var(--sage);padding:4px 11px;border-radius:20px;
+  }
+  .xref{margin-top:14px;font-size:.92rem;color:var(--ink-soft)}
+  .xref b{font-family:var(--label);font-weight:600;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--indigo)}
+
+  /* reflect block */
+  .reflect{margin-top:18px;padding:18px 18px 16px;background:rgba(37,39,77,.05);border:1px solid var(--line);border-radius:4px}
+  .reflect .rlabel{display:flex;align-items:center;gap:9px;font-family:var(--label);font-weight:600;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--indigo);margin-bottom:12px}
+  .reflect .rlabel svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.5}
+  .reflect ol{list-style:none;counter-reset:q;margin:0 0 12px}
+  .reflect ol li{counter-increment:q;position:relative;padding-left:30px;margin-bottom:11px;font-size:1rem;color:var(--ink)}
+  .reflect ol li::before{
+    content:counter(q);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;
+    border:1px solid var(--gold);color:var(--gold);font-family:var(--display);font-size:.82rem;
+    display:grid;place-items:center;line-height:1;
+  }
+  .reflect .frame{font-family:var(--display);font-style:italic;font-size:1.08rem;color:var(--wine);padding-top:4px;border-top:1px dashed var(--line);margin-top:4px;padding-top:12px}
+  .reflect .frame b{font-family:var(--label);font-style:normal;font-weight:600;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px}
+
+  /* ---------- symbols glossary ---------- */
+  .symbols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+  .sym{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:20px;display:flex;gap:14px;align-items:flex-start}
+  .sym svg{width:38px;height:38px;flex:none;margin-top:2px}
+  .sym h4{font-family:var(--display);color:var(--indigo);font-size:1.32rem;font-weight:600;margin-bottom:2px}
+  .sym p{font-size:.96rem;color:var(--ink-soft)}
+
+  /* ---------- reading lenses ---------- */
+  .lenses{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px}
+  .lens{background:var(--indigo);color:#EFE8D6;border-radius:6px;padding:30px 28px;position:relative;overflow:hidden}
+  .lens.wine{background:var(--wine)}
+  .lens h3{font-family:var(--display);font-weight:600;font-size:1.7rem;color:#F4ECD9;margin-bottom:4px}
+  .lens .label{color:var(--gold-soft)}
+  .lens p{font-size:1.02rem;color:rgba(244,236,217,.86);margin-top:12px}
+  .lens .scriptline{margin-top:14px;font-family:var(--display);font-style:italic;font-size:1.08rem;color:#F4ECD9}
+
+  /* ---------- closing ---------- */
+  .closing{text-align:center;padding:74px 0 30px}
+  .closing .verse{font-family:var(--display);font-style:italic;font-size:clamp(1.5rem,4.4vw,2.4rem);line-height:1.36;color:var(--indigo);max-width:640px;margin:0 auto}
+  .closing .ref{font-family:var(--label);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:16px}
+
+  footer{border-top:1px solid var(--line);margin-top:40px;padding:34px 0;text-align:center}
+  footer p{font-size:.92rem;color:var(--ink-soft)}
+  footer a{color:var(--wine);text-decoration:none;font-weight:500}
+  footer a:hover{text-decoration:underline}
+  .note{font-family:var(--label);font-size:.74rem;color:var(--ink-soft);opacity:.8;margin-top:8px}
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:860px){
+    .orient,.symbols{grid-template-columns:1fr 1fr}
+    .lenses{grid-template-columns:1fr}
+  }
+  @media(max-width:680px){
+    body{font-size:18px}
+    .chapnav{display:none}
+    .spine{left:34px}
+    .chapter{grid-template-columns:68px 1fr;gap:0}
+    .chapter .node{grid-column:1;grid-row:1;width:60px;height:60px;box-shadow:0 0 0 6px var(--parchment)}
+    .chapter .node svg{width:34px;height:34px}
+    .chapter .num{left:34px}
+    .chapter.left .card,.chapter.right .card{grid-column:2;grid-row:1;margin:0 0 0 16px;text-align:left}
+    .orient,.symbols{grid-template-columns:1fr}
+    .topbar .row{flex-direction:row}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">
+  <div class="row">
+    <a class="back" href="../">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      Bible Studies
+    </a>
+    <nav class="chapnav" aria-label="Chapters">
+      <a href="#c1">1</a><a href="#c2">2</a><a href="#c3">3</a><a href="#c4">4</a>
+      <a href="#c5">5</a><a href="#c6">6</a><a href="#c7">7</a><a href="#c8">8</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero reveal">
+    <!-- seal emblem: love is strong as death -->
+    <svg class="seal" viewBox="0 0 120 120" aria-hidden="true">
+      <circle cx="60" cy="60" r="55" fill="none" stroke="#AE8338" stroke-width="1.5"/>
+      <circle cx="60" cy="60" r="46" fill="none" stroke="#AE8338" stroke-width="1" stroke-dasharray="2 5"/>
+      <path d="M60 84 C40 70 36 54 46 46 C53 40 60 46 60 52 C60 46 67 40 74 46 C84 54 80 70 60 84 Z" fill="none" stroke="#7A2B39" stroke-width="2"/>
+      <path d="M60 52 C58 60 60 70 60 76" fill="none" stroke="#AE8338" stroke-width="1.4"/>
+      <g stroke="#646E4C" stroke-width="1.3" fill="none">
+        <path d="M30 60 q-6 -4 -10 0"/><path d="M90 60 q6 -4 10 0"/>
+        <path d="M34 40 q-3 -5 -8 -5"/><path d="M86 40 q3 -5 8 -5"/>
+      </g>
+    </svg>
+    <h1 class="booktitle">Song of Solomon</h1>
+    <p class="hebrew">Shir ha-Shirim &middot; the Song of Songs</p>
+    <div class="rule"><span class="ln"></span><span class="dot"></span><span class="ln r"></span></div>
+    <p class="verse">&ldquo;Set me as a seal upon thine heart&hellip; for love is strong as death.&rdquo;</p>
+    <p class="ref">Song of Solomon 8:6 &middot; KJV</p>
+  </header>
+
+  <!-- ============ INTRO ============ -->
+  <section class="intro reveal">
+    <p><span class="lead">Eight chapters. One song.</span> The title means <em>the Song of Songs</em> &mdash; the finest of all, the superlative of love poems. It is a sustained lyric passed back and forth between a bride, her beloved, and the watching daughters of Jerusalem, set in vineyards, gardens, and the streets of the city at night.</p>
+    <p>For centuries it has been read on two levels at once: a canonical celebration of covenant love between husband and wife, and a picture of the love between God and his people &mdash; Christ and the Church. This study walks chapter by chapter, marking the turning points and the verses worth carrying with you.</p>
+
+    <div class="orient">
+      <div class="ocard">
+        <h3>The Voices</h3>
+        <p>Three speakers carry the song, often without introduction &mdash; you tell them apart by their words.</p>
+        <p class="who"><b>The Bride</b> &mdash; the Shulamite, sun-darkened, seeking.<br>
+        <b>The Beloved</b> &mdash; the bridegroom, the king.<br>
+        <b>The Daughters</b> &mdash; the chorus of Jerusalem.</p>
+      </div>
+      <div class="ocard">
+        <h3>The Shape</h3>
+        <p>Not one straight narrative but a weave of songs: longing, praise, a night search, a wedding procession, separation and reunion, and a final seal.</p>
+        <p class="who"><b>8</b> chapters &middot; <b>117</b> verses &middot; traditionally ascribed to <b>Solomon</b> (1:1).</p>
+      </div>
+      <div class="ocard">
+        <h3>The Refrain</h3>
+        <p>One line keeps returning, in growing fullness &mdash; the heartbeat of the whole book.</p>
+        <p class="who">&ldquo;<b>My beloved is mine, and I am his.</b>&rdquo;<br>2:16 &rarr; 6:3 &rarr; 7:10</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTERS ============ -->
+  <div class="sectionhead reveal">
+    <span class="label">Chapter by Chapter</span>
+    <h2>Walking the Song</h2>
+  </div>
+
+  <section class="chapters">
+    <div class="spine" aria-hidden="true"></div>
+
+    <!-- CH 1 -->
+    <article class="chapter left reveal" id="c1">
+      <div class="node"><span class="num">I</span>
+        <!-- vine -->
+        <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#646E4C" stroke-width="1.6">
+          <path d="M24 8 C24 18 18 22 18 30 C18 38 24 40 24 40 C24 40 30 38 30 30 C30 22 24 18 24 8Z"/>
+          <circle cx="16" cy="34" r="3.2" stroke="#7A2B39"/><circle cx="32" cy="34" r="3.2" stroke="#7A2B39"/>
+          <path d="M24 14 q6 -2 9 -6 M24 20 q-6 -2 -9 -6"/>
+        </svg>
+      </div>
+      <div class="card">
+        <span class="kicker">Chapter One</span>
+        <h3>Longing &amp; First Praise</h3>
+        <p class="key">&ldquo;Let him kiss me with the kisses of his mouth: for thy love is better than wine.&rdquo;
+          <span class="kref">Song 1:2</span></p>
+        <div class="body"><p>The song opens mid-desire. The bride calls for her beloved, owns that she is &ldquo;black, but comely&rdquo; &mdash; darkened from working her brothers&rsquo; vineyards &mdash; and asks where he pastures his flock. He answers with praise, she with adoration. Their love is already a place of belonging.</p></div>
+        <ul class="moments">
+          <li>&ldquo;Draw me, we will run after thee&rdquo; &mdash; desire that pulls others along <span class="m-ref">1:4</span></li>
+          <li>She is compared to &ldquo;a company of horses in Pharaoh&rsquo;s chariots&rdquo; &mdash; royal, striking <span class="m-ref">1:9</span></li>
+          <li>A green bed, cedar beams &mdash; their meeting place is a living garden <span class="m-ref">1:16&ndash;17</span></li>
+        </ul>
+        <div class="tags"><span class="tag">desire</span><span class="tag">belonging</span><span class="tag">the pursuit</span></div>
+        <div class="reflect">
+          <span class="rlabel"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-1.5-8-1v13c3-.5 6-.5 8 1 2-1.5 5-1.5 8-1V5c-3-.5-6-.5-8 1Z"/><path d="M12 6v13"/></svg>Reflect</span>
+          <ol>
+            <li>&ldquo;Draw me, we will run after thee.&rdquo; Where does your own being drawn toward God spill over and pull others along?</li>
+            <li>She admits her own vineyard she has &ldquo;not kept.&rdquo; What have you neglected while tending everyone else&rsquo;s expectations?</li>
+          </ol>
+          <p class="frame"><b>Reading frame</b>Love begins as longing before it becomes anything else.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- CH 2 -->
+    <article class="chapter right reveal" id="c2">
+      <div class="node"><span class="num">II</span>
+        <!-- rose + lily -->
+        <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#7A2B39" stroke-width="1.5">
+          <circle cx="24" cy="20" r="6"/><path d="M24 14 a6 6 0 0 1 0 12 M18 20 a6 6 0 0 1 12 0"/>
+          <path d="M24 26 C24 32 24 38 24 42" stroke="#646E4C"/>
+          <path d="M24 32 q-7 -1 -9 -7 M24 36 q7 -1 9 -7" stroke="#646E4C"/>
+        </svg>
+      </div>
+      <div class="card">
+        <span class="kicker">Chapter Two</span>
+        <h3>Rose of Sharon, Voice of the Beloved</h3>
+        <p class="key">&ldquo;I am the rose of Sharon, and the lily of the valleys.&rdquo;
+          <span class="kref">Song 2:1</span></p>
+        <div class="body"><p>The most quoted chapter. The beloved is an apple tree among the trees of the wood; his banner over her is love. Then his voice arrives over the mountains with a springtime invitation &mdash; the winter is past, the flowers appear, rise up and come away.</p></div>
+        <ul class="moments">
+          <li>&ldquo;His banner over me was love&rdquo; &mdash; love as open, flown declaration <span class="m-ref">2:4</span></li>
+          <li>&ldquo;Rise up, my love&hellip; the winter is past&rdquo; &mdash; the call into a new season <span class="m-ref">2:10&ndash;11</span></li>
+          <li>&ldquo;Take us the foxes, the little foxes, that spoil the vines&rdquo; &mdash; guard love from small ruins <span class="m-ref">2:15</span></li>
+          <li>First refrain: &ldquo;My beloved is mine, and I am his&rdquo; <span class="m-ref">2:16</span></li>
+        </ul>
+        <div class="tags"><span class="tag">springtime</span><span class="tag">invitation</span><span class="tag">guarding love</span></div>
+        <div class="reflect">
+          <span class="rlabel"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-1.5-8-1v13c3-.5 6-.5 8 1 2-1.5 5-1.5 8-1V5c-3-.5-6-.5-8 1Z"/><path d="M12 6v13"/></svg>Reflect</span>
+          <ol>
+            <li>&ldquo;His banner over me was love.&rdquo; What changes when you know God&rsquo;s intentions toward you are flown openly, not hidden?</li>
+            <li>The little foxes spoil the vines. What small, unaddressed thing is quietly eroding a relationship you care about?</li>
+          </ol>
+          <p class="frame"><b>Reading frame</b>Guard the small things; they spoil the most.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- CH 3 -->
+    <article class="chapter left reveal" id="c3">
+      <div class="node"><span class="num">III</span>
+        <!-- crown / procession -->
+        <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#AE8338" stroke-width="1.6">
+          <path d="M12 30 L12 18 L20 24 L24 14 L28 24 L36 18 L36 30 Z"/>
+          <path d="M12 34 L36 34" />
+          <circle cx="24" cy="14" r="1.6" fill="#7A2B39" stroke="none"/>
+        </svg>
+      </div>
+      <div class="card">
+        <span class="kicker">Chapter Three</span>
+        <h3>Seeking by Night &amp; the Royal Procession</h3>
+        <p class="key">&ldquo;I sought him whom my soul loveth&hellip; I found him, and would not let him go.&rdquo;
+          <span class="kref">Song 3:1, 4</span></p>
+        <div class="body"><p>A turn into darkness and resolve. The bride rises and searches the city by night until she finds her beloved, holding him fast. The scene then swells into a wedding: Solomon&rsquo;s carriage rising from the wilderness like pillars of perfumed smoke, crowned on the day of his espousals.</p></div>
+        <ul class="moments">
+          <li>The night search through the city streets and the watchmen <span class="m-ref">3:1&ndash;3</span></li>
+          <li>&ldquo;Pillars of smoke, perfumed with myrrh and frankincense&rdquo; <span class="m-ref">3:6</span></li>
+          <li>The crowned bridegroom &mdash; &ldquo;the day of the gladness of his heart&rdquo; <span class="m-ref">3:11</span></li>
+        </ul>
+        <div class="tags"><span class="tag">the night search</span><span class="tag">anticipation</span><span class="tag">the wedding</span></div>
+        <div class="reflect">
+          <span class="rlabel"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-1.5-8-1v13c3-.5 6-.5 8 1 2-1.5 5-1.5 8-1V5c-3-.5-6-.5-8 1Z"/><path d="M12 6v13"/></svg>Reflect</span>
+          <ol>
+            <li>The bride searches the dark city rather than wait. When has seeking God cost you comfort &mdash; and what did you find?</li>
+            <li>The procession turns private love into public celebration. Where do you keep love hidden that could be honoured openly?</li>
+          </ol>
+          <p class="frame"><b>Reading frame</b>What you seek in the dark, you hold fast in the light.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- CH 4 -->
+    <article class="chapter right reveal" id="c4">
+      <div class="node"><span class="num">IV</span>
+        <!-- enclosed garden / pomegranate -->
+        <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#7A2B39" stroke-width="1.5">
+          <circle cx="24" cy="26" r="9"/>
+          <path d="M24 17 l2 -4 l-2 -2 l-2 2 z" stroke="#646E4C"/>
+          <circle cx="21" cy="24" r="1" fill="#7A2B39" stroke="none"/><circle cx="27" cy="24" r="1" fill="#7A2B39" stroke="none"/>
+          <circle cx="24" cy="29" r="1" fill="#7A2B39" stroke="none"/><circle cx="20" cy="29" r="1" fill="#7A2B39" stroke="none"/><circle cx="28" cy="29" r="1" fill="#7A2B39" stroke="none"/>
+        </svg>
+      </div>
+      <div class="card">
+        <span class="kicker">Chapter Four</span>
+        <h3>The Bridegroom&rsquo;s Praise &amp; the Garden Enclosed</h3>
+        <p class="key">&ldquo;Thou art all fair, my love; there is no spot in thee.&rdquo;
+          <span class="kref">Song 4:7</span></p>
+        <div class="body"><p>A descriptive love-song head to heart: eyes like doves, a neck like the tower of David. The praise ends in a sealed image &mdash; the bride is a garden enclosed, a spring shut up, a fountain sealed, an orchard of pomegranates and spices. Love here is faithful, exclusive, full.</p></div>
+        <ul class="moments">
+          <li>&ldquo;Thou hast ravished my heart, my sister, my spouse&rdquo; <span class="m-ref">4:9</span></li>
+          <li>&ldquo;A garden inclosed&hellip; a spring shut up, a fountain sealed&rdquo; <span class="m-ref">4:12</span></li>
+          <li>&ldquo;Awake, O north wind&hellip; blow upon my garden&rdquo; &mdash; she opens the garden to him <span class="m-ref">4:16</span></li>
+        </ul>
+        <div class="tags"><span class="tag">faithfulness</span><span class="tag">beauty named</span><span class="tag">the sealed garden</span></div>
+        <div class="reflect">
+          <span class="rlabel"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-1.5-8-1v13c3-.5 6-.5 8 1 2-1.5 5-1.5 8-1V5c-3-.5-6-.5-8 1Z"/><path d="M12 6v13"/></svg>Reflect</span>
+          <ol>
+            <li>&ldquo;There is no spot in thee.&rdquo; How is being seen as wholly lovely different from being told to improve?</li>
+            <li>The sealed garden is opened by invitation &mdash; &ldquo;blow upon my garden.&rdquo; What does it mean to give access rather than have it taken?</li>
+          </ol>
+          <p class="frame"><b>Reading frame</b>Faithful love is a garden with a gate, not a field without one.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- CH 5 -->
+    <article class="chapter left reveal" id="c5">
+      <div class="node"><span class="num">V</span>
+        <!-- door + moon (night) -->
+        <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#25274D" stroke-width="1.6">
+          <rect x="16" y="14" width="16" height="24" rx="8"/>
+          <circle cx="28" cy="26" r="1.4" fill="#AE8338" stroke="none"/>
+          <path d="M36 12 a4 4 0 1 0 4 5 a3 3 0 0 1 -4 -5z" fill="none" stroke="#AE8338"/>
+        </svg>
+      </div>
+      <div class="card">
+        <span class="kicker">Chapter Five</span>
+        <h3>The Lost Beloved &amp; the Search</h3>
+        <p class="key">&ldquo;I sleep, but my heart waketh: it is the voice of my beloved that knocketh.&rdquo;
+          <span class="kref">Song 5:2</span></p>
+        <div class="body"><p>The shadow side of love. He knocks; she hesitates to rise; when at last she opens, he is gone. She searches the night, is wounded by the watchmen, and pours out her grief in praise &mdash; describing her beloved feature by feature to the daughters of Jerusalem.</p></div>
+        <ul class="moments">
+          <li>The hesitation, the open door, the absence &mdash; love delayed is love nearly lost <span class="m-ref">5:3&ndash;6</span></li>
+          <li>The watchmen wound the seeking bride <span class="m-ref">5:7</span></li>
+          <li>&ldquo;My beloved is white and ruddy, the chiefest among ten thousand&hellip; altogether lovely&rdquo; <span class="m-ref">5:10, 16</span></li>
+        </ul>
+        <div class="tags"><span class="tag">hesitation</span><span class="tag">longing</span><span class="tag">devotion</span></div>
+        <div class="reflect">
+          <span class="rlabel"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-1.5-8-1v13c3-.5 6-.5 8 1 2-1.5 5-1.5 8-1V5c-3-.5-6-.5-8 1Z"/><path d="M12 6v13"/></svg>Reflect</span>
+          <ol>
+            <li>She hesitates to open the door, and he is gone. When has delay or comfort cost you a moment of nearness with God?</li>
+            <li>Wounded by the watchmen, she still calls him &ldquo;altogether lovely.&rdquo; How can loss sharpen love rather than dull it?</li>
+          </ol>
+          <p class="frame"><b>Reading frame</b>Hesitation is its own kind of answer.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- CH 6 -->
+    <article class="chapter right reveal" id="c6">
+      <div class="node"><span class="num">VI</span>
+        <!-- sun + moon -->
+        <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#AE8338" stroke-width="1.5">
+          <circle cx="20" cy="24" r="6"/>
+          <g stroke-width="1.3"><path d="M20 14v-3M20 37v-3M10 24H7M33 24h-3M13 17l-2-2M27 31l2 2M27 17l2-2M13 31l-2 2"/></g>
+          <path d="M34 16 a7 7 0 1 0 5 9 a5 5 0 0 1 -5 -9z" stroke="#25274D"/>
+        </svg>
+      </div>
+      <div class="card">
+        <span class="kicker">Chapter Six</span>
+        <h3>Restoration &amp; &ldquo;I Am My Beloved&rsquo;s&rdquo;</h3>
+        <p class="key">&ldquo;I am my beloved&rsquo;s, and my beloved is mine: he feedeth among the lilies.&rdquo;
+          <span class="kref">Song 6:3</span></p>
+        <div class="body"><p>The chorus asks where he has gone; he is in his garden all along. Reunion brings renewed praise &mdash; she is fair as the moon, clear as the sun, terrible as an army with banners. The refrain returns, deeper than before, with possession in the right order: <em>I am his</em> comes first.</p></div>
+        <ul class="moments">
+          <li>The refrain matures: &ldquo;I am my beloved&rsquo;s, and my beloved is mine&rdquo; <span class="m-ref">6:3</span></li>
+          <li>&ldquo;Fair as the moon, clear as the sun&rdquo; <span class="m-ref">6:10</span></li>
+          <li>The bride named at last &mdash; the Shulamite <span class="m-ref">6:13</span></li>
+        </ul>
+        <div class="tags"><span class="tag">reunion</span><span class="tag">mutual love</span><span class="tag">radiance</span></div>
+        <div class="reflect">
+          <span class="rlabel"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-1.5-8-1v13c3-.5 6-.5 8 1 2-1.5 5-1.5 8-1V5c-3-.5-6-.5-8 1Z"/><path d="M12 6v13"/></svg>Reflect</span>
+          <ol>
+            <li>The refrain now puts &ldquo;I am my beloved&rsquo;s&rdquo; first. Why might belonging come before possessing in healthy love?</li>
+            <li>He was in his garden the whole time. Where have you assumed God was absent when he was simply where he said he&rsquo;d be?</li>
+          </ol>
+          <p class="frame"><b>Reading frame</b>He is often nearer than the search suggests.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- CH 7 -->
+    <article class="chapter left reveal" id="c7">
+      <div class="node"><span class="num">VII</span>
+        <!-- fruited vine -->
+        <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#646E4C" stroke-width="1.6">
+          <path d="M24 10 C24 18 20 22 20 28"/>
+          <circle cx="18" cy="32" r="2.6" stroke="#7A2B39"/><circle cx="24" cy="34" r="2.6" stroke="#7A2B39"/><circle cx="30" cy="32" r="2.6" stroke="#7A2B39"/><circle cx="21" cy="37" r="2.6" stroke="#7A2B39"/><circle cx="27" cy="37" r="2.6" stroke="#7A2B39"/>
+          <path d="M24 14 q6 -3 9 -8"/>
+        </svg>
+      </div>
+      <div class="card">
+        <span class="kicker">Chapter Seven</span>
+        <h3>Praise &amp; Mutual Delight</h3>
+        <p class="key">&ldquo;I am my beloved&rsquo;s, and his desire is toward me.&rdquo;
+          <span class="kref">Song 7:10</span></p>
+        <div class="body"><p>A second song of praise, now from the feet upward, answered by the bride&rsquo;s own glad desire. She invites him out of the city &mdash; to the fields, the villages, the budding vineyards &mdash; promising her love where the vines flower. Delight has become a shared journey outward.</p></div>
+        <ul class="moments">
+          <li>The refrain&rsquo;s third form &mdash; now centred on <em>his</em> desire toward her <span class="m-ref">7:10</span></li>
+          <li>&ldquo;Let us go forth into the field&hellip; let us get up early to the vineyards&rdquo; <span class="m-ref">7:11&ndash;12</span></li>
+          <li>&ldquo;There will I give thee my loves&rdquo; &mdash; love offered in the open country <span class="m-ref">7:12</span></li>
+        </ul>
+        <div class="tags"><span class="tag">delight</span><span class="tag">belonging</span><span class="tag">going out together</span></div>
+        <div class="reflect">
+          <span class="rlabel"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-1.5-8-1v13c3-.5 6-.5 8 1 2-1.5 5-1.5 8-1V5c-3-.5-6-.5-8 1Z"/><path d="M12 6v13"/></svg>Reflect</span>
+          <ol>
+            <li>Now &ldquo;his desire is toward me.&rdquo; How does it land to believe God delights in you, not merely tolerates you?</li>
+            <li>She invites him out to the fields and vineyards. What would it look like to take your faith into ordinary, everyday places?</li>
+          </ol>
+          <p class="frame"><b>Reading frame</b>Mature love goes out together.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- CH 8 -->
+    <article class="chapter right reveal" id="c8">
+      <div class="node"><span class="num">VIII</span>
+        <!-- seal / flame -->
+        <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#7A2B39" stroke-width="1.6">
+          <path d="M24 38 C14 30 12 22 18 18 C22 15 24 19 24 22 C24 19 26 15 30 18 C36 22 34 30 24 38Z"/>
+          <circle cx="24" cy="26" r="13" stroke="#AE8338" stroke-width="1" stroke-dasharray="2 4"/>
+        </svg>
+      </div>
+      <div class="card">
+        <span class="kicker">Chapter Eight</span>
+        <h3>Love Strong as Death</h3>
+        <p class="key">&ldquo;Many waters cannot quench love, neither can the floods drown it.&rdquo;
+          <span class="kref">Song 8:7</span></p>
+        <div class="body"><p>The song gathers to its great theme. Love asks to be set as a seal &mdash; a mark of belonging that cannot be undone &mdash; for it is strong as death, fierce as the grave, a flame from the Lord that no flood can drown and no price can buy. The book closes on a call: <em>make haste, my beloved.</em></p></div>
+        <ul class="moments">
+          <li>&ldquo;Set me as a seal upon thine heart&hellip; love is strong as death&rdquo; <span class="m-ref">8:6</span></li>
+          <li>Love unquenchable and unpurchasable &mdash; &ldquo;it would utterly be contemned&rdquo; <span class="m-ref">8:7</span></li>
+          <li>The closing invitation: &ldquo;Make haste, my beloved&rdquo; <span class="m-ref">8:14</span></li>
+        </ul>
+        <div class="tags"><span class="tag">the seal</span><span class="tag">unquenchable</span><span class="tag">permanence</span></div>
+        <div class="reflect">
+          <span class="rlabel"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-1.5-8-1v13c3-.5 6-.5 8 1 2-1.5 5-1.5 8-1V5c-3-.5-6-.5-8 1Z"/><path d="M12 6v13"/></svg>Reflect</span>
+          <ol>
+            <li>Love asks to be a seal &mdash; permanent, unremovable. What in your life are you willing to make that kind of commitment to?</li>
+            <li>&ldquo;Many waters cannot quench love.&rdquo; What floods have tested a love of yours, and what kept it from drowning?</li>
+          </ol>
+          <p class="frame"><b>Reading frame</b>The strongest love cannot be bought or quenched.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ SYMBOLS ============ -->
+  <div class="sectionhead reveal">
+    <span class="label">A Reader&rsquo;s Glossary</span>
+    <h2>Symbols of the Song</h2>
+  </div>
+  <section class="symbols reveal">
+    <div class="sym">
+      <svg viewBox="0 0 40 40" fill="none" stroke="#646E4C" stroke-width="1.5"><circle cx="20" cy="20" r="11"/><path d="M20 9v22M9 20h22" stroke="#AE8338"/></svg>
+      <div><h4>The Garden</h4><p>The place of intimacy and welcome &mdash; an Eden restored where the lovers meet.</p></div>
+    </div>
+    <div class="sym">
+      <svg viewBox="0 0 40 40" fill="none" stroke="#7A2B39" stroke-width="1.5"><circle cx="15" cy="24" r="2.4"/><circle cx="21" cy="26" r="2.4"/><circle cx="25" cy="22" r="2.4"/><path d="M20 8c0 8-4 10-4 14" stroke="#646E4C"/></svg>
+      <div><h4>The Vineyard</h4><p>Fruitfulness and care &mdash; and the self too: &ldquo;mine own vineyard have I not kept.&rdquo;</p></div>
+    </div>
+    <div class="sym">
+      <svg viewBox="0 0 40 40" fill="none" stroke="#AE8338" stroke-width="1.5"><path d="M20 8C16 16 12 18 14 26c1 5 6 6 6 6s5-1 6-6c2-8-2-10-6-18z"/></svg>
+      <div><h4>Spices &amp; Myrrh</h4><p>Costliness and devotion &mdash; the fragrance of a love that holds nothing back.</p></div>
+    </div>
+    <div class="sym">
+      <svg viewBox="0 0 40 40" fill="none" stroke="#25274D" stroke-width="1.5"><path d="M20 12c4 2 4 8 0 9-4-1-4-7 0-9z"/><path d="M12 22c4-1 5 3 8 3s4-4 8-3" stroke="#646E4C"/></svg>
+      <div><h4>The Dove</h4><p>Purity and gentleness &mdash; the eyes of the beloved, the voice that signals spring.</p></div>
+    </div>
+    <div class="sym">
+      <svg viewBox="0 0 40 40" fill="none" stroke="#7A2B39" stroke-width="1.5"><rect x="13" y="12" width="14" height="18" rx="2"/><circle cx="20" cy="21" r="2.4" stroke="#AE8338"/></svg>
+      <div><h4>The Seal</h4><p>Belonging made permanent &mdash; the mark of a covenant that cannot be unwritten.</p></div>
+    </div>
+    <div class="sym">
+      <svg viewBox="0 0 40 40" fill="none" stroke="#25274D" stroke-width="1.5"><circle cx="13" cy="22" r="2"/><circle cx="20" cy="22" r="2"/><circle cx="27" cy="22" r="2"/><path d="M11 28h18" stroke="#AE8338"/></svg>
+      <div><h4>Daughters of Jerusalem</h4><p>The chorus &mdash; the watching community that questions, charges, and witnesses the love.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ READING LENSES ============ -->
+  <div class="sectionhead reveal">
+    <span class="label">Two Ways to Read</span>
+    <h2>One Song, Two Lenses</h2>
+  </div>
+  <section class="lenses reveal">
+    <div class="lens">
+      <span class="label">The plain sense</span>
+      <h3>Covenant Love</h3>
+      <p>Read first as what it is: a canonical, unembarrassed celebration of married love &mdash; desire, faithfulness, and delight held as good gifts. Scripture places the love of bride and bridegroom in its own book and calls it beautiful.</p>
+      <p class="scriptline">&ldquo;Many waters cannot quench love.&rdquo; &mdash; 8:7</p>
+    </div>
+    <div class="lens wine">
+      <span class="label">The long tradition</span>
+      <h3>Christ &amp; the Church</h3>
+      <p>Synagogue and church have also heard a deeper song: God&rsquo;s love for his people, Christ for his bride. The seeking, the seal, the unquenchable flame echo the Bridegroom of the Gospels and the marriage of the Lamb.</p>
+      <p class="scriptline">Compare Ephesians 5:25&ndash;32 &middot; Revelation 19:7; 21:2</p>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING ============ -->
+  <section class="closing reveal">
+    <div class="rule"><span class="ln"></span><span class="dot"></span><span class="ln r"></span></div>
+    <p class="verse">&ldquo;I am my beloved&rsquo;s, and my beloved is mine.&rdquo;</p>
+    <p class="ref">Song of Solomon 6:3 &middot; KJV</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><a href="../">&larr; Back to Bible Studies</a></p>
+    <p class="note">Scripture quotations from the King James Version (public domain). Built for study and reflection.</p>
+  </div>
+</footer>
+
+<script>
+  // gentle scroll reveal
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      els.forEach(function(e){e.classList.add('in')}); return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+    }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>
