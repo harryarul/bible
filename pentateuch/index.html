@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Pentateuch &mdash; The Five Books of Moses</title>
+<meta name="description" content="A complete study of the Pentateuch (Torah): Genesis, Exodus, Leviticus, Numbers and Deuteronomy. Dates, summaries, key events, every major character, and New Testament cross-references, with in-page scripture reading.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#FBF5E6;--p2:#F5EDD4;--wh:#FFFDF7;--dk:#2C1810;--md:#6B4423;
+  --gd:#C4872A;--gl:#E8C97A;--gp:#FBF0D0;--tn:#D4B896;--tl:#EBD9BE;
+  --rd:#8B3A3A;--tl2:#2A7B6B;--in:#3A4A8B;--pl:#6B3A7B;
+  /* per-book accents */
+  --gen:#2A7B6B;--exo:#8B3A3A;--lev:#C4872A;--num:#6B3A7B;--deu:#3A4A8B;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:118px}
+body{font-family:Lato,sans-serif;background:var(--p);color:var(--dk);margin:0;min-height:100vh;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%}
+
+/* ---------- header ---------- */
+.hdr{background:var(--dk);color:#FDF8EE;padding:.85rem 1.4rem;display:flex;align-items:center;gap:.9rem;position:sticky;top:0;z-index:40;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.hdr a.back{font-size:.8rem;color:var(--gl);text-decoration:none;border:1px solid rgba(196,135,42,.5);padding:.32rem .7rem;border-radius:20px;white-space:nowrap}
+.hdr a.back:hover{background:rgba(196,135,42,.2)}
+.logo{font-family:Caveat,cursive;font-size:1.55rem;font-weight:700;color:var(--gl);line-height:1}
+.sub{font-size:.62rem;color:#C4A47A;letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
+.bdg{margin-left:auto;background:rgba(196,135,42,.25);border:1px solid var(--gd);color:var(--gl);font-size:.66rem;padding:.25rem .65rem;border-radius:20px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+
+/* ---------- sticky chip nav ---------- */
+.nav{position:sticky;top:60px;z-index:30;background:rgba(251,245,230,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--tl);padding:.5rem .8rem;display:flex;gap:.4rem;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{height:0}
+.nav a{flex:0 0 auto;font-size:.78rem;font-weight:700;color:var(--md);text-decoration:none;padding:.34rem .7rem;border:1px solid var(--tn);border-radius:18px;background:var(--wh);white-space:nowrap;transition:.15s}
+.nav a:hover{background:var(--dk);color:var(--gl);border-color:var(--dk)}
+
+main{max-width:920px;margin:0 auto;padding:1.6rem 1.1rem 3rem}
+
+/* ---------- hero ---------- */
+.hero{text-align:center;padding:1.4rem 0 1rem}
+.hero .heb{font-family:'Playfair Display',serif;font-style:italic;color:var(--gd);letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;margin-bottom:.5rem}
+.hero h1{font-family:Caveat,cursive;font-size:3.3rem;color:var(--dk);margin:0 0 .35rem;line-height:1.04}
+.hero .lead{font-family:'Playfair Display',serif;font-style:italic;font-size:1.15rem;color:var(--md);max-width:640px;margin:.2rem auto 0}
+.hero .names{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;margin-top:1rem}
+.hero .names span{font-size:.72rem;font-weight:700;color:var(--md);background:var(--gp);border:1px solid var(--gd);padding:.25rem .6rem;border-radius:14px}
+
+/* ---------- section heads ---------- */
+.sec-title{display:flex;align-items:center;gap:.6rem;font-family:Caveat,cursive;font-size:1.85rem;color:var(--dk);font-weight:700;margin:2.4rem 0 .3rem}
+.sec-icon{width:34px;height:34px;background:var(--dk);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;color:var(--gl)}
+.sec-sub{font-family:'Playfair Display',serif;font-style:italic;color:var(--md);font-size:.97rem;margin:0 0 1.1rem;max-width:680px}
+
+/* ---------- prose panels ---------- */
+.panel{background:var(--wh);border:1.5px solid var(--tn);border-radius:16px;padding:1.3rem 1.4rem;margin:1rem 0}
+.panel p{margin:.55rem 0}
+.panel p:first-child{margin-top:0}
+
+/* ---------- timeline (signature) ---------- */
+.tl-wrap{background:var(--dk);border-radius:18px;padding:1.4rem 0 1.2rem;margin:1.1rem 0 0;overflow:hidden;position:relative}
+.tl-head{color:var(--gl);font-family:Caveat,cursive;font-size:1.5rem;text-align:center;margin:0 1rem .2rem}
+.tl-note{color:#C4A47A;font-size:.72rem;text-align:center;margin:0 1rem 1rem;font-style:italic;font-family:'Playfair Display',serif}
+.tl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:.4rem 1.2rem 1rem}
+.tl-scroll::-webkit-scrollbar{height:7px}
+.tl-scroll::-webkit-scrollbar-thumb{background:var(--gd);border-radius:6px}
+.tl-rail{display:flex;align-items:flex-start;gap:0;min-width:max-content;position:relative;padding-top:18px}
+.tl-rail::before{content:"";position:absolute;top:24px;left:14px;right:14px;height:3px;background:linear-gradient(90deg,var(--gd),var(--gl),var(--gd))}
+.tl-step{flex:0 0 138px;text-align:center;position:relative;padding:0 .35rem}
+.tl-dot{width:14px;height:14px;border-radius:50%;background:var(--gl);border:3px solid var(--dk);box-shadow:0 0 0 2px var(--gd);margin:0 auto 14px;position:relative;z-index:2}
+.tl-date{color:var(--gl);font-size:.7rem;font-weight:700;letter-spacing:.04em}
+.tl-event{color:#FDF8EE;font-size:.82rem;font-weight:700;margin-top:.15rem;line-height:1.25}
+.tl-book{color:#C4A47A;font-size:.64rem;text-transform:uppercase;letter-spacing:.08em;margin-top:.2rem}
+
+/* ---------- book cards ---------- */
+.book{background:var(--wh);border:1.5px solid var(--tn);border-radius:18px;padding:0;margin:1.2rem 0;overflow:hidden;scroll-margin-top:120px}
+.book-top{padding:1.2rem 1.4rem 1rem;border-top:5px solid var(--accent);position:relative}
+.book-num{font-family:'Playfair Display',serif;font-style:italic;color:var(--accent);font-weight:700;font-size:.8rem;letter-spacing:.05em}
+.book-name{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:var(--dk);line-height:1.1;margin:.1rem 0 .1rem}
+.book-heb{font-family:Caveat,cursive;font-size:1.2rem;color:var(--accent)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.5rem;margin:.9rem 0 .2rem}
+.fact{background:var(--p);border:1px solid var(--tl);border-radius:10px;padding:.5rem .65rem}
+.fact b{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.07em;color:var(--gd);margin-bottom:.15rem}
+.fact span{font-size:.86rem;font-weight:700;color:var(--dk)}
+.book-body{padding:0 1.4rem 1.3rem}
+.book-body h4{font-family:Caveat,cursive;font-size:1.35rem;color:var(--dk);margin:1.1rem 0 .45rem;font-weight:700}
+.book-body p{margin:.5rem 0}
+.outline{list-style:none;padding:0;margin:.3rem 0}
+.outline li{padding:.4rem 0 .4rem 1.5rem;border-bottom:1px dashed var(--tl);position:relative;font-size:.93rem}
+.outline li:last-child{border-bottom:none}
+.outline li::before{content:"\203A";position:absolute;left:.4rem;color:var(--accent);font-weight:700}
+.outline li b{color:var(--accent)}
+.events{display:flex;flex-direction:column;gap:.45rem;margin:.4rem 0}
+.evt{display:flex;gap:.6rem;align-items:baseline;font-size:.92rem;padding:.15rem 0}
+.evt .e-ref{flex:0 0 auto}
+.themes{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
+.theme{font-size:.74rem;font-weight:700;color:var(--md);background:var(--gp);border:1px solid var(--gd);padding:.22rem .6rem;border-radius:13px}
+
+/* key verse block */
+.kv{background:var(--p2);border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:.8rem 1rem;margin:.9rem 0}
+.kv q{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--dk);display:block;quotes:"\201C""\201D"}
+.kv cite{display:block;font-style:normal;font-size:.76rem;font-weight:700;color:var(--gd);margin-top:.4rem;letter-spacing:.04em}
+
+/* cross-ref block */
+.xref{background:var(--p);border:1px dashed var(--tn);border-radius:12px;padding:.8rem 1rem;margin:.9rem 0}
+.xref .xh{font-family:Caveat,cursive;font-size:1.2rem;color:var(--accent);font-weight:700;margin-bottom:.35rem}
+.xref ul{margin:0;padding-left:1.1rem}
+.xref li{margin:.35rem 0;font-size:.9rem}
+
+/* read buttons */
+.reads{display:flex;flex-wrap:wrap;gap:.45rem;margin:.7rem 0 .2rem}
+.btn-niv,.btn-read{display:inline-flex;align-items:center;gap:.35rem;font-size:.8rem;font-weight:700;text-decoration:none;padding:.45rem .8rem;border-radius:9px;cursor:pointer;border:none}
+.btn-read{background:var(--dk);color:var(--gl)}
+.btn-read:hover{background:var(--md)}
+.btn-niv{background:transparent;color:var(--accent,var(--md));border:1.5px solid var(--tn)}
+.btn-niv:hover{border-color:var(--accent,var(--md))}
+
+/* clickable scripture ref */
+.ref{color:var(--gd);font-weight:700;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
+.ref:hover{color:var(--rd)}
+
+/* ---------- character cards ---------- */
+.era-head{font-family:Caveat,cursive;font-size:1.4rem;color:var(--md);font-weight:700;margin:1.5rem 0 .1rem;display:flex;align-items:center;gap:.5rem}
+.era-head::after{content:"";flex:1;height:1px;background:var(--tl)}
+.chars{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.9rem;margin:.7rem 0}
+.char{background:var(--wh);border:1.5px solid var(--tn);border-radius:14px;padding:1rem 1.1rem;position:relative;overflow:hidden}
+.char::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--gd)}
+.char .cn{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--dk);line-height:1.15}
+.char .cn .emo{margin-right:.35rem}
+.char .meaning{font-family:Caveat,cursive;font-size:1.05rem;color:var(--gd);margin:.05rem 0 .4rem}
+.char .role{font-size:.88rem;margin:.3rem 0 .55rem}
+.char .where,.char .nt{font-size:.78rem;margin:.3rem 0}
+.char .lbl{display:inline-block;font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gd);font-weight:700;margin-right:.3rem}
+
+/* ---------- christ-in-torah ---------- */
+.types{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.9rem;margin:.8rem 0}
+.type{background:var(--wh);border:1.5px solid var(--tn);border-left:4px solid var(--gd);border-radius:0 12px 12px 0;padding:.9rem 1.1rem}
+.type h5{font-family:'Playfair Display',serif;font-size:1.05rem;margin:0 0 .3rem;color:var(--dk)}
+.type .shadow{font-size:.85rem;color:var(--md)}
+.type .arrow{color:var(--gd);font-weight:700;margin:.3rem 0}
+.type .fulfil{font-size:.85rem}
+
+/* ---------- xref index table ---------- */
+.tbl{width:100%;border-collapse:collapse;font-size:.86rem;margin:.6rem 0;background:var(--wh);border:1.5px solid var(--tn);border-radius:12px;overflow:hidden}
+.tbl th{background:var(--dk);color:var(--gl);text-align:left;padding:.55rem .7rem;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+.tbl td{padding:.5rem .7rem;border-top:1px solid var(--tl);vertical-align:top}
+.tbl tr:nth-child(even) td{background:var(--p)}
+
+/* ---------- reader panel ---------- */
+.scrim{position:fixed;inset:0;background:rgba(44,24,16,.55);z-index:90;opacity:0;pointer-events:none;transition:opacity .2s}
+.scrim.on{opacity:1;pointer-events:auto}
+.reader{position:fixed;left:0;right:0;bottom:0;z-index:100;background:var(--wh);border-top:4px solid var(--gd);border-radius:18px 18px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.3);transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.8,.2,1);max-height:82vh;display:flex;flex-direction:column;max-width:920px;margin:0 auto}
+.reader.on{transform:translateY(0)}
+.r-top{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.1rem;border-bottom:1px solid var(--tl)}
+.r-ref{font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:var(--dk);flex:1;line-height:1.2}
+.r-x{background:var(--p2);border:1px solid var(--tn);width:34px;height:34px;border-radius:50%;font-size:1.1rem;cursor:pointer;color:var(--md);flex-shrink:0;line-height:1}
+.r-tabs{display:flex;gap:.4rem;padding:.6rem 1.1rem 0}
+.r-tab{font-size:.76rem;font-weight:700;padding:.35rem .75rem;border-radius:16px 16px 0 0;border:1px solid var(--tn);border-bottom:none;background:var(--p);color:var(--md);cursor:pointer}
+.r-tab.act{background:var(--wh);color:var(--dk);border-color:var(--gd)}
+.r-body{padding:1rem 1.2rem 1.4rem;overflow-y:auto;font-family:'Playfair Display',serif;font-size:1.05rem;line-height:1.85;color:var(--dk)}
+.r-body .vn{font-family:Lato,sans-serif;font-size:.62rem;font-weight:700;color:var(--gd);vertical-align:super;margin-right:.2rem}
+.r-body .muted{font-family:Lato,sans-serif;font-style:italic;color:var(--md);font-size:.92rem}
+.r-foot{padding:.7rem 1.2rem 1.1rem;border-top:1px solid var(--tl)}
+.r-foot a{display:inline-flex;align-items:center;gap:.35rem;font-size:.8rem;font-weight:700;color:var(--gd);text-decoration:none;border:1.5px solid var(--tn);padding:.4rem .8rem;border-radius:9px}
+.r-foot a:hover{border-color:var(--gd)}
+
+/* ---------- footer ---------- */
+.foot{background:var(--dk);color:#C4A47A;text-align:center;padding:1.6rem 1.2rem;font-size:.78rem;line-height:1.75}
+.foot a{color:var(--gl)}
+
+@media(max-width:560px){
+  .hero h1{font-size:2.5rem}
+  .hdr .logo{font-size:1.3rem}
+  .bdg{display:none}
+  .facts{grid-template-columns:repeat(2,1fr)}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <a class="back" href="../">&larr; Library</a>
+  <div>
+    <div class="logo">Bible Study Library</div>
+    <div class="sub">The Pentateuch</div>
+  </div>
+  <span class="bdg">Torah &middot; Books 1&ndash;5</span>
+</header>
+
+<nav class="nav" aria-label="Section navigation">
+  <a href="#overview">Overview</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#genesis">Genesis</a>
+  <a href="#exodus">Exodus</a>
+  <a href="#leviticus">Leviticus</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#deuteronomy">Deuteronomy</a>
+  <a href="#characters">Characters</a>
+  <a href="#christ">Christ in the Torah</a>
+  <a href="#index">Cross-Ref Index</a>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <div class="heb">Torah &middot; The Law &middot; The Five Books of Moses</div>
+    <h1>The Pentateuch</h1>
+    <p class="lead">From the first word of creation to the edge of the Promised Land &mdash; the foundation on which the whole of Scripture is built.</p>
+    <div class="names">
+      <span>&#1489;&#1456;&#1468;&#1512;&#1461;&#1488;&#1513;&#1473;&#1460;&#1497;&#1514; Bereshit</span>
+      <span>&#1513;&#1473;&#1456;&#1502;&#1493;&#1465;&#1514; Shemot</span>
+      <span>&#1493;&#1463;&#1497;&#1468;&#1460;&#1511;&#1456;&#1512;&#1464;&#1488; Vayikra</span>
+      <span>&#1489;&#1456;&#1468;&#1502;&#1460;&#1491;&#1456;&#1489;&#1463;&#1468;&#1512; Bamidbar</span>
+      <span>&#1491;&#1456;&#1468;&#1489;&#1464;&#1512;&#1460;&#1497;&#1501; Devarim</span>
+    </div>
+  </section>
+
+  <!-- =================== OVERVIEW =================== -->
+  <h2 class="sec-title" id="overview"><span class="sec-icon">&#128220;</span> What is the Pentateuch?</h2>
+  <p class="sec-sub">&ldquo;Pentateuch&rdquo; comes from the Greek for <em>five scrolls</em>. The Jewish people call it the <em>Torah</em> &mdash; &ldquo;instruction&rdquo; or &ldquo;law.&rdquo; It is the opening movement of the Bible and the soil every later book grows out of.</p>
+
+  <div class="panel">
+    <p>These five books tell one continuous story: God creates a good world, humanity falls, and God begins a rescue plan through one family &mdash; Abraham&rsquo;s &mdash; which becomes the nation of Israel. By the final book the people stand on the plains of Moab, the Law given, the covenant renewed, ready to enter the land God promised.</p>
+    <p><b>Authorship.</b> Jesus, the New Testament writers, and historic Jewish and Christian tradition attribute the Pentateuch to <b>Moses</b> &mdash; he is the central human figure from Exodus onward, and the books themselves describe him writing (<span class="ref" data-ref="Exodus 24:4">Exodus 24:4</span>; <span class="ref" data-ref="Deuteronomy 31:9">Deuteronomy 31:9</span>; Jesus speaks of &ldquo;the law of Moses&rdquo; in <span class="ref" data-ref="Luke 24:44">Luke 24:44</span>). Many modern scholars see later editing and earlier sources woven in, but the books present Moses as the foundational voice.</p>
+    <p><b>Dating.</b> By the conservative chronology (built on <span class="ref" data-ref="1 Kings 6:1">1 Kings 6:1</span>), the events run from the patriarchs (Abraham called c.&nbsp;2091&nbsp;BC) to the Exodus (c.&nbsp;1446&nbsp;BC) and the death of Moses (c.&nbsp;1406&nbsp;BC). A widely-held alternative places the Exodus later, c.&nbsp;1260&nbsp;BC. Dates before Abraham are not fixed by Scripture; the figures below follow the traditional reckoning and are best read as a <em>framework</em>, not a calendar.</p>
+  </div>
+
+  <!-- =================== TIMELINE (signature) =================== -->
+  <div id="timeline" style="scroll-margin-top:120px"></div>
+  <div class="tl-wrap">
+    <div class="tl-head">The Story in One Line</div>
+    <div class="tl-note">Traditional chronology &middot; scroll sideways &rarr; &middot; dates are approximate</div>
+    <div class="tl-scroll">
+      <div class="tl-rail">
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-date">&ldquo;In the beginning&rdquo;</div><div class="tl-event">Creation &amp; the Fall</div><div class="tl-book">Genesis 1&ndash;3</div></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-date">primeval</div><div class="tl-event">Flood &amp; Babel</div><div class="tl-book">Genesis 6&ndash;11</div></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-date">c. 2091 BC</div><div class="tl-event">Abraham called</div><div class="tl-book">Genesis 12</div></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-date">c. 2066 BC</div><div class="tl-event">Isaac born</div><div class="tl-book">Genesis 21</div></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-date">c. 2006 BC</div><div class="tl-event">Jacob &amp; Esau</div><div class="tl-book">Genesis 25</div></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-date">c. 1876 BC</div><div class="tl-event">Joseph &middot; Israel to Egypt</div><div class="tl-book">Genesis 37&ndash;50</div></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-date">c. 1526 BC</div><div class="tl-event">Moses born</div><div class="tl-book">Exodus 2</div></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-date">c. 1446 BC</div><div class="tl-event">The Exodus &amp; Passover</div><div class="tl-book">Exodus 12&ndash;14</div></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-date">c. 1446 BC</div><div class="tl-event">Law given at Sinai</div><div class="tl-book">Exodus 19&ndash;Lev</div></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-date">c. 1446 BC</div><div class="tl-event">Spies &middot; 40 years decreed</div><div class="tl-book">Numbers 13&ndash;14</div></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-date">c. 1406 BC</div><div class="tl-event">Plains of Moab</div><div class="tl-book">Deuteronomy</div></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-date">c. 1406 BC</div><div class="tl-event">Moses dies &middot; Joshua leads</div><div class="tl-book">Deut 34</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== GENESIS =================== -->
+  <h2 class="sec-title" id="genesis"><span class="sec-icon">&#127793;</span> The Five Books</h2>
+  <p class="sec-sub">Tap any <span class="ref" data-ref="John 3:16">blue reference</span> to read the passage in this page. Each book has its dates, a summary, an outline, its key events, themes, a key verse and New&nbsp;Testament cross-references.</p>
+
+  <article class="book" id="genesis-card" style="--accent:var(--gen)">
+    <div class="book-top">
+      <div class="book-num">Book One</div>
+      <div class="book-name">Genesis</div>
+      <div class="book-heb">Bereshit &middot; &ldquo;In the beginning&rdquo;</div>
+      <div class="facts">
+        <div class="fact"><b>Author</b><span>Moses (traditional)</span></div>
+        <div class="fact"><b>Written</b><span>c. 1446&ndash;1406 BC</span></div>
+        <div class="fact"><b>Events span</b><span>Creation &rarr; c. 1805 BC</span></div>
+        <div class="fact"><b>Chapters</b><span>50</span></div>
+      </div>
+    </div>
+    <div class="book-body">
+      <h4>Summary</h4>
+      <p>Genesis is the book of beginnings &mdash; of the universe, of humanity, of sin and death, and of God&rsquo;s plan to undo them. The first eleven chapters move at sweeping speed (creation, the fall, the flood, Babel). Then the lens narrows to one family: God calls <span class="ref" data-ref="Genesis 12:1-3">Abram</span> and promises to bless all nations through him. The rest follows four generations &mdash; Abraham, Isaac, Jacob, Joseph &mdash; as the promise survives barrenness, famine, betrayal and exile, ending with Israel safe in Egypt.</p>
+
+      <h4>Outline</h4>
+      <ul class="outline">
+        <li><b>1&ndash;11 Primeval history:</b> creation, the fall, Cain &amp; Abel, the flood, the tower of Babel</li>
+        <li><b>12&ndash;25 Abraham:</b> the call, the covenant, Isaac&rsquo;s birth and near-sacrifice</li>
+        <li><b>25&ndash;36 Isaac &amp; Jacob:</b> Jacob and Esau, the ladder, wrestling with God, the twelve sons</li>
+        <li><b>37&ndash;50 Joseph:</b> sold by his brothers, raised in Egypt, saving the family he forgives</li>
+      </ul>
+
+      <h4>Key events</h4>
+      <div class="events">
+        <div class="evt"><span class="ref e-ref" data-ref="Genesis 1">Gen 1&ndash;2</span><span>Creation of the heavens, the earth, and humanity in God&rsquo;s image</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Genesis 3">Gen 3</span><span>The fall &mdash; sin and death enter the world</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Genesis 6:9-22">Gen 6&ndash;9</span><span>The flood and God&rsquo;s covenant with Noah</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Genesis 11:1-9">Gen 11</span><span>The tower of Babel and the scattering of nations</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Genesis 15">Gen 15, 17</span><span>God cuts covenant with Abraham &mdash; land, seed and blessing</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Genesis 22">Gen 22</span><span>The binding of Isaac on Mount Moriah</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Genesis 28:10-22">Gen 28</span><span>Jacob&rsquo;s ladder at Bethel</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Genesis 32:22-32">Gen 32</span><span>Jacob wrestles with God and is renamed Israel</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Genesis 45">Gen 45, 50</span><span>Joseph reveals himself and forgives his brothers</span></div>
+      </div>
+
+      <h4>Major themes</h4>
+      <div class="themes"><span class="theme">Creation</span><span class="theme">Image of God</span><span class="theme">Sin &amp; the fall</span><span class="theme">Covenant</span><span class="theme">Promise &amp; faith</span><span class="theme">God&rsquo;s providence</span></div>
+
+      <div class="kv"><q>In the beginning God created the heaven and the earth.</q><cite>Genesis 1:1 &middot; KJV</cite></div>
+
+      <div class="xref">
+        <div class="xh">New Testament cross-references</div>
+        <ul>
+          <li><b>Creation through the Word</b> &mdash; <span class="ref" data-ref="John 1:1-3">John 1:1&ndash;3</span>; <span class="ref" data-ref="Colossians 1:16">Col 1:16</span>; <span class="ref" data-ref="Hebrews 11:3">Heb 11:3</span></li>
+          <li><b>Adam and Christ</b> &mdash; <span class="ref" data-ref="Romans 5:12-21">Rom 5:12&ndash;21</span>; <span class="ref" data-ref="1 Corinthians 15:21-22">1 Cor 15:21&ndash;22</span></li>
+          <li><b>Abraham justified by faith</b> &mdash; <span class="ref" data-ref="Romans 4">Rom 4</span>; <span class="ref" data-ref="Galatians 3:6-9">Gal 3:6&ndash;9</span>; <span class="ref" data-ref="James 2:21-23">Jas 2:21&ndash;23</span></li>
+          <li><b>The promised Seed is Christ</b> &mdash; <span class="ref" data-ref="Galatians 3:16">Gal 3:16</span>; <span class="ref" data-ref="Matthew 1:1">Matt 1:1</span></li>
+          <li><b>Isaac as a picture of resurrection</b> &mdash; <span class="ref" data-ref="Hebrews 11:17-19">Heb 11:17&ndash;19</span></li>
+          <li><b>Melchizedek &amp; Christ&rsquo;s priesthood</b> &mdash; <span class="ref" data-ref="Hebrews 7:1-3">Heb 7:1&ndash;3</span></li>
+        </ul>
+      </div>
+
+      <div class="reads">
+        <span class="btn-read" data-ref="Genesis 1">&#128214; Read Genesis 1 here</span>
+        <a class="btn-niv" href="https://www.biblegateway.com/passage/?search=Genesis+1&version=NIV" target="_blank" rel="noopener">Genesis (NIV) &#8599;</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- =================== EXODUS =================== -->
+  <article class="book" id="exodus" style="--accent:var(--exo)">
+    <div class="book-top">
+      <div class="book-num">Book Two</div>
+      <div class="book-name">Exodus</div>
+      <div class="book-heb">Shemot &middot; &ldquo;Names&rdquo;</div>
+      <div class="facts">
+        <div class="fact"><b>Author</b><span>Moses (traditional)</span></div>
+        <div class="fact"><b>Written</b><span>c. 1446&ndash;1406 BC</span></div>
+        <div class="fact"><b>Events span</b><span>c. 1876 &rarr; 1446 BC</span></div>
+        <div class="fact"><b>Chapters</b><span>40</span></div>
+      </div>
+    </div>
+    <div class="book-body">
+      <h4>Summary</h4>
+      <p>Centuries after Joseph, his people have multiplied into a nation &mdash; and into slavery. God hears their groaning, raises up <span class="ref" data-ref="Exodus 3">Moses</span> at the burning bush, and through ten plagues breaks Egypt&rsquo;s grip. On Passover night Israel is redeemed by the blood of a lamb; at the Red Sea they are delivered; at Sinai they are given the Law and the pattern of the Tabernacle so that the holy God can dwell among them. Exodus is the Old Testament&rsquo;s great picture of redemption.</p>
+
+      <h4>Outline</h4>
+      <ul class="outline">
+        <li><b>1&ndash;4 Slavery &amp; call:</b> Israel oppressed; Moses and the burning bush</li>
+        <li><b>5&ndash;15 Deliverance:</b> the ten plagues, Passover, the Red Sea</li>
+        <li><b>16&ndash;18 The journey:</b> manna, water from the rock, Jethro&rsquo;s counsel</li>
+        <li><b>19&ndash;24 Covenant at Sinai:</b> the Ten Commandments and the Law</li>
+        <li><b>25&ndash;40 The Tabernacle:</b> its design, the golden calf, and God&rsquo;s glory filling it</li>
+      </ul>
+
+      <h4>Key events</h4>
+      <div class="events">
+        <div class="evt"><span class="ref e-ref" data-ref="Exodus 2:1-10">Ex 2</span><span>The birth and rescue of Moses</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Exodus 3">Ex 3&ndash;4</span><span>The burning bush &mdash; God reveals his name &ldquo;I AM&rdquo;</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Exodus 7:14-25">Ex 7&ndash;12</span><span>The ten plagues on Egypt</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Exodus 12">Ex 12</span><span>The first Passover and the exodus from Egypt</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Exodus 14">Ex 14</span><span>Crossing the Red Sea on dry ground</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Exodus 16">Ex 16&ndash;17</span><span>Manna, quail, and water from the rock</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Exodus 20:1-17">Ex 20</span><span>The giving of the Ten Commandments</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Exodus 32">Ex 32</span><span>The golden calf and Moses&rsquo; intercession</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Exodus 40:34-38">Ex 40</span><span>God&rsquo;s glory fills the finished Tabernacle</span></div>
+      </div>
+
+      <h4>Major themes</h4>
+      <div class="themes"><span class="theme">Redemption</span><span class="theme">Passover</span><span class="theme">The Law</span><span class="theme">God&rsquo;s presence</span><span class="theme">Covenant</span><span class="theme">Deliverance</span></div>
+
+      <div class="kv"><q>I am the LORD thy God, which have brought thee out of the land of Egypt, out of the house of bondage.</q><cite>Exodus 20:2 &middot; KJV</cite></div>
+
+      <div class="xref">
+        <div class="xh">New Testament cross-references</div>
+        <ul>
+          <li><b>Christ our Passover lamb</b> &mdash; <span class="ref" data-ref="1 Corinthians 5:7">1 Cor 5:7</span>; <span class="ref" data-ref="John 1:29">John 1:29</span>; <span class="ref" data-ref="1 Peter 1:18-19">1 Pet 1:18&ndash;19</span></li>
+          <li><b>The Red Sea &amp; the wilderness as warning</b> &mdash; <span class="ref" data-ref="1 Corinthians 10:1-4">1 Cor 10:1&ndash;4</span></li>
+          <li><b>Christ the true bread from heaven</b> &mdash; <span class="ref" data-ref="John 6:31-35">John 6:31&ndash;35</span></li>
+          <li><b>The Tabernacle as a shadow of heaven</b> &mdash; <span class="ref" data-ref="Hebrews 8:5">Heb 8:5</span>; <span class="ref" data-ref="Hebrews 9:1-12">Heb 9:1&ndash;12</span></li>
+          <li><b>Greater than Moses</b> &mdash; <span class="ref" data-ref="Hebrews 3:1-6">Heb 3:1&ndash;6</span>; <span class="ref" data-ref="John 1:17">John 1:17</span></li>
+          <li><b>&ldquo;I AM&rdquo; fulfilled in Jesus</b> &mdash; <span class="ref" data-ref="John 8:58">John 8:58</span></li>
+        </ul>
+      </div>
+
+      <div class="reads">
+        <span class="btn-read" data-ref="Exodus 12:1-13">&#128214; Read the Passover (Ex 12)</span>
+        <a class="btn-niv" href="https://www.biblegateway.com/passage/?search=Exodus+20&version=NIV" target="_blank" rel="noopener">Exodus (NIV) &#8599;</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- =================== LEVITICUS =================== -->
+  <article class="book" id="leviticus" style="--accent:var(--lev)">
+    <div class="book-top">
+      <div class="book-num">Book Three</div>
+      <div class="book-name">Leviticus</div>
+      <div class="book-heb">Vayikra &middot; &ldquo;And He called&rdquo;</div>
+      <div class="facts">
+        <div class="fact"><b>Author</b><span>Moses (traditional)</span></div>
+        <div class="fact"><b>Written</b><span>c. 1446&ndash;1445 BC</span></div>
+        <div class="fact"><b>Events span</b><span>~1 month at Sinai</span></div>
+        <div class="fact"><b>Chapters</b><span>27</span></div>
+      </div>
+    </div>
+    <div class="book-body">
+      <h4>Summary</h4>
+      <p>If Exodus ends with God moving in, Leviticus answers the question: <em>how can a sinful people live next to a holy God?</em> God calls from the Tabernacle and gives the sacrificial system, the priesthood, and laws of clean and unclean &mdash; all so that Israel may be holy as he is holy. At its centre stands the Day of Atonement, when the nation&rsquo;s sin is carried away. It is the most quoted Old Testament book in the New, because it explains <em>why</em> Jesus had to die.</p>
+
+      <h4>Outline</h4>
+      <ul class="outline">
+        <li><b>1&ndash;7 The offerings:</b> burnt, grain, peace, sin and guilt sacrifices</li>
+        <li><b>8&ndash;10 The priesthood:</b> Aaron ordained; the death of Nadab and Abihu</li>
+        <li><b>11&ndash;15 Clean &amp; unclean:</b> food, childbirth, disease and purity</li>
+        <li><b>16 The Day of Atonement:</b> the scapegoat carries sin away</li>
+        <li><b>17&ndash;27 The Holiness Code:</b> holy living, the feasts, the Jubilee, blessings &amp; curses</li>
+      </ul>
+
+      <h4>Key events &amp; sections</h4>
+      <div class="events">
+        <div class="evt"><span class="ref e-ref" data-ref="Leviticus 1">Lev 1&ndash;7</span><span>The five offerings that bring Israel near to God</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Leviticus 8">Lev 8&ndash;9</span><span>Aaron and his sons consecrated as priests</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Leviticus 10:1-7">Lev 10</span><span>Nadab and Abihu offer &ldquo;strange fire&rdquo; and die</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Leviticus 16">Lev 16</span><span>The Day of Atonement and the scapegoat</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Leviticus 19:18">Lev 19:18</span><span>&ldquo;Love your neighbour as yourself&rdquo;</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Leviticus 23">Lev 23</span><span>The appointed feasts of the LORD</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Leviticus 25:8-17">Lev 25</span><span>The Sabbath year and the Year of Jubilee</span></div>
+      </div>
+
+      <h4>Major themes</h4>
+      <div class="themes"><span class="theme">Holiness</span><span class="theme">Sacrifice</span><span class="theme">Atonement</span><span class="theme">Priesthood</span><span class="theme">Clean &amp; unclean</span><span class="theme">The feasts</span></div>
+
+      <div class="kv"><q>Ye shall be holy: for I the LORD your God am holy.</q><cite>Leviticus 19:2 &middot; KJV</cite></div>
+
+      <div class="xref">
+        <div class="xh">New Testament cross-references</div>
+        <ul>
+          <li><b>The blood that the sacrifices pointed to</b> &mdash; <span class="ref" data-ref="Hebrews 9:11-14">Heb 9:11&ndash;14</span>; <span class="ref" data-ref="Hebrews 10:1-14">Heb 10:1&ndash;14</span></li>
+          <li><b>Day of Atonement fulfilled</b> &mdash; <span class="ref" data-ref="Hebrews 9:24-28">Heb 9:24&ndash;28</span>; <span class="ref" data-ref="Romans 3:25">Rom 3:25</span></li>
+          <li><b>&ldquo;Be holy, for I am holy&rdquo;</b> &mdash; <span class="ref" data-ref="1 Peter 1:15-16">1 Pet 1:15&ndash;16</span></li>
+          <li><b>Love your neighbour</b> &mdash; <span class="ref" data-ref="Matthew 22:39">Matt 22:39</span>; <span class="ref" data-ref="Galatians 5:14">Gal 5:14</span>; <span class="ref" data-ref="James 2:8">Jas 2:8</span></li>
+          <li><b>A great high priest</b> &mdash; <span class="ref" data-ref="Hebrews 4:14-16">Heb 4:14&ndash;16</span></li>
+        </ul>
+      </div>
+
+      <div class="reads">
+        <span class="btn-read" data-ref="Leviticus 16:20-22">&#128214; Read the scapegoat (Lev 16)</span>
+        <a class="btn-niv" href="https://www.biblegateway.com/passage/?search=Leviticus+16&version=NIV" target="_blank" rel="noopener">Leviticus (NIV) &#8599;</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- =================== NUMBERS =================== -->
+  <article class="book" id="numbers" style="--accent:var(--num)">
+    <div class="book-top">
+      <div class="book-num">Book Four</div>
+      <div class="book-name">Numbers</div>
+      <div class="book-heb">Bamidbar &middot; &ldquo;In the wilderness&rdquo;</div>
+      <div class="facts">
+        <div class="fact"><b>Author</b><span>Moses (traditional)</span></div>
+        <div class="fact"><b>Written</b><span>c. 1446&ndash;1406 BC</span></div>
+        <div class="fact"><b>Events span</b><span>~38&ndash;40 years</span></div>
+        <div class="fact"><b>Chapters</b><span>36</span></div>
+      </div>
+    </div>
+    <div class="book-body">
+      <h4>Summary</h4>
+      <p>Named for its two censuses, Numbers is really the story of a journey that should have taken weeks and took forty years. Standing at the border of the Promised Land, Israel listens to ten fearful spies instead of God &mdash; and a whole generation is sentenced to wander and die in the desert. Yet through rebellion, plague and even a pagan prophet&rsquo;s curses, God keeps his promise alive, raising up a new generation to inherit the land.</p>
+
+      <h4>Outline</h4>
+      <ul class="outline">
+        <li><b>1&ndash;10 At Sinai:</b> the first census and order of the camp</li>
+        <li><b>11&ndash;14 The fatal turn:</b> complaints, the twelve spies, the forty-year sentence</li>
+        <li><b>15&ndash;19 Wandering &amp; rebellion:</b> Korah&rsquo;s revolt, Aaron&rsquo;s budding staff</li>
+        <li><b>20&ndash;21 The road to Moab:</b> Moses strikes the rock; the bronze serpent</li>
+        <li><b>22&ndash;36 A new generation:</b> Balaam&rsquo;s blessings, the second census, preparing for the land</li>
+      </ul>
+
+      <h4>Key events</h4>
+      <div class="events">
+        <div class="evt"><span class="ref e-ref" data-ref="Numbers 1:1-4">Num 1</span><span>The first census of the fighting men</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Numbers 13">Num 13&ndash;14</span><span>The twelve spies and the people&rsquo;s unbelief</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Numbers 16">Num 16</span><span>Korah&rsquo;s rebellion against Moses and Aaron</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Numbers 17">Num 17</span><span>Aaron&rsquo;s staff buds to confirm his priesthood</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Numbers 20:1-13">Num 20</span><span>Moses strikes the rock and is barred from the land</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Numbers 21:4-9">Num 21</span><span>The bronze serpent lifted up for healing</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Numbers 22">Num 22&ndash;24</span><span>Balaam, hired to curse Israel, can only bless</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Numbers 26:1-4">Num 26</span><span>The second census of the new generation</span></div>
+      </div>
+
+      <h4>Major themes</h4>
+      <div class="themes"><span class="theme">Wilderness</span><span class="theme">Unbelief</span><span class="theme">God&rsquo;s faithfulness</span><span class="theme">Testing</span><span class="theme">Leadership</span><span class="theme">A new generation</span></div>
+
+      <div class="kv"><q>The LORD bless thee, and keep thee: the LORD make his face shine upon thee&hellip;</q><cite>Numbers 6:24&ndash;25 &middot; KJV</cite></div>
+
+      <div class="xref">
+        <div class="xh">New Testament cross-references</div>
+        <ul>
+          <li><b>The bronze serpent and the cross</b> &mdash; <span class="ref" data-ref="John 3:14-15">John 3:14&ndash;15</span></li>
+          <li><b>The wilderness as a warning to us</b> &mdash; <span class="ref" data-ref="1 Corinthians 10:5-11">1 Cor 10:5&ndash;11</span>; <span class="ref" data-ref="Hebrews 3:16-19">Heb 3:16&ndash;19</span></li>
+          <li><b>The rock that followed was Christ</b> &mdash; <span class="ref" data-ref="1 Corinthians 10:4">1 Cor 10:4</span></li>
+          <li><b>The way of Balaam</b> &mdash; <span class="ref" data-ref="2 Peter 2:15-16">2 Pet 2:15&ndash;16</span>; <span class="ref" data-ref="Jude 1:11">Jude 11</span>; <span class="ref" data-ref="Revelation 2:14">Rev 2:14</span></li>
+          <li><b>Korah&rsquo;s rebellion</b> &mdash; <span class="ref" data-ref="Jude 1:11">Jude 11</span></li>
+        </ul>
+      </div>
+
+      <div class="reads">
+        <span class="btn-read" data-ref="Numbers 21:4-9">&#128214; Read the bronze serpent</span>
+        <a class="btn-niv" href="https://www.biblegateway.com/passage/?search=Numbers+13&version=NIV" target="_blank" rel="noopener">Numbers (NIV) &#8599;</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- =================== DEUTERONOMY =================== -->
+  <article class="book" id="deuteronomy" style="--accent:var(--deu)">
+    <div class="book-top">
+      <div class="book-num">Book Five</div>
+      <div class="book-name">Deuteronomy</div>
+      <div class="book-heb">Devarim &middot; &ldquo;Words&rdquo;</div>
+      <div class="facts">
+        <div class="fact"><b>Author</b><span>Moses (traditional)</span></div>
+        <div class="fact"><b>Written</b><span>c. 1406 BC</span></div>
+        <div class="fact"><b>Events span</b><span>~1 month, Moab</span></div>
+        <div class="fact"><b>Chapters</b><span>34</span></div>
+      </div>
+    </div>
+    <div class="book-body">
+      <h4>Summary</h4>
+      <p>The name means &ldquo;second law&rdquo; &mdash; the Law restated for a new generation on the brink of the land. In a series of farewell sermons, the aged Moses retells the journey, repeats the commandments, and calls Israel to love God with all their heart. He sets before them life and death, blessing and curse, and pleads with them to choose life. Then he blesses the tribes, climbs Mount Nebo, sees the land he may not enter, and dies. It is the book Jesus quotes more than almost any other.</p>
+
+      <h4>Outline</h4>
+      <ul class="outline">
+        <li><b>1&ndash;4 First sermon:</b> a look back at the wilderness journey</li>
+        <li><b>5&ndash;26 Second sermon:</b> the Ten Commandments retold; the Shema; the heart of the Law</li>
+        <li><b>27&ndash;30 Third sermon:</b> blessings and curses; the call to choose life</li>
+        <li><b>31&ndash;34 Farewell:</b> Joshua commissioned, the Song of Moses, the death of Moses</li>
+      </ul>
+
+      <h4>Key events</h4>
+      <div class="events">
+        <div class="evt"><span class="ref e-ref" data-ref="Deuteronomy 5:1-21">Deut 5</span><span>The Ten Commandments restated</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Deuteronomy 6:4-9">Deut 6</span><span>The Shema &mdash; &ldquo;Hear, O Israel&rdquo; &mdash; and the great commandment</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Deuteronomy 18:15-19">Deut 18</span><span>The promise of a prophet like Moses</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Deuteronomy 28:1-14">Deut 28</span><span>The blessings and curses of the covenant</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Deuteronomy 30:11-20">Deut 30</span><span>&ldquo;Choose life&rdquo; &mdash; the heart of the appeal</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Deuteronomy 31:1-8">Deut 31</span><span>Joshua commissioned to lead Israel</span></div>
+        <div class="evt"><span class="ref e-ref" data-ref="Deuteronomy 34">Deut 34</span><span>Moses views the land from Nebo and dies</span></div>
+      </div>
+
+      <h4>Major themes</h4>
+      <div class="themes"><span class="theme">Covenant renewal</span><span class="theme">Love &amp; obedience</span><span class="theme">Remember</span><span class="theme">One God</span><span class="theme">Blessing &amp; curse</span><span class="theme">Choose life</span></div>
+
+      <div class="kv"><q>Hear, O Israel: The LORD our God is one LORD: And thou shalt love the LORD thy God with all thine heart.</q><cite>Deuteronomy 6:4&ndash;5 &middot; KJV</cite></div>
+
+      <div class="xref">
+        <div class="xh">New Testament cross-references</div>
+        <ul>
+          <li><b>Jesus answers temptation from Deuteronomy</b> &mdash; <span class="ref" data-ref="Matthew 4:1-11">Matt 4:1&ndash;11</span> (quoting <span class="ref" data-ref="Deuteronomy 8:3">Deut 8:3</span>, <span class="ref" data-ref="Deuteronomy 6:13">6:13</span>, <span class="ref" data-ref="Deuteronomy 6:16">6:16</span>)</li>
+          <li><b>The greatest commandment</b> &mdash; <span class="ref" data-ref="Mark 12:29-30">Mark 12:29&ndash;30</span> (the Shema)</li>
+          <li><b>The prophet like Moses is Jesus</b> &mdash; <span class="ref" data-ref="Acts 3:22-23">Acts 3:22&ndash;23</span>; <span class="ref" data-ref="John 6:14">John 6:14</span></li>
+          <li><b>Christ became a curse for us</b> &mdash; <span class="ref" data-ref="Galatians 3:13">Gal 3:13</span> (citing <span class="ref" data-ref="Deuteronomy 21:23">Deut 21:23</span>)</li>
+          <li><b>The word is near you</b> &mdash; <span class="ref" data-ref="Romans 10:6-8">Rom 10:6&ndash;8</span> (from <span class="ref" data-ref="Deuteronomy 30:12-14">Deut 30</span>)</li>
+        </ul>
+      </div>
+
+      <div class="reads">
+        <span class="btn-read" data-ref="Deuteronomy 6:4-9">&#128214; Read the Shema</span>
+        <a class="btn-niv" href="https://www.biblegateway.com/passage/?search=Deuteronomy+6&version=NIV" target="_blank" rel="noopener">Deuteronomy (NIV) &#8599;</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- =================== CHARACTERS =================== -->
+  <h2 class="sec-title" id="characters"><span class="sec-icon">&#128101;</span> The People of the Pentateuch</h2>
+  <p class="sec-sub">Every major figure of the first five books &mdash; who they were, where to find them, and how the New Testament reads their lives. Tap any reference to read it.</p>
+  <div id="char-root"></div>
+
+  <!-- =================== CHRIST IN THE TORAH =================== -->
+  <h2 class="sec-title" id="christ"><span class="sec-icon">&#10010;</span> Christ in the Torah</h2>
+  <p class="sec-sub">Jesus told the disciples that Moses wrote about him (<span class="ref" data-ref="John 5:46">John 5:46</span>; <span class="ref" data-ref="Luke 24:27">Luke 24:27</span>). These are the great shadows the New Testament says he fulfilled.</p>
+  <div class="types">
+    <div class="type"><h5>The Passover Lamb</h5><div class="shadow">A spotless lamb&rsquo;s blood spares Israel from death &mdash; <span class="ref" data-ref="Exodus 12:13">Ex 12:13</span></div><div class="arrow">&darr; fulfilled in</div><div class="fulfil">&ldquo;Christ our Passover&rdquo; &mdash; <span class="ref" data-ref="1 Corinthians 5:7">1 Cor 5:7</span>; <span class="ref" data-ref="John 1:29">John 1:29</span></div></div>
+    <div class="type"><h5>The Bronze Serpent</h5><div class="shadow">Lifted up so that all who look live &mdash; <span class="ref" data-ref="Numbers 21:8-9">Num 21:8&ndash;9</span></div><div class="arrow">&darr; fulfilled in</div><div class="fulfil">&ldquo;So must the Son of Man be lifted up&rdquo; &mdash; <span class="ref" data-ref="John 3:14-15">John 3:14&ndash;15</span></div></div>
+    <div class="type"><h5>The Day of Atonement</h5><div class="shadow">One sacrifice carries the nation&rsquo;s sin away &mdash; <span class="ref" data-ref="Leviticus 16:21-22">Lev 16:21&ndash;22</span></div><div class="arrow">&darr; fulfilled in</div><div class="fulfil">Christ&rsquo;s once-for-all sacrifice &mdash; <span class="ref" data-ref="Hebrews 9:11-14">Heb 9:11&ndash;14</span></div></div>
+    <div class="type"><h5>Melchizedek</h5><div class="shadow">A priest-king without recorded beginning &mdash; <span class="ref" data-ref="Genesis 14:18-20">Gen 14:18&ndash;20</span></div><div class="arrow">&darr; fulfilled in</div><div class="fulfil">Christ, a priest forever &mdash; <span class="ref" data-ref="Hebrews 7:1-3">Heb 7:1&ndash;3</span></div></div>
+    <div class="type"><h5>The Rock in the Desert</h5><div class="shadow">Struck, it pours out water for the thirsty &mdash; <span class="ref" data-ref="Exodus 17:6">Ex 17:6</span></div><div class="arrow">&darr; fulfilled in</div><div class="fulfil">&ldquo;That Rock was Christ&rdquo; &mdash; <span class="ref" data-ref="1 Corinthians 10:4">1 Cor 10:4</span></div></div>
+    <div class="type"><h5>The Prophet Like Moses</h5><div class="shadow">God will raise a prophet to speak his words &mdash; <span class="ref" data-ref="Deuteronomy 18:15">Deut 18:15</span></div><div class="arrow">&darr; fulfilled in</div><div class="fulfil">&ldquo;This is the Prophet&rdquo; &mdash; <span class="ref" data-ref="Acts 3:22-23">Acts 3:22&ndash;23</span></div></div>
+  </div>
+
+  <!-- =================== CROSS-REF INDEX =================== -->
+  <h2 class="sec-title" id="index"><span class="sec-icon">&#128279;</span> Cross-Reference Index</h2>
+  <p class="sec-sub">A quick map from the Torah into the rest of the Bible &mdash; handy for small-group prep.</p>
+  <table class="tbl">
+    <thead><tr><th>In the Pentateuch</th><th>Picks up in&hellip;</th></tr></thead>
+    <tbody>
+      <tr><td>Creation (<span class="ref" data-ref="Genesis 1:1">Gen 1</span>)</td><td><span class="ref" data-ref="John 1:1-3">John 1</span> &middot; <span class="ref" data-ref="Colossians 1:16">Col 1:16</span> &middot; <span class="ref" data-ref="Revelation 21:1">Rev 21</span></td></tr>
+      <tr><td>The fall (<span class="ref" data-ref="Genesis 3">Gen 3</span>)</td><td><span class="ref" data-ref="Romans 5:12-21">Rom 5</span> &middot; <span class="ref" data-ref="1 Corinthians 15:21-22">1 Cor 15</span></td></tr>
+      <tr><td>Abraham&rsquo;s covenant (<span class="ref" data-ref="Genesis 15">Gen 15</span>)</td><td><span class="ref" data-ref="Romans 4">Rom 4</span> &middot; <span class="ref" data-ref="Galatians 3:6-29">Gal 3</span> &middot; <span class="ref" data-ref="Hebrews 11:8-19">Heb 11</span></td></tr>
+      <tr><td>The Passover (<span class="ref" data-ref="Exodus 12">Ex 12</span>)</td><td><span class="ref" data-ref="1 Corinthians 5:7">1 Cor 5:7</span> &middot; <span class="ref" data-ref="John 19:36">John 19:36</span></td></tr>
+      <tr><td>The Law at Sinai (<span class="ref" data-ref="Exodus 20:1-17">Ex 20</span>)</td><td><span class="ref" data-ref="Matthew 5:17-20">Matt 5</span> &middot; <span class="ref" data-ref="Galatians 3:24">Gal 3:24</span> &middot; <span class="ref" data-ref="Romans 7:7">Rom 7</span></td></tr>
+      <tr><td>The Tabernacle (<span class="ref" data-ref="Exodus 25:8-9">Ex 25</span>)</td><td><span class="ref" data-ref="Hebrews 9:1-12">Heb 9</span> &middot; <span class="ref" data-ref="John 1:14">John 1:14</span></td></tr>
+      <tr><td>The sacrifices (<span class="ref" data-ref="Leviticus 1">Lev 1&ndash;7</span>)</td><td><span class="ref" data-ref="Hebrews 10:1-14">Heb 10</span> &middot; <span class="ref" data-ref="Ephesians 5:2">Eph 5:2</span></td></tr>
+      <tr><td>Day of Atonement (<span class="ref" data-ref="Leviticus 16">Lev 16</span>)</td><td><span class="ref" data-ref="Hebrews 9:24-28">Heb 9</span> &middot; <span class="ref" data-ref="Romans 3:25">Rom 3:25</span></td></tr>
+      <tr><td>Love your neighbour (<span class="ref" data-ref="Leviticus 19:18">Lev 19:18</span>)</td><td><span class="ref" data-ref="Matthew 22:39">Matt 22:39</span> &middot; <span class="ref" data-ref="Galatians 5:14">Gal 5:14</span></td></tr>
+      <tr><td>Bronze serpent (<span class="ref" data-ref="Numbers 21:8-9">Num 21</span>)</td><td><span class="ref" data-ref="John 3:14-15">John 3:14&ndash;15</span></td></tr>
+      <tr><td>The Shema (<span class="ref" data-ref="Deuteronomy 6:4-5">Deut 6:4&ndash;5</span>)</td><td><span class="ref" data-ref="Mark 12:29-31">Mark 12</span> &middot; <span class="ref" data-ref="Matthew 22:37">Matt 22:37</span></td></tr>
+      <tr><td>Prophet like Moses (<span class="ref" data-ref="Deuteronomy 18:15">Deut 18:15</span>)</td><td><span class="ref" data-ref="Acts 3:22-23">Acts 3</span> &middot; <span class="ref" data-ref="John 6:14">John 6:14</span></td></tr>
+    </tbody>
+  </table>
+
+</main>
+
+<!-- =================== READER PANEL =================== -->
+<div class="scrim" id="scrim"></div>
+<div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="Scripture reader">
+  <div class="r-top">
+    <div class="r-ref" id="rRef">Scripture</div>
+    <button class="r-x" id="rClose" aria-label="Close reader">&times;</button>
+  </div>
+  <div class="r-tabs">
+    <button class="r-tab act" id="tabWeb" data-tr="web">WEB</button>
+    <button class="r-tab" id="tabKjv" data-tr="kjv">KJV</button>
+  </div>
+  <div class="r-body" id="rBody"><span class="muted">Loading&hellip;</span></div>
+  <div class="r-foot" id="rFoot"></div>
+</div>
+
+<footer class="foot">
+  The Pentateuch &middot; The Five Books of Moses &mdash; part of the Bible Study Library<br>
+  In-page text is the public-domain <b>World English Bible</b> (WEB) and <b>King James Version</b> (KJV), served by
+  <a href="https://bible-api.com" target="_blank" rel="noopener">bible-api.com</a>.
+  NIV passages open via <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a>.<br>
+  Dates follow the traditional chronology and are approximate. &larr; <a href="../">Back to the Library</a>
+</footer>
+
+<script>
+/* ============ CHARACTER DATA ============ */
+var CHARS = [
+  { era: "Primeval History (Genesis 1\u201311)", people: [
+    { n:"Adam & Eve", emo:"\uD83C\uDF3F", m:"the first man & woman",
+      role:"The first humans, made in God\u2019s image to fill and keep the earth. Their disobedience brings sin and death into the world \u2014 the wound the whole Bible sets out to heal.",
+      where:"Genesis 1\u20135",
+      nt:[["Romans 5:12-21","Adam vs. Christ"],["1 Corinthians 15:22","in Adam all die"],["1 Corinthians 15:45","Christ the last Adam"],["1 Timothy 2:13-14","order & the deception"]] },
+    { n:"Cain & Abel", emo:"\uD83C\uDF3E", m:"the first brothers",
+      role:"Adam\u2019s sons. Abel\u2019s offering is accepted by faith; jealous Cain murders him \u2014 the first death, and the first martyr.",
+      where:"Genesis 4",
+      nt:[["Hebrews 11:4","Abel\u2019s faith"],["1 John 3:12","not like Cain"],["Matthew 23:35","blood of Abel"],["Jude 1:11","the way of Cain"]] },
+    { n:"Noah", emo:"\uD83D\uDEA2", m:"\u201Crest\u201D \u00B7 the ark-builder",
+      role:"A righteous man in a violent age. By faith he builds the ark, and through the flood God preserves humanity and creation, sealing it with the rainbow covenant.",
+      where:"Genesis 5\u20139",
+      nt:[["Hebrews 11:7","condemned the world by faith"],["1 Peter 3:20-21","the ark & baptism"],["2 Peter 2:5","a preacher of righteousness"],["Matthew 24:37-39","as in the days of Noah"]] },
+  ]},
+  { era: "The Patriarchs (Genesis 12\u201350)", people: [
+    { n:"Abraham", emo:"\u2B50", m:"\u201Cfather of many\u201D",
+      role:"Called out of Ur to a land he had never seen, Abraham believes God\u2019s promise of a son, a nation and worldwide blessing. He becomes the Bible\u2019s model of justifying faith and \u201Cthe father of all who believe.\u201D",
+      where:"Genesis 12\u201325",
+      nt:[["Romans 4","justified by faith"],["Galatians 3:6-9","father of believers"],["Hebrews 11:8-19","faith that obeyed"],["James 2:21-23","faith & works"],["John 8:56","he saw my day"]] },
+    { n:"Sarah", emo:"\uD83D\uDC51", m:"\u201Cprincess\u201D",
+      role:"Abraham\u2019s wife, barren into old age, who laughs at the promise yet bears Isaac at ninety \u2014 proof that God keeps his word against all odds.",
+      where:"Genesis 11\u201323",
+      nt:[["Hebrews 11:11","faith to conceive"],["1 Peter 3:6","an example to wives"],["Romans 4:19","the deadness of her womb"],["Galatians 4:22-31","the free woman"]] },
+    { n:"Lot", emo:"\u26FA", m:"Abraham\u2019s nephew",
+      role:"He chooses the well-watered plain near Sodom and is nearly destroyed with it; rescued by angels, he loses almost everything \u2014 a warning about drifting toward a doomed city.",
+      where:"Genesis 11\u201319",
+      nt:[["2 Peter 2:7-8","a righteous man distressed"],["Luke 17:28-32","remember Lot\u2019s wife"]] },
+    { n:"Hagar & Ishmael", emo:"\uD83C\uDFDC\uFE0F", m:"the slave & her son",
+      role:"Sarah\u2019s servant and the son born of human scheming. God meets Hagar in the desert and still blesses Ishmael, yet the covenant runs through Isaac.",
+      where:"Genesis 16, 21",
+      nt:[["Galatians 4:21-31","two covenants"]] },
+    { n:"Isaac", emo:"\uD83D\uDD25", m:"\u201Che laughs\u201D \u00B7 the child of promise",
+      role:"The promised son, willingly bound on the altar at Moriah and given back \u2014 a living picture of resurrection and of the Father giving his Son. He carries the covenant to the next generation.",
+      where:"Genesis 21\u201335",
+      nt:[["Hebrews 11:17-19","received back as resurrection"],["Romans 9:7-9","children of promise"],["Galatians 4:28","children like Isaac"],["James 2:21","offered on the altar"]] },
+    { n:"Rebekah", emo:"\uD83D\uDED6", m:"Isaac\u2019s wife",
+      role:"Found at a well in answer to prayer, she leaves home in faith, and her twins\u2019 destiny is announced before birth \u2014 a key text for God\u2019s sovereign choice.",
+      where:"Genesis 24\u201327",
+      nt:[["Romans 9:10-13","the elder shall serve the younger"]] },
+    { n:"Jacob (Israel)", emo:"\uD83E\uDE9C", m:"\u201Cheel-grabber\u201D \u2192 \u201Cstrives with God\u201D",
+      role:"The deceiver who is himself deceived, then transformed. He wrestles with God, is renamed Israel, and fathers the twelve tribes \u2014 grace working through a flawed man.",
+      where:"Genesis 25\u201350",
+      nt:[["Romans 9:13","Jacob I loved"],["Hebrews 11:21","blessed by faith, dying"],["John 4:5-6","Jacob\u2019s well"]] },
+    { n:"Esau", emo:"\uD83C\uDF72", m:"Jacob\u2019s twin",
+      role:"The firstborn who trades his birthright for a bowl of stew \u2014 the Bible\u2019s emblem of despising what is sacred for the appetite of the moment.",
+      where:"Genesis 25\u201336",
+      nt:[["Hebrews 12:16-17","sold his birthright"],["Romans 9:13","Esau I hated"]] },
+    { n:"Joseph", emo:"\uD83C\uDF08", m:"\u201CGod will add\u201D",
+      role:"Sold into slavery by his brothers, falsely imprisoned, then raised to rule Egypt and save his family. He forgives them with the words, \u201CYou meant evil; God meant it for good\u201D \u2014 a striking picture of Christ.",
+      where:"Genesis 37\u201350",
+      nt:[["Hebrews 11:22","faith about his bones"],["Acts 7:9-16","Stephen retells his story"]] },
+  ]},
+  { era: "The Exodus Generation", people: [
+    { n:"Moses", emo:"\uD83D\uDCDC", m:"\u201Cdrawn out\u201D \u00B7 the deliverer",
+      role:"Rescued from the Nile, schooled in Egypt, called at the burning bush. He confronts Pharaoh, leads Israel out, receives the Law at Sinai, and shepherds the nation forty years. The greatest prophet of the Old Testament \u2014 and a signpost to a greater one.",
+      where:"Exodus \u2013 Deuteronomy",
+      nt:[["Hebrews 11:23-28","faith that left Egypt"],["Acts 7:20-44","Stephen\u2019s summary"],["John 1:17","law by Moses, grace by Christ"],["John 5:46","he wrote of me"],["Matthew 17:3","with Jesus at the transfiguration"]] },
+    { n:"Aaron", emo:"\uD83D\uDD6F\uFE0F", m:"the first high priest",
+      role:"Moses\u2019 brother and spokesman, made high priest \u2014 yet also the man who made the golden calf. His priesthood foreshadows a perfect priest to come.",
+      where:"Exodus \u2013 Numbers",
+      nt:[["Hebrews 5:4","called by God as Aaron was"],["Hebrews 7:11","a priesthood that could not perfect"]] },
+    { n:"Miriam", emo:"\uD83E\uDD41", m:"Moses\u2019 sister, prophetess",
+      role:"She watches over baby Moses, then leads Israel in song at the Red Sea \u2014 but is later disciplined for opposing Moses\u2019 authority.",
+      where:"Exodus 2, 15; Numbers 12",
+      nt:[["Micah 6:4","sent before the people (OT echo)"]] },
+    { n:"Pharaoh", emo:"\uD83D\uDC51", m:"the king of Egypt",
+      role:"The hard-hearted ruler who refuses to free Israel through plague after plague \u2014 the Bible\u2019s case study in resisting God.",
+      where:"Exodus 1\u201314",
+      nt:[["Romans 9:17","raised up to show God\u2019s power"]] },
+  ]},
+  { era: "The Wilderness Generation", people: [
+    { n:"Joshua", emo:"\u2694\uFE0F", m:"\u201CThe LORD saves\u201D",
+      role:"Moses\u2019 aide and one of only two faithful spies. Commissioned to lead Israel into the land, he models courageous trust in God\u2019s promise. (His name is the Hebrew form of \u201CJesus.\u201D)",
+      where:"Exodus 17; Numbers 13\u201314; Deut 31, 34",
+      nt:[["Hebrews 4:8","a rest Joshua could not give"],["Acts 7:45","brought in the tabernacle"]] },
+    { n:"Caleb", emo:"\uD83C\uDFD4\uFE0F", m:"the faithful spy",
+      role:"With Joshua, he alone urges Israel to trust God and take the land. For \u201Cfollowing the LORD fully\u201D he is promised his inheritance \u2014 and receives it decades later.",
+      where:"Numbers 13\u201314, 32",
+      nt:[["1 Corinthians 10:1-11","wilderness as warning (context)"]] },
+    { n:"Balaam", emo:"\uD83D\uDC34", m:"the prophet-for-hire",
+      role:"A pagan seer paid to curse Israel, whose own donkey rebukes him and who can only speak blessing \u2014 yet whose greedy counsel later leads Israel into sin.",
+      where:"Numbers 22\u201324, 31",
+      nt:[["2 Peter 2:15-16","loved the wages of wickedness"],["Jude 1:11","Balaam\u2019s error"],["Revelation 2:14","the teaching of Balaam"]] },
+    { n:"Korah", emo:"\u26A1", m:"the rebel Levite",
+      role:"He leads a revolt against Moses and Aaron\u2019s God-given leadership; the ground opens and swallows the rebels \u2014 a sobering lesson on contesting God\u2019s order.",
+      where:"Numbers 16",
+      nt:[["Jude 1:11","perished in Korah\u2019s rebellion"]] },
+    { n:"Melchizedek", emo:"\uD83C\uDF77", m:"priest-king of Salem",
+      role:"A mysterious king-priest who blesses Abraham and receives his tithe, with no recorded genealogy \u2014 a unique foreshadow of Christ\u2019s eternal priesthood.",
+      where:"Genesis 14:18-20",
+      nt:[["Hebrews 7:1-3","a priest forever"],["Hebrews 7:17","after the order of Melchizedek"]] },
+  ]},
+];
+
+/* ============ RENDER CHARACTERS ============ */
+(function(){
+  var root = document.getElementById('char-root');
+  CHARS.forEach(function(group){
+    var h = document.createElement('div');
+    h.className = 'era-head';
+    h.textContent = group.era;
+    root.appendChild(h);
+    var grid = document.createElement('div');
+    grid.className = 'chars';
+    group.people.forEach(function(p){
+      var nt = p.nt.map(function(x){
+        return '<span class="ref" data-ref="'+x[0]+'">'+x[0].replace('1 ','1\u00A0').replace('2 ','2\u00A0')+'</span> <span style="color:var(--md)">('+x[1]+')</span>';
+      }).join(' &middot; ');
+      var card = document.createElement('div');
+      card.className = 'char';
+      card.innerHTML =
+        '<div class="cn"><span class="emo">'+p.emo+'</span>'+p.n+'</div>'+
+        '<div class="meaning">'+p.m+'</div>'+
+        '<div class="role">'+p.role+'</div>'+
+        '<div class="where"><span class="lbl">Read</span><span class="ref" data-ref="'+firstRef(p.where)+'">'+p.where+'</span></div>'+
+        '<div class="nt"><span class="lbl">In the NT</span>'+nt+'</div>';
+      grid.appendChild(card);
+    });
+    root.appendChild(grid);
+  });
+  function firstRef(s){
+    // turn "Genesis 1\u20135" or "Exodus 2, 15; Numbers 12" into a single openable ref
+    var first = s.split(/[;,]/)[0].trim();
+    first = first.replace(/\u2013.*$/,'').trim(); // drop range after en-dash -> open first chapter
+    if(!/\d/.test(first)) first = first + ' 1'; // bare book name -> open chapter 1
+    return first;
+  }
+})();
+
+/* ============ SCRIPTURE READER ============ */
+(function(){
+  var scrim=document.getElementById('scrim'),
+      reader=document.getElementById('reader'),
+      rRef=document.getElementById('rRef'),
+      rBody=document.getElementById('rBody'),
+      rFoot=document.getElementById('rFoot'),
+      tabWeb=document.getElementById('tabWeb'),
+      tabKjv=document.getElementById('tabKjv'),
+      rClose=document.getElementById('rClose');
+  var current="", cache={};
+
+  function bgLink(ref,ver){
+    return 'https://www.biblegateway.com/passage/?search='+encodeURIComponent(ref)+'&version='+ver;
+  }
+  function setFoot(ref){
+    rFoot.innerHTML='<a href="'+bgLink(ref,'NIV')+'" target="_blank" rel="noopener">\uD83D\uDCD6 Open in NIV (BibleGateway) \u2197</a>';
+  }
+  function open(ref){
+    current=ref;
+    rRef.textContent=ref;
+    setActive('web');
+    scrim.classList.add('on');
+    reader.classList.add('on');
+    setFoot(ref);
+    load(ref,'web');
+  }
+  function close(){
+    scrim.classList.remove('on');
+    reader.classList.remove('on');
+  }
+  function setActive(tr){
+    tabWeb.classList.toggle('act',tr==='web');
+    tabKjv.classList.toggle('act',tr==='kjv');
+  }
+  function load(ref,tr){
+    var key=ref+'|'+tr;
+    if(cache[key]){rBody.innerHTML=cache[key];return;}
+    rBody.innerHTML='<span class="muted">Loading '+ref+'\u2026</span>';
+    var url='https://bible-api.com/'+encodeURIComponent(ref)+(tr==='kjv'?'?translation=kjv':'');
+    fetch(url).then(function(r){
+      if(!r.ok) throw new Error('http '+r.status);
+      return r.json();
+    }).then(function(d){
+      if(d.error||!d.verses){ throw new Error(d.error||'no text'); }
+      var html='';
+      d.verses.forEach(function(v){
+        html+='<span class="vn">'+v.verse+'</span>'+v.text.replace(/\n/g,' ').trim()+' ';
+      });
+      cache[key]=html;
+      if(current===ref) rBody.innerHTML=html;
+    }).catch(function(){
+      rBody.innerHTML='<span class="muted">Couldn\u2019t load this passage in-page. Tap the NIV button below to read it on BibleGateway.</span>';
+    });
+  }
+
+  // delegate clicks on any .ref
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('.ref,.btn-read');
+    if(t&&t.dataset.ref){ e.preventDefault(); open(t.dataset.ref); }
+  });
+  tabWeb.addEventListener('click',function(){setActive('web');load(current,'web');});
+  tabKjv.addEventListener('click',function(){setActive('kjv');load(current,'kjv');});
+  rClose.addEventListener('click',close);
+  scrim.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>
+
+</body>
+</html>
