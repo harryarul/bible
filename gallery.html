@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>The Living Library — Scripture Gallery</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Lato:wght@400;700;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
+
+<!-- importmap MUST come before the module script so the three.js add-ons
+     (EffectComposer/RenderPass/ShaderPass) can resolve their bare "three" imports -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+    "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm"
+  }
+}
+</script>
+
+<style>
+  :root{
+    --space:#0a0707;
+    --space-2:#140d0c;
+    --wine:#7a1f2b;
+    --gold:#d8b56b;
+    --gold-soft:#e6c87f;
+    --parch:#efe6d3;
+    --ink:#0c0908;
+    --hair:rgba(239,230,211,.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;overflow:hidden;background:var(--space);}
+  body{
+    font-family:'Lato',sans-serif;
+    color:var(--parch);
+    cursor:none;
+    -webkit-font-smoothing:antialiased;
+    touch-action:none;
+  }
+  canvas{display:block;}
+
+  /* ===== Scene root ===== */
+  #scene{position:fixed;inset:0;z-index:1;}
+  #scene canvas{position:absolute;inset:0;}
+
+  /* ambient vignette baked over webgl so DOM + GL share the lens mood */
+  #vignette{
+    position:fixed;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 46%,transparent 38%,rgba(6,4,4,.55) 78%,rgba(4,2,2,.92) 100%);
+    mix-blend-mode:multiply;
+  }
+  #grain{
+    position:fixed;inset:-50%;z-index:3;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    animation:grain 6s steps(6) infinite;
+  }
+  @keyframes grain{
+    0%{transform:translate(0,0)}10%{transform:translate(-4%,-3%)}30%{transform:translate(3%,-5%)}
+    50%{transform:translate(-3%,4%)}70%{transform:translate(4%,2%)}90%{transform:translate(-2%,-4%)}100%{transform:translate(0,0)}
+  }
+
+  /* ===== HUD ===== */
+  .hud{position:fixed;z-index:6;pointer-events:none;user-select:none;}
+  .hud .lbl{
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:rgba(239,230,211,.78);font-weight:700;
+  }
+  .hud .dim{color:rgba(239,230,211,.42);}
+
+  #hud-tl{top:26px;left:30px;max-width:46vw;}
+  #hud-tl .mark{display:flex;align-items:center;gap:10px;}
+  #hud-tl .seal{
+    width:13px;height:13px;border:1.5px solid var(--gold);border-radius:50%;
+    position:relative;flex:none;
+  }
+  #hud-tl .seal::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--gold);}
+  #hud-tl .sub{margin-top:9px;font-size:10.5px;letter-spacing:.16em;line-height:1.7;color:rgba(239,230,211,.5);}
+
+  #hud-tr{top:26px;right:30px;text-align:right;}
+  #hud-tr .loc{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+  #hud-tr .pin{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);}
+  #hud-tr .clock{margin-top:6px;font-variant-numeric:tabular-nums;}
+
+  #hud-center{
+    top:30px;left:50%;transform:translateX(-50%);text-align:center;max-width:520px;
+  }
+  #hud-center .tag{
+    font-family:'Lato';font-weight:900;font-size:12px;letter-spacing:.14em;line-height:1.6;
+    color:rgba(239,230,211,.8);text-transform:uppercase;
+  }
+
+  #cta{
+    position:fixed;top:22px;right:30px;z-index:7;pointer-events:auto;display:none;
+  }
+  /* CTA pill bottom-center instead — feels less cramped with the clock */
+  #cta{top:auto;bottom:30px;right:auto;left:50%;transform:translateX(-50%);}
+  #cta button{
+    pointer-events:auto;cursor:none;border:none;border-radius:999px;
+    background:var(--parch);color:var(--ink);
+    font-family:'Lato';font-weight:900;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;
+    padding:13px 26px;display:flex;align-items:center;gap:9px;
+    box-shadow:0 8px 30px rgba(0,0,0,.5);transition:transform .35s cubic-bezier(.2,.9,.2,1),background .3s;
+  }
+  #cta button:hover{transform:translateX(-50%) translateY(-2px);}
+  #cta button .dot{width:7px;height:7px;border-radius:50%;background:var(--wine);}
+
+  #hud-bl{bottom:30px;left:30px;}
+  #hud-bl .hint{font-size:10.5px;letter-spacing:.18em;color:rgba(239,230,211,.4);}
+  #hud-br{bottom:30px;right:30px;text-align:right;}
+  #hud-br .count{font-family:'Playfair Display';font-style:italic;font-size:15px;color:rgba(239,230,211,.55);}
+
+  /* ===== Custom lens cursor ===== */
+  #lens{
+    position:fixed;z-index:30;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;
+    border:1px solid rgba(239,230,211,.55);border-radius:50%;pointer-events:none;
+    display:flex;align-items:center;justify-content:center;
+    transition:width .35s cubic-bezier(.2,.9,.2,1),height .35s cubic-bezier(.2,.9,.2,1),
+               border-color .3s,background .3s;
+    backdrop-filter:contrast(1.06) brightness(1.04);
+    -webkit-backdrop-filter:contrast(1.06) brightness(1.04);
+  }
+  #lens .crumb{width:4px;height:4px;border-radius:50%;background:rgba(239,230,211,.8);transition:opacity .25s;}
+  #lens .word{
+    position:absolute;font-family:'Lato';font-weight:900;font-size:10px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .25s;
+  }
+  body.hovering #lens{width:78px;height:78px;margin:-39px 0 0 -39px;background:var(--gold-soft);border-color:var(--gold-soft);}
+  body.hovering #lens .crumb{opacity:0;}
+  body.hovering #lens .word{opacity:1;}
+  body.dragging #lens{width:18px;height:18px;margin:-9px 0 0 -9px;border-color:rgba(239,230,211,.85);}
+  body.dragging #lens .crumb{opacity:0;}
+
+  /* ===== Detail page (animates in) ===== */
+  #detail{
+    position:fixed;inset:0;z-index:20;display:none;overflow:hidden;
+  }
+  #detail .sheet{
+    position:absolute;inset:0;will-change:transform,opacity;
+  }
+  #detail .bg{position:absolute;inset:0;}
+  #detail .scrim{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(8,5,5,.2) 0%,rgba(8,5,5,.55) 55%,rgba(6,3,3,.92) 100%);
+  }
+  #detail .inner{
+    position:relative;z-index:2;height:100%;width:100%;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:clamp(28px,6vw,90px);
+    opacity:0;
+  }
+  #detail .eyebrow{
+    font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:700;
+    color:rgba(239,230,211,.7);margin-bottom:18px;display:flex;gap:14px;align-items:center;
+  }
+  #detail .eyebrow .ln{height:1px;width:46px;background:var(--gold);}
+  #detail h1{
+    font-family:'Playfair Display';font-weight:900;line-height:.94;
+    font-size:clamp(46px,10vw,128px);color:var(--parch);
+    text-shadow:0 14px 60px rgba(0,0,0,.6);
+  }
+  #detail h1 em{font-style:italic;color:var(--gold-soft);font-weight:500;}
+  #detail .lede{
+    margin-top:24px;max-width:620px;font-size:clamp(15px,1.6vw,18px);line-height:1.7;
+    color:rgba(239,230,211,.82);
+  }
+  #detail .verse{
+    margin-top:26px;max-width:600px;border-left:2px solid var(--gold);padding-left:20px;
+    font-family:'Playfair Display';font-style:italic;font-size:clamp(17px,2vw,22px);line-height:1.55;
+    color:var(--parch);
+  }
+  #detail .verse cite{display:block;margin-top:10px;font-family:'Lato';font-style:normal;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(239,230,211,.55);}
+  #detail .meta{
+    margin-top:30px;display:flex;flex-wrap:wrap;gap:10px;
+  }
+  #detail .chip{
+    border:1px solid var(--hair);border-radius:999px;padding:7px 15px;
+    font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(239,230,211,.7);
+  }
+  #detail .actions{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;}
+  #detail .btn{
+    cursor:none;border:none;border-radius:999px;padding:14px 26px;
+    font-family:'Lato';font-weight:900;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  }
+  #detail .btn.primary{background:var(--parch);color:var(--ink);}
+  #detail .btn.primary.disabled{background:rgba(239,230,211,.32);color:rgba(12,9,8,.6);}
+  #detail .btn.ghost{background:transparent;color:var(--parch);border:1px solid var(--hair);}
+  #detail #back{
+    position:absolute;top:clamp(24px,4vw,40px);left:clamp(24px,4vw,40px);z-index:3;
+    pointer-events:auto;cursor:none;background:rgba(12,9,8,.5);border:1px solid var(--hair);
+    color:var(--parch);border-radius:999px;padding:12px 20px;
+    font-family:'Lato';font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    display:flex;align-items:center;gap:9px;backdrop-filter:blur(8px);opacity:0;
+  }
+  #detail #back .arrow{display:inline-block;transition:transform .3s;}
+  #detail #back:hover .arrow{transform:translateX(-4px);}
+
+  /* ===== Loader ===== */
+  #loader{
+    position:fixed;inset:0;z-index:50;background:var(--space);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default;
+  }
+  #loader .title{
+    font-family:'Playfair Display';font-style:italic;font-weight:500;
+    font-size:clamp(28px,5vw,52px);color:var(--parch);overflow:hidden;
+  }
+  #loader .title span{display:inline-block;transform:translateY(110%);}
+  #loader .bar{
+    margin-top:30px;width:min(280px,60vw);height:1px;background:rgba(239,230,211,.16);position:relative;overflow:hidden;
+  }
+  #loader .bar i{position:absolute;inset:0;width:0;background:var(--gold);}
+  #loader .pct{
+    margin-top:14px;font-size:11px;letter-spacing:.3em;color:rgba(239,230,211,.5);font-variant-numeric:tabular-nums;
+  }
+
+  @media (max-width:640px){
+    body{cursor:auto;}
+    #lens{display:none;}
+    #hud-center{display:none;}
+    #hud-tl .sub{display:none;}
+    #hud-bl,#hud-br{display:none;}
+    #hud-tl{top:18px;left:18px;}
+    #hud-tr{top:18px;right:18px;}
+    #cta button{padding:11px 20px;font-size:11px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #grain{animation:none;}
+  }
+</style>
+</head>
+<body>
+  <div id="scene"></div>
+  <div id="vignette"></div>
+  <div id="grain"></div>
+
+  <!-- HUD -->
+  <div id="hud-tl" class="hud">
+    <div class="mark"><span class="seal"></span><span class="lbl">The&nbsp;Living&nbsp;Library</span></div>
+    <div class="sub">AN INTERACTIVE GALLERY OF<br>SCRIPTURE, STUDY &amp; REFLECTION</div>
+  </div>
+  <div id="hud-tr" class="hud">
+    <div class="loc"><span class="lbl dim">SYDNEY, AU</span><span class="pin"></span></div>
+    <div class="clock lbl" id="clock">00:00:00 AEST</div>
+  </div>
+  <div id="hud-center" class="hud">
+    <div class="tag">A LIVING LIBRARY OF SCRIPTURE,<br>GATHERED FOR EVERY SEEKER &amp; STUDENT.</div>
+  </div>
+  <div id="hud-bl" class="hud"><div class="hint">DRAG TO LOOK&nbsp;·&nbsp;SCROLL TO ROAM&nbsp;·&nbsp;CLICK TO OPEN</div></div>
+  <div id="hud-br" class="hud"><div class="count"><span id="count">66</span> books · one story</div></div>
+
+  <div id="cta"><button id="ctaBtn"><span class="dot"></span>Begin a Study</button></div>
+
+  <!-- Custom cursor -->
+  <div id="lens"><span class="crumb"></span><span class="word">Open</span></div>
+
+  <!-- Detail page -->
+  <div id="detail">
+    <div class="sheet">
+      <div class="bg" id="d-bg"></div>
+      <div class="scrim"></div>
+    </div>
+    <button id="back"><span class="arrow">←</span> Back to gallery</button>
+    <div class="inner" id="d-inner">
+      <div class="eyebrow"><span class="ln"></span><span id="d-cat">STUDY</span><span id="d-ref">—</span></div>
+      <h1 id="d-title">Title</h1>
+      <p class="lede" id="d-lede"></p>
+      <blockquote class="verse" id="d-verse"></blockquote>
+      <div class="meta" id="d-meta"></div>
+      <div class="actions">
+        <button class="btn primary" id="d-read">Read the Scripture</button>
+        <button class="btn ghost" id="d-notes">Study Notes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="title"><span>The Living Library</span></div>
+    <div class="bar"><i></i></div>
+    <div class="pct">000</div>
+  </div>
+
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import gsap from 'gsap';
+
+/* ============================================================
+   DATA — drawn from the existing Bible library
+   ============================================================ */
+const BOOKS = [
+  {title:'Romans',        cat:'EPISTLE',  ref:'ROMANS 1–16', url:'romans-study.html', tags:['STUDY','GRACE','GOSPEL'],
+   pal:['#3a0d12','#7a1f2b','#d8b56b'], verse:'For I am not ashamed of the gospel of Christ: for it is the power of God unto salvation.', cite:'Romans 1:16 · KJV',
+   lede:"Paul's masterwork on grace — sixteen chapters tracing the road from human ruin to righteousness by faith, and from there to a life poured out in love."},
+  {title:'Matthew',       cat:'GOSPEL',   ref:'GOSPEL · KING', url:'gospels/matthew.html', tags:['GOSPEL','KINGDOM'],
+   pal:['#2a1c06','#9a6b1e','#e6c87f'], verse:'And they shall call his name Emmanuel, which being interpreted is, God with us.', cite:'Matthew 1:23 · KJV',
+   lede:'The promised King arrives. Matthew gathers the teaching of Jesus into five great discourses, opening with the Sermon on the Mount.'},
+  {title:'Mark',          cat:'GOSPEL',   ref:'GOSPEL · SERVANT', url:'gospels/mark.html', tags:['GOSPEL','ACTION'],
+   pal:['#06231f','#127a63','#7fe6c0'], verse:'For even the Son of man came not to be ministered unto, but to minister.', cite:'Mark 10:45 · KJV',
+   lede:'Swift and urgent — the shortest Gospel, racing from miracle to miracle to show the Servant-King on the move.'},
+  {title:'Luke',          cat:'GOSPEL',   ref:'GOSPEL · SON OF MAN', url:'gospels/luke.html', tags:['GOSPEL','MERCY'],
+   pal:['#331804','#b5651d','#f0c27a'], verse:'For the Son of man is come to seek and to save that which was lost.', cite:'Luke 19:10 · KJV',
+   lede:'The physician\u2019s Gospel — the outsider, the poor, and the lost gathered in. Home of the prodigal son and the good Samaritan.'},
+  {title:'John',          cat:'GOSPEL',   ref:'GOSPEL · LIGHT', url:'gospels/john.html', tags:['GOSPEL','LIFE','LIGHT'],
+   pal:['#0a1230','#243a8c','#9fb6ff'], verse:'In the beginning was the Word, and the Word was with God, and the Word was God.', cite:'John 1:1 · KJV',
+   lede:'Seven signs and seven \u201CI am\u201D sayings. John writes so that you may believe — and believing, have life.'},
+  {title:'Psalms',        cat:'POETRY',   ref:'150 SONGS', url:'psalms/', tags:['WORSHIP','PRAYER'],
+   pal:['#0c1633','#2f4a9c','#e6c87f'], verse:'The LORD is my shepherd; I shall not want.', cite:'Psalm 23:1 · KJV',
+   lede:'The prayer book of the Bible — lament and praise, fear and trust, the whole range of the human heart turned Godward.'},
+  {title:'Song of Solomon',cat:'POETRY',  ref:'A LOVE SONG', url:'songofsolomon/', tags:['LOVE','POETRY'],
+   pal:['#3a0a1c','#a83a5b','#f3c1cf'], verse:'I am my beloved\u2019s, and my beloved is mine.', cite:'Song of Solomon 6:3 · KJV',
+   lede:'A garden of imagery on covenant love — tender, unashamed, and long read as a picture of love between God and his people.'},
+  {title:'Apostle Paul',  cat:'JOURNEYS', ref:'13 LETTERS', url:'paul/', tags:['EPISTLE','MISSION'],
+   pal:['#150b33','#3b2c8c','#e6c87f'], verse:'For to me to live is Christ, and to die is gain.', cite:'Philippians 1:21 · KJV',
+   lede:'From Damascus road to Roman prison — the missionary whose letters carry the gospel across the empire and across the centuries.'},
+  {title:'Genesis',       cat:'TORAH',    ref:'BEGINNINGS', tags:['ORIGINS','COVENANT'],
+   pal:['#2a1605','#a8631d','#f0c27a'], verse:'In the beginning God created the heaven and the earth.', cite:'Genesis 1:1 · KJV',
+   lede:'Creation, fall, flood, and promise. The book of beginnings, where every later thread of Scripture is first tied.'},
+  {title:'Exodus',        cat:'TORAH',    ref:'DELIVERANCE', tags:['RESCUE','LAW'],
+   pal:['#330a06','#b5371d','#f0a36a'], verse:'And the LORD went before them by day in a pillar of a cloud.', cite:'Exodus 13:21 · KJV',
+   lede:'Out of slavery and into covenant — the sea split, the law given, and a people learning to follow God through the wilderness.'},
+  {title:'Proverbs',      cat:'WISDOM',   ref:'WISE LIVING', tags:['WISDOM','PRACTICE'],
+   pal:['#10260c','#3f7a1f','#e6c87f'], verse:'The fear of the LORD is the beginning of knowledge.', cite:'Proverbs 1:7 · KJV',
+   lede:'Wisdom for the everyday — speech, work, money, friendship — the skill of living well under heaven.'},
+  {title:'Revelation',    cat:'PROPHECY', ref:'THE UNVEILING', tags:['VISION','GLORY'],
+   pal:['#330612','#a31d2b','#f0c27a'], verse:'Behold, I make all things new.', cite:'Revelation 21:5 · KJV',
+   lede:'The curtain pulled back. Through thunder and song, the last word is a wedding, a city, and every tear wiped away.'},
+  {title:'Isaiah',        cat:'PROPHET',  ref:'COMFORT & CALL', tags:['PROPHECY','HOPE'],
+   pal:['#1a0d33','#5a3a9c','#cbb6ff'], verse:'They that wait upon the LORD shall renew their strength.', cite:'Isaiah 40:31 · KJV',
+   lede:'The gospel before the Gospels — judgement and breathtaking comfort, and a suffering servant who bears the sin of many.'},
+  {title:'Acts',          cat:'CHURCH',   ref:'THE SPIRIT MOVES', tags:['SPIRIT','MISSION'],
+   pal:['#33180a','#c2531d','#f0b06a'], verse:'But ye shall receive power, after that the Holy Ghost is come upon you.', cite:'Acts 1:8 · KJV',
+   lede:'Wind and fire and a church born running — the gospel spreading from Jerusalem to the ends of the earth.'},
+  {title:'Ruth',          cat:'STORY',    ref:'REDEMPTION', tags:['LOYALTY','GRACE'],
+   pal:['#2a2008','#9a7a1e','#f0d27a'], verse:'Whither thou goest, I will go; ... thy God my God.', cite:'Ruth 1:16 · KJV',
+   lede:'A famine, a far country, and a loyalty that will not let go — a small story that turns out to sit in the line of the King.'},
+  {title:'Ecclesiastes',  cat:'WISDOM',   ref:'UNDER THE SUN', tags:['MEANING','WISDOM'],
+   pal:['#1a1810','#5c5340','#cbbf9a'], verse:'To every thing there is a season, and a time to every purpose.', cite:'Ecclesiastes 3:1 · KJV',
+   lede:'The honest book — chasing meaning to the edge of despair and back, to fear God and find the gift in the ordinary day.'}
+];
+
+/* ============================================================
+   TEXTURE FACTORY — illuminated-manuscript style card art,
+   baked entirely in canvas (no external image hotlinking)
+   ============================================================ */
+function rounded(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+}
+function hexToRgb(h){const n=parseInt(h.slice(1),16);return [n>>16&255,n>>8&255,n&255];}
+function rgba(h,a){const[r,g,b]=hexToRgb(h);return `rgba(${r},${g},${b},${a})`;}
+
+function makeCardTexture(book, seed){
+  const W=768, H=960;
+  const cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+  const ctx=cv.getContext('2d');
+  const [dark,mid,accent]=book.pal;
+
+  // --- art frame geometry ---
+  const ax=18, ay=128, aw=W-36, ah=700;
+  ctx.save();
+  rounded(ctx,ax,ay,aw,ah,18); ctx.clip();
+
+  // base gradient
+  const g=ctx.createLinearGradient(0,ay,0,ay+ah);
+  g.addColorStop(0, dark);
+  g.addColorStop(1, mid);
+  ctx.fillStyle=g; ctx.fillRect(ax,ay,aw,ah);
+
+  // composition variant
+  const variant = seed % 4;
+  const cx = ax+aw*(0.5 + (variant===2?0.16:0));
+  const cy = ay+ah*(variant===1?0.30:0.46);
+
+  if(variant===0 || variant===2){           // glowing orb (sun / seal)
+    const rad=ctx.createRadialGradient(cx,cy,10,cx,cy,aw*0.62);
+    rad.addColorStop(0, rgba(accent,0.95));
+    rad.addColorStop(0.35, rgba(accent,0.55));
+    rad.addColorStop(0.7, rgba(mid,0.25));
+    rad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle=rad; ctx.fillRect(ax,ay,aw,ah);
+    // disc
+    const disc=ctx.createRadialGradient(cx-40,cy-40,8,cx,cy,aw*0.30);
+    disc.addColorStop(0, rgba(accent,1));
+    disc.addColorStop(0.8, rgba(mid,0.9));
+    disc.addColorStop(1, rgba(dark,0.7));
+    ctx.fillStyle=disc;
+    ctx.beginPath(); ctx.arc(cx,cy,aw*0.27,0,Math.PI*2); ctx.fill();
+  } else if(variant===1){                    // horizon / radiant beams
+    const rad=ctx.createRadialGradient(cx,ay+ah*0.85,20,cx,ay+ah*0.85,ah*0.95);
+    rad.addColorStop(0, rgba(accent,0.9));
+    rad.addColorStop(0.4, rgba(mid,0.6));
+    rad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle=rad; ctx.fillRect(ax,ay,aw,ah);
+    ctx.save();
+    ctx.translate(cx, ay+ah*0.88);
+    for(let i=0;i<11;i++){
+      ctx.rotate((Math.PI/11));
+      ctx.fillStyle = rgba(accent, 0.06+0.04*((i+seed)%3));
+      ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(-60, -ah); ctx.lineTo(60,-ah); ctx.closePath(); ctx.fill();
+    }
+    ctx.restore();
+  } else {                                   // soft drifting blobs
+    for(let i=0;i<5;i++){
+      const bx=ax+aw*(0.2+0.6*(((seed*7+i*3)%10)/10));
+      const by=ay+ah*(0.2+0.6*(((seed*5+i*7)%10)/10));
+      const br=aw*(0.18+0.12*(((seed+i)%4)/4));
+      const rb=ctx.createRadialGradient(bx,by,4,bx,by,br);
+      rb.addColorStop(0, rgba(i%2?accent:mid, 0.7));
+      rb.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=rb; ctx.beginPath(); ctx.arc(bx,by,br,0,Math.PI*2); ctx.fill();
+    }
+  }
+
+  // gilded inner frame line
+  ctx.strokeStyle=rgba(accent,0.5); ctx.lineWidth=2;
+  rounded(ctx,ax+10,ay+10,aw-20,ah-20,12); ctx.stroke();
+
+  // grain inside art
+  const grains = 1400;
+  for(let i=0;i<grains;i++){
+    const gx=ax+Math.random()*aw, gy=ay+Math.random()*ah;
+    ctx.fillStyle=`rgba(255,255,255,${Math.random()*0.05})`;
+    ctx.fillRect(gx,gy,1,1);
+  }
+  // bottom darken for title legibility
+  const vg=ctx.createLinearGradient(0,ay+ah*0.55,0,ay+ah);
+  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(8,4,4,0.85)');
+  ctx.fillStyle=vg; ctx.fillRect(ax,ay,aw,ah);
+
+  // title (inside art, lower-left) — Playfair
+  ctx.textBaseline='alphabetic';
+  const tSize = book.title.length>11 ? 58 : 78;
+  ctx.font=`700 ${tSize}px 'Playfair Display', serif`;
+  ctx.fillStyle='rgba(0,0,0,0.45)';
+  ctx.fillText(book.title, ax+38+2, ay+ah-46+3);
+  ctx.fillStyle=book.pal[2];
+  ctx.fillText(book.title, ax+38, ay+ah-46);
+  ctx.restore(); // unclip
+
+  // ===== top label row (floats above the art on dark space) =====
+  ctx.font="700 24px 'Lato', sans-serif";
+  ctx.fillStyle='rgba(239,230,211,0.82)';
+  ctx.textBaseline='middle';
+  drawTracked(ctx, book.cat.toUpperCase(), ax+6, 74, 3);
+  ctx.textAlign='right';
+  ctx.fillStyle='rgba(239,230,211,0.45)';
+  drawTrackedRight(ctx, book.ref.toUpperCase(), W-22, 74, 2.4);
+  ctx.textAlign='left';
+
+  // ===== bottom tag chips =====
+  let tx=ax+6; const ty=ay+ah+58;
+  ctx.font="700 21px 'Lato', sans-serif";
+  for(const tag of book.tags){
+    const label=tag.toUpperCase();
+    const tw=measureTracked(ctx,label,2.6)+34;
+    ctx.strokeStyle='rgba(239,230,211,0.22)'; ctx.lineWidth=1.4;
+    rounded(ctx,tx,ty-26,tw,52,26); ctx.stroke();
+    ctx.fillStyle='rgba(239,230,211,0.7)';
+    ctx.textBaseline='middle';
+    drawTracked(ctx,label,tx+17,ty+1,2.6);
+    tx+=tw+12;
+  }
+
+  const tex=new THREE.CanvasTexture(cv);
+  tex.colorSpace=THREE.SRGBColorSpace;
+  tex.anisotropy=8;
+  tex.generateMipmaps=true;
+  tex.minFilter=THREE.LinearMipmapLinearFilter;
+  return tex;
+}
+// letter-spaced text helpers
+function drawTracked(ctx,str,x,y,sp){let cx=x;for(const ch of str){ctx.fillText(ch,cx,y);cx+=ctx.measureText(ch).width+sp;}}
+function measureTracked(ctx,str,sp){let w=0;for(const ch of str){w+=ctx.measureText(ch).width+sp;}return w-sp;}
+function drawTrackedRight(ctx,str,xRight,y,sp){
+  ctx.save();ctx.textAlign='left';
+  const w=measureTracked(ctx,str,sp);let cx=xRight-w;
+  for(const ch of str){ctx.fillText(ch,cx,y);cx+=ctx.measureText(ch).width+sp;}
+  ctx.restore();
+}
+
+/* ============================================================
+   THREE.JS — the spherical gallery
+   ============================================================ */
+const sceneEl=document.getElementById('scene');
+let W=window.innerWidth, H=window.innerHeight;
+
+const renderer=new THREE.WebGLRenderer({antialias:true, alpha:true, powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setSize(W,H);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+sceneEl.appendChild(renderer.domElement);
+
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x0a0707, 0.018);
+
+const camera=new THREE.PerspectiveCamera(68, W/H, 0.1, 200);
+camera.position.set(0,0,0);
+camera.rotation.order='YXZ';
+
+// faint inner-sphere atmosphere
+const atmoGeo=new THREE.SphereGeometry(60,32,32);
+const atmoMat=new THREE.MeshBasicMaterial({
+  color:0x140d0c, side:THREE.BackSide, transparent:true, opacity:0.9
+});
+scene.add(new THREE.Mesh(atmoGeo,atmoMat));
+
+// drifting embers (depth particles)
+const emberGeo=new THREE.BufferGeometry();
+const EN=420, epos=new Float32Array(EN*3);
+for(let i=0;i<EN;i++){
+  const r=12+Math.random()*30;
+  const th=Math.random()*Math.PI*2, ph=Math.acos(2*Math.random()-1);
+  epos[i*3]=r*Math.sin(ph)*Math.cos(th);
+  epos[i*3+1]=r*Math.cos(ph);
+  epos[i*3+2]=r*Math.sin(ph)*Math.sin(th);
+}
+emberGeo.setAttribute('position',new THREE.BufferAttribute(epos,3));
+const emberMat=new THREE.PointsMaterial({color:0xd8b56b,size:0.06,transparent:true,opacity:0.5,depthWrite:false});
+const embers=new THREE.Points(emberGeo,emberMat);
+scene.add(embers);
+
+// ---- card grid on the inside of a sphere ----
+const galaxy=new THREE.Group();          // holds all cards
+scene.add(galaxy);
+
+const COLS=14, ROWS=3, R=9;
+const CARD_W=3.2, CARD_H=4.0;
+const phiRows=[-32,0,32].map(d=>d*Math.PI/180);   // pitch bands
+const cards=[];
+
+for(let row=0; row<ROWS; row++){
+  for(let col=0; col<COLS; col++){
+    const theta=(col/COLS)*Math.PI*2;
+    const phi=phiRows[row];
+    const idx=(col*ROWS+row);
+    const book=BOOKS[ idx % BOOKS.length ];
+    const tex=makeCardTexture(book, idx);
+
+    const mat=new THREE.MeshBasicMaterial({map:tex,transparent:true,opacity:0,side:THREE.DoubleSide,depthWrite:false});
+    const mesh=new THREE.Mesh(new THREE.PlaneGeometry(CARD_W,CARD_H),mat);
+
+    const x=R*Math.cos(phi)*Math.sin(theta);
+    const y=R*Math.sin(phi);
+    const z=-R*Math.cos(phi)*Math.cos(theta);
+    mesh.position.set(x,y,z);
+    mesh.lookAt(0,0,0);
+
+    mesh.userData={book, baseScale:1, hover:0, theta, phi, idx};
+    mesh.scale.setScalar(0.001);
+    galaxy.add(mesh);
+    cards.push(mesh);
+  }
+}
+document.getElementById('count').textContent = BOOKS.length>0 ? '66' : '66';
+
+/* ---- post-processing: barrel lens + vignette + chromatic ---- */
+const composer=new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene,camera));
+const LensShader={
+  uniforms:{
+    tDiffuse:{value:null},
+    distortion:{value:0.0},
+    vignette:{value:1.15},
+    aberration:{value:0.0},
+    time:{value:0}
+  },
+  vertexShader:`varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
+  fragmentShader:`
+    uniform sampler2D tDiffuse; uniform float distortion; uniform float vignette;
+    uniform float aberration; uniform float time; varying vec2 vUv;
+    void main(){
+      vec2 cc = vUv - 0.5;
+      float d = dot(cc,cc);
+      vec2 uv = vUv + cc * d * distortion;
+      vec2 dir = normalize(cc + 1e-5);
+      float ca = d * aberration;
+      float r = texture2D(tDiffuse, uv + dir*ca).r;
+      float g = texture2D(tDiffuse, uv).g;
+      float b = texture2D(tDiffuse, uv - dir*ca).b;
+      vec3 col = vec3(r,g,b);
+      float v = smoothstep(0.85, 0.18, d*vignette);
+      col *= mix(1.0, v, 0.85);
+      float grain = fract(sin(dot(vUv*(time*0.5+1.0), vec2(12.9898,78.233)))*43758.5453);
+      col += (grain-0.5)*0.025;
+      if(uv.x<0.0||uv.x>1.0||uv.y<0.0||uv.y>1.0){ col*=0.0; }
+      gl_FragColor=vec4(col,1.0);
+    }`
+};
+const lensPass=new ShaderPass(LensShader);
+lensPass.renderToScreen=true;
+composer.addPass(lensPass);
+
+/* ============================================================
+   INTERACTION — drag look, scroll roam, inertia, hover, click
+   ============================================================ */
+const state={
+  yaw:0, pitch:0,
+  targetYaw:0, targetPitch:0,
+  velYaw:0, velPitch:0,
+  dragging:false, lastX:0, lastY:0,
+  downX:0, downY:0, downT:0, moved:0,
+  auto:0.00018,
+  idle:0,
+  open:false
+};
+const raycaster=new THREE.Raycaster();
+const pointer=new THREE.Vector2(-2,-2);
+let hovered=null;
+
+function onDown(e){
+  if(state.open) return;
+  const p=e.touches?e.touches[0]:e;
+  state.dragging=true; document.body.classList.add('dragging');
+  state.lastX=p.clientX; state.lastY=p.clientY;
+  state.downX=p.clientX; state.downY=p.clientY; state.downT=performance.now(); state.moved=0;
+  state.velYaw=0; state.velPitch=0; state.idle=0;
+}
+function onMove(e){
+  const p=e.touches?e.touches[0]:e;
+  pointer.x=(p.clientX/W)*2-1;
+  pointer.y=-(p.clientY/H)*2+1;
+  gsap.to('#lens',{x:p.clientX,y:p.clientY,duration:0.32,ease:'power3.out',overwrite:'auto'});
+
+  if(state.dragging){
+    const dx=p.clientX-state.lastX, dy=p.clientY-state.lastY;
+    state.lastX=p.clientX; state.lastY=p.clientY;
+    state.moved+=Math.abs(dx)+Math.abs(dy);
+    const k=0.0026;
+    state.targetYaw   -= dx*k;
+    state.targetPitch -= dy*k;
+    state.velYaw   = -dx*k;
+    state.velPitch = -dy*k;
+    clampPitch();
+    state.idle=0;
+  }
+}
+function onUp(e){
+  if(!state.dragging) return;
+  state.dragging=false; document.body.classList.remove('dragging');
+  const dt=performance.now()-state.downT;
+  if(state.moved<7 && dt<350){ tryOpen(); }
+}
+function clampPitch(){
+  const lim=0.62;
+  state.targetPitch=Math.max(-lim,Math.min(lim,state.targetPitch));
+}
+
+renderer.domElement.addEventListener('pointerdown',onDown);
+window.addEventListener('pointermove',onMove,{passive:true});
+window.addEventListener('pointerup',onUp);
+
+// scroll to roam around the sphere
+window.addEventListener('wheel',e=>{
+  if(state.open) return;
+  state.targetYaw   += e.deltaY*0.00075;
+  state.targetPitch += e.deltaX*0.0006;
+  clampPitch();
+  state.velYaw = e.deltaY*0.00075*0.25;
+  state.idle=0;
+},{passive:true});
+
+/* ---- hover detection + click open ---- */
+function pickCard(){
+  raycaster.setFromCamera(pointer,camera);
+  const hits=raycaster.intersectObjects(cards,false);
+  return hits.length?hits[0].object:null;
+}
+function tryOpen(){
+  const card=pickCard();
+  if(card) openDetail(card);
+}
+
+/* ============================================================
+   DETAIL PAGE — card expands into a new page
+   ============================================================ */
+const detail=document.getElementById('detail');
+const dBg=document.getElementById('d-bg');
+const dInner=document.getElementById('d-inner');
+const dBack=document.getElementById('back');
+
+function openDetail(card){
+  state.open=true; document.body.classList.remove('hovering');
+  const b=card.userData.book;
+
+  // project card centre to screen for the expand origin
+  const v=card.getWorldPosition(new THREE.Vector3()).project(camera);
+  const sx=(v.x*0.5+0.5)*W, sy=(-v.y*0.5+0.5)*H;
+
+  // themed background
+  dBg.style.background=`radial-gradient(120% 90% at 60% 30%, ${b.pal[2]}33 0%, ${b.pal[1]} 38%, ${b.pal[0]} 100%)`;
+
+  // fill content
+  document.getElementById('d-cat').textContent=b.cat;
+  document.getElementById('d-ref').textContent=b.ref;
+  const tt=document.getElementById('d-title');
+  tt.innerHTML = b.title.includes(' ')
+    ? b.title.replace(/ (\S+)$/, ' <em>$1</em>')
+    : b.title;
+  document.getElementById('d-lede').textContent=b.lede;
+  document.getElementById('d-verse').innerHTML=`“${b.verse}” <cite>${b.cite}</cite>`;
+  const meta=document.getElementById('d-meta'); meta.innerHTML='';
+  b.tags.forEach(t=>{const c=document.createElement('span');c.className='chip';c.textContent=t;meta.appendChild(c);});
+
+  // wire the primary button to the real study page (or mark as coming soon)
+  const read=document.getElementById('d-read');
+  if(b.url){
+    read.textContent='Open the Study →';
+    read.dataset.url=b.url;
+    read.classList.remove('disabled');
+  } else {
+    read.textContent='Study coming soon';
+    read.dataset.url='';
+    read.classList.add('disabled');
+  }
+
+  // animate the gallery receding
+  gsap.to(galaxy.scale,{x:1.18,y:1.18,z:1.18,duration:1.0,ease:'power3.inOut'});
+  gsap.to(lensPass.uniforms.distortion,{value:0.55,duration:0.8,ease:'power2.out'});
+
+  // reveal sheet with circular wipe from the card position
+  detail.style.display='block';
+  detail.style.clipPath=`circle(0px at ${sx}px ${sy}px)`;
+  gsap.to(detail,{clipPath:`circle(${Math.hypot(W,H)*1.1}px at ${sx}px ${sy}px)`,
+    duration:0.95,ease:'power3.inOut',
+    onComplete:()=>{ detail.style.clipPath='none'; }
+  });
+  gsap.to(dInner,{opacity:1,duration:0.7,delay:0.35,ease:'power2.out'});
+  gsap.fromTo(dInner.querySelectorAll('.eyebrow, h1, .lede, .verse, .meta, .actions'),
+    {y:34,opacity:0},{y:0,opacity:1,duration:0.7,stagger:0.07,delay:0.45,ease:'power3.out'});
+  gsap.to(dBack,{opacity:1,duration:0.5,delay:0.6});
+}
+
+function closeDetail(){
+  gsap.to(dInner,{opacity:0,duration:0.3,ease:'power2.in'});
+  gsap.to(dBack,{opacity:0,duration:0.25});
+  gsap.to(detail,{opacity:0,duration:0.5,ease:'power2.inOut',onComplete:()=>{
+    detail.style.display='none'; detail.style.opacity='1'; state.open=false;
+  }});
+  gsap.to(galaxy.scale,{x:1,y:1,z:1,duration:1.0,ease:'power3.inOut'});
+  gsap.to(lensPass.uniforms.distortion,{value:LENS_TARGET,duration:0.9,ease:'power2.out'});
+}
+dBack.addEventListener('click',closeDetail);
+document.getElementById('d-read').addEventListener('click',(e)=>{
+  const u=e.currentTarget.dataset.url;
+  if(!u){ // coming-soon: gentle shake, no navigation
+    gsap.fromTo('#d-read',{x:-4},{x:0,duration:0.45,ease:'elastic.out(1,0.6)'});
+    return;
+  }
+  // smooth hand-off into the real study page
+  gsap.to('#d-inner',{opacity:0,y:-14,duration:0.35,ease:'power2.in'});
+  gsap.to('#detail',{filter:'brightness(0.35)',duration:0.45,ease:'power2.in',
+    onComplete:()=>{ window.location.href=u; }});
+});
+document.getElementById('d-notes').addEventListener('click',()=>{
+  gsap.fromTo('#d-notes',{scale:0.94},{scale:1,duration:0.4,ease:'elastic.out(1,0.5)'});
+});
+document.getElementById('ctaBtn').addEventListener('click',()=>{
+  if(!state.open && cards.length) openDetail(cards[Math.floor(cards.length/2)]);
+});
+
+/* lens word swap */
+function setLensWord(w){document.querySelector('#lens .word').textContent=w;}
+
+/* ============================================================
+   RENDER LOOP
+   ============================================================ */
+const clock=new THREE.Clock();
+const LENS_TARGET=0.34;
+
+function tick(){
+  const dt=Math.min(clock.getDelta(),0.05);
+  const t=clock.elapsedTime;
+
+  // idle auto-drift after a pause
+  state.idle+=dt;
+  if(!state.dragging && !state.open && state.idle>2.4){
+    state.targetYaw += state.auto*60*dt;
+  }
+  // inertia
+  if(!state.dragging){
+    state.targetYaw   += state.velYaw;
+    state.targetPitch += state.velPitch;
+    state.velYaw   *= 0.94;
+    state.velPitch *= 0.94;
+    clampPitch();
+  }
+  // smooth follow (damped)
+  state.yaw   += (state.targetYaw   - state.yaw)   * Math.min(1, dt*7);
+  state.pitch += (state.targetPitch - state.pitch) * Math.min(1, dt*7);
+  camera.rotation.y=state.yaw;
+  camera.rotation.x=state.pitch;
+
+  // hover test (skip while dragging hard / open)
+  if(!state.open){
+    const card=(!state.dragging||state.moved<6)?pickCard():null;
+    if(card!==hovered){
+      if(hovered) gsap.to(hovered.userData,{hover:0,duration:0.4,ease:'power2.out'});
+      hovered=card;
+      if(hovered){
+        gsap.to(hovered.userData,{hover:1,duration:0.4,ease:'power2.out'});
+        document.body.classList.add('hovering');
+        setLensWord('Open');
+      } else {
+        document.body.classList.remove('hovering');
+      }
+    }
+  }
+
+  // per-card breathing + hover lift
+  for(const c of cards){
+    const hv=c.userData.hover;
+    const breathe=1+Math.sin(t*0.6+c.userData.idx)*0.012;
+    const s=(c.userData.baseScale)*breathe*(1+hv*0.12);
+    c.scale.x += (s - c.scale.x)*Math.min(1,dt*8);
+    c.scale.y += (s - c.scale.y)*Math.min(1,dt*8);
+    c.material.opacity += ((0.72+hv*0.28) - c.material.opacity)*Math.min(1,dt*8) ;
+    // nudge hovered card toward viewer
+    const targetR = R - hv*0.7;
+    const dirv = c.userData;
+    const x=targetR*Math.cos(dirv.phi)*Math.sin(dirv.theta);
+    const y=targetR*Math.sin(dirv.phi);
+    const z=-targetR*Math.cos(dirv.phi)*Math.cos(dirv.theta);
+    c.position.x += (x-c.position.x)*Math.min(1,dt*6);
+    c.position.y += (y-c.position.y)*Math.min(1,dt*6);
+    c.position.z += (z-c.position.z)*Math.min(1,dt*6);
+  }
+
+  embers.rotation.y += dt*0.01;
+  lensPass.uniforms.time.value=t;
+  composer.render();
+  requestAnimationFrame(tick);
+}
+
+/* ============================================================
+   RESIZE
+   ============================================================ */
+window.addEventListener('resize',()=>{
+  W=window.innerWidth; H=window.innerHeight;
+  camera.aspect=W/H; camera.updateProjectionMatrix();
+  renderer.setSize(W,H); composer.setSize(W,H);
+});
+
+/* ============================================================
+   CLOCK (Sydney)
+   ============================================================ */
+function fmtClock(){
+  try{
+    const s=new Intl.DateTimeFormat('en-AU',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:'Australia/Sydney'}).format(new Date());
+    document.getElementById('clock').textContent=`${s} AEST`;
+  }catch(e){
+    document.getElementById('clock').textContent=new Date().toLocaleTimeString();
+  }
+}
+fmtClock(); setInterval(fmtClock,1000);
+
+/* ============================================================
+   BOOT — wait for fonts, build textures, reveal
+   ============================================================ */
+async function boot(){
+  const loader=document.getElementById('loader');
+  const bar=loader.querySelector('.bar i');
+  const pct=loader.querySelector('.pct');
+  const titleSpan=loader.querySelector('.title span');
+
+  // ensure the display + label faces are ready before baking canvas text
+  try{
+    await Promise.all([
+      document.fonts.load("700 78px 'Playfair Display'"),
+      document.fonts.load("700 24px 'Lato'"),
+      document.fonts.ready
+    ]);
+  }catch(e){ /* fall back to default serif/sans */ }
+
+  // (textures already created synchronously above are pre-font; rebuild for crisp text)
+  cards.forEach((c)=>{
+    const newTex=makeCardTexture(c.userData.book, c.userData.idx);
+    c.material.map.dispose();
+    c.material.map=newTex; c.material.needsUpdate=true;
+  });
+
+  gsap.to(titleSpan,{y:'0%',duration:0.9,ease:'power3.out'});
+
+  // fake-progress that resolves to reveal
+  let p=0;
+  const grow=setInterval(()=>{
+    p=Math.min(100,p+Math.random()*16);
+    bar.style.width=p+'%';
+    pct.textContent=String(Math.floor(p)).padStart(3,'0');
+    if(p>=100){
+      clearInterval(grow);
+      gsap.to(loader,{opacity:0,duration:0.8,delay:0.25,ease:'power2.inOut',
+        onComplete:()=>{loader.style.display='none';}});
+      reveal();
+    }
+  },130);
+
+  // ease the lens distortion up as the world appears
+  gsap.fromTo(lensPass.uniforms.distortion,{value:0.9},{value:LENS_TARGET,duration:1.8,delay:0.4,ease:'power3.out'});
+  gsap.fromTo(lensPass.uniforms.aberration,{value:0.0},{value:0.012,duration:1.6,delay:0.6});
+  gsap.fromTo(camera,{fov:96},{fov:68,duration:1.8,delay:0.3,ease:'power3.out',
+    onUpdate:()=>camera.updateProjectionMatrix()});
+}
+
+function reveal(){
+  // stagger cards in, ordered by distance from front
+  const ordered=[...cards].sort((a,b)=> dFront(a)-dFront(b));
+  ordered.forEach((c,i)=>{
+    c.userData.baseScale=0.0001;
+    gsap.to(c.userData,{baseScale:1,duration:1.1,delay:i*0.018,ease:'power3.out'});
+  });
+  // a slow welcome sweep
+  gsap.fromTo(state,{targetYaw:-0.5},{targetYaw:0,duration:2.4,ease:'power2.inOut'});
+}
+function dFront(c){
+  // angular distance of card from current view centre (front = small)
+  return Math.abs(c.userData.theta) + Math.abs(c.userData.phi)*2;
+}
+
+tick();
+boot();
+</script>
+</body>
+</html>
