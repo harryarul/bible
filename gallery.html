@@ -71,7 +71,10 @@
   }
   .hud .dim{color:rgba(239,230,211,.42);}
 
-  #hud-tl{top:26px;left:30px;max-width:46vw;}
+  #hud-tl{top:26px;left:30px;max-width:46vw;pointer-events:auto;cursor:none;text-decoration:none;color:inherit;display:block;transition:transform .35s cubic-bezier(.2,.9,.2,1);}
+  #hud-tl:hover{transform:translateX(2px);}
+  #hud-tl .sub{transition:color .3s,letter-spacing .3s;}
+  #hud-tl:hover .sub{color:var(--gold-soft);letter-spacing:.18em;}
   #hud-tl .mark{display:flex;align-items:center;gap:10px;}
   #hud-tl .seal{
     width:13px;height:13px;border:1.5px solid var(--gold);border-radius:50%;
@@ -221,7 +224,7 @@
     body{cursor:auto;}
     #lens{display:none;}
     #hud-center{display:none;}
-    #hud-tl .sub{display:none;}
+    #hud-tl .sub{font-size:9.5px;letter-spacing:.14em;}
     #hud-bl,#hud-br{display:none;}
     #hud-tl{top:18px;left:18px;}
     #hud-tr{top:18px;right:18px;}
@@ -238,10 +241,10 @@
   <div id="grain"></div>
 
   <!-- HUD -->
-  <div id="hud-tl" class="hud">
+  <a id="hud-tl" class="hud navlink" href="index.html" data-word="Library">
     <div class="mark"><span class="seal"></span><span class="lbl">The&nbsp;Living&nbsp;Library</span></div>
-    <div class="sub">AN INTERACTIVE GALLERY OF<br>SCRIPTURE, STUDY &amp; REFLECTION</div>
-  </div>
+    <div class="sub">←&nbsp;&nbsp;BACK TO ALL STUDIES</div>
+  </a>
   <div id="hud-tr" class="hud">
     <div class="loc"><span class="lbl dim">SYDNEY, AU</span><span class="pin"></span></div>
     <div class="clock lbl" id="clock">00:00:00 AEST</div>
@@ -613,7 +616,8 @@ const state={
   downX:0, downY:0, downT:0, moved:0,
   auto:0.00018,
   idle:0,
-  open:false
+  open:false,
+  uiHover:false
 };
 const raycaster=new THREE.Raycaster();
 const pointer=new THREE.Vector2(-2,-2);
@@ -773,6 +777,17 @@ document.getElementById('ctaBtn').addEventListener('click',()=>{
 /* lens word swap */
 function setLensWord(w){document.querySelector('#lens .word').textContent=w;}
 
+/* DOM links (back-to-library etc.) drive the lens and suppress card hover */
+document.querySelectorAll('.navlink').forEach(el=>{
+  el.addEventListener('pointerenter',()=>{
+    state.uiHover=true; setLensWord(el.dataset.word||'Open');
+    document.body.classList.add('hovering');
+  });
+  el.addEventListener('pointerleave',()=>{
+    state.uiHover=false; document.body.classList.remove('hovering');
+  });
+});
+
 /* ============================================================
    RENDER LOOP
    ============================================================ */
@@ -802,8 +817,8 @@ function tick(){
   camera.rotation.y=state.yaw;
   camera.rotation.x=state.pitch;
 
-  // hover test (skip while dragging hard / open)
-  if(!state.open){
+  // hover test (skip while dragging hard / open / over a UI link)
+  if(!state.open && !state.uiHover){
     const card=(!state.dragging||state.moved<6)?pickCard():null;
     if(card!==hovered){
       if(hovered) gsap.to(hovered.userData,{hover:0,duration:0.4,ease:'power2.out'});

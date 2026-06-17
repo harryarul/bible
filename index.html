@@ -79,6 +79,49 @@ a{text-decoration:none;color:inherit}
 
 <main class="wrap">
 
+  <!-- =========================================================
+     IMMERSIVE GALLERY LINK  ·  paste inside index.html
+     Put this block right AFTER <main class="wrap"> so it sits
+     at the very top of the studies, above "The Life of Jesus".
+     Inline-styled & self-contained — no CSS file changes needed.
+     ========================================================= -->
+<a href="gallery.html" aria-label="Open the interactive Scripture Gallery"
+   style="display:block;width:100%;margin:.4rem 0 1.6rem;border-radius:18px;
+          overflow:hidden;position:relative;text-decoration:none;color:#EFE6D3;
+          background:radial-gradient(120% 150% at 50% 0%, #2a1410 0%, #160e0c 48%, #0a0707 100%);
+          border:1px solid rgba(196,135,42,.45);
+          box-shadow:0 18px 50px rgba(0,0,0,.45);">
+  <!-- faint orbit rings as ambient texture -->
+  <span style="position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;
+               border:1px solid rgba(232,201,122,.14);"></span>
+  <span style="position:absolute;right:-20px;top:-20px;width:160px;height:160px;border-radius:50%;
+               border:1px solid rgba(232,201,122,.10);"></span>
+  <div style="display:flex;align-items:center;gap:1.4rem;padding:1.55rem 1.8rem;
+              flex-wrap:wrap;position:relative;z-index:1;">
+    <!-- glowing sphere glyph -->
+    <span style="flex:none;width:64px;height:64px;border-radius:50%;position:relative;
+                 background:radial-gradient(circle at 35% 30%, #F0DBA0, #C4872A 55%, #6B4423 100%);
+                 box-shadow:0 0 30px rgba(232,201,122,.55);">
+      <span style="position:absolute;inset:-9px;border:1px solid rgba(232,201,122,.5);
+                   border-radius:50%;transform:rotate(-18deg);"></span>
+    </span>
+    <span style="flex:1;min-width:230px;">
+      <span style="display:block;font-family:Lato,sans-serif;font-size:.66rem;font-weight:900;
+                   letter-spacing:.22em;text-transform:uppercase;color:#E8C97A;">New · Interactive Experience</span>
+      <span style="display:block;font-family:Caveat,cursive;font-size:2rem;line-height:1.1;
+                   color:#FFFDF7;margin:.12rem 0 .28rem;">Enter the Scripture Gallery</span>
+      <span style="display:block;font-family:'Playfair Display',serif;font-style:italic;
+                   font-size:1rem;color:#D9C9A8;line-height:1.5;">
+        Step inside a sphere of light and drift through every study — drag to look, scroll to roam, tap a book to open it.
+      </span>
+    </span>
+    <span style="flex:none;font-family:Lato,sans-serif;font-weight:900;font-size:.8rem;
+                 letter-spacing:.06em;text-transform:uppercase;color:#0c0908;background:#E8C97A;
+                 padding:.7rem 1.2rem;border-radius:999px;white-space:nowrap;">Open Gallery →</span>
+  </div>
+</a>
+
+
   <div class="sec-title"><span class="sec-icon">&#10010;</span> The Life of Jesus &mdash; The Four Gospels</div>
   <p class="foursub">Four witnesses, one Saviour. Walk through the events of Jesus&rsquo; life &mdash; birth, miracles, the final days, the cross, the seven last words and the resurrection. Every shared miracle and event is <strong>interlinked</strong>, so you can leap from one Gospel to the parallel account in another.</p>
   <div class="grid">
