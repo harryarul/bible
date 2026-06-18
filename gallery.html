@@ -50,7 +50,7 @@
   /* ambient vignette baked over webgl so DOM + GL share the lens mood */
   #vignette{
     position:fixed;inset:0;z-index:2;pointer-events:none;
-    background:radial-gradient(120% 90% at 50% 46%,transparent 38%,rgba(6,4,4,.55) 78%,rgba(4,2,2,.92) 100%);
+    background:radial-gradient(120% 90% at 50% 46%,transparent 42%,rgba(8,6,6,.32) 80%,rgba(8,5,5,.6) 100%);
     mix-blend-mode:multiply;
   }
   #grain{
@@ -515,7 +515,7 @@ camera.rotation.order='YXZ';
 // faint inner-sphere atmosphere
 const atmoGeo=new THREE.SphereGeometry(60,32,32);
 const atmoMat=new THREE.MeshBasicMaterial({
-  color:0x140d0c, side:THREE.BackSide, transparent:true, opacity:0.9
+  color:0x1c1316, side:THREE.BackSide, transparent:true, opacity:0.85
 });
 scene.add(new THREE.Mesh(atmoGeo,atmoMat));
 
@@ -575,7 +575,7 @@ const LensShader={
   uniforms:{
     tDiffuse:{value:null},
     distortion:{value:0.0},
-    vignette:{value:1.15},
+    vignette:{value:0.75},
     aberration:{value:0.0},
     time:{value:0}
   },
@@ -594,7 +594,7 @@ const LensShader={
       float b = texture2D(tDiffuse, uv - dir*ca).b;
       vec3 col = vec3(r,g,b);
       float v = smoothstep(0.85, 0.18, d*vignette);
-      col *= mix(1.0, v, 0.85);
+      col *= mix(1.0, v, 0.5);
       float grain = fract(sin(dot(vUv*(time*0.5+1.0), vec2(12.9898,78.233)))*43758.5453);
       col += (grain-0.5)*0.025;
       if(uv.x<0.0||uv.x>1.0||uv.y<0.0||uv.y>1.0){ col*=0.0; }
@@ -840,7 +840,7 @@ function tick(){
     const s=(c.userData.baseScale)*breathe*(1+hv*0.12);
     c.scale.x += (s - c.scale.x)*Math.min(1,dt*8);
     c.scale.y += (s - c.scale.y)*Math.min(1,dt*8);
-    c.material.opacity += ((0.72+hv*0.28) - c.material.opacity)*Math.min(1,dt*8) ;
+    c.material.opacity += ((0.9+hv*0.1) - c.material.opacity)*Math.min(1,dt*8) ;
     // nudge hovered card toward viewer
     const targetR = R - hv*0.7;
     const dirv = c.userData;
