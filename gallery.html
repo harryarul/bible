@@ -14,11 +14,44 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
     "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm"
   }
 }
+</script>
+
+<!-- self-diagnostic: surfaces a readable message if the 3D scene fails to start -->
+<script>
+  window.__sceneAlive = false;
+  function __diag(msg){
+    var el = document.getElementById('diag');
+    if(!el) return;
+    el.querySelector('.dmsg').textContent = msg;
+    el.style.display = 'flex';
+  }
+  window.addEventListener('error', function(e){
+    if(window.__sceneAlive) return;
+    var src = e && e.target && (e.target.src || e.target.href);
+    if(src){ __diag('A required library failed to load: ' + src); }
+    else if(e && e.message){ __diag('Script error: ' + e.message); }
+  }, true);
+  window.addEventListener('unhandledrejection', function(e){
+    if(window.__sceneAlive) return;
+    var r = e && e.reason; __diag('Load error: ' + (r && r.message ? r.message : r));
+  });
+  try{
+    var __c = document.createElement('canvas');
+    var __gl = __c.getContext('webgl') || __c.getContext('experimental-webgl');
+    if(!__gl){ document.addEventListener('DOMContentLoaded', function(){ __diag('WebGL is turned off in this browser, so the 3D gallery can\u2019t render. Enable hardware acceleration / WebGL and reload.'); }); }
+  }catch(_){}
+  document.addEventListener('DOMContentLoaded', function(){
+    setTimeout(function(){
+      if(!window.__sceneAlive){
+        __diag('The 3D scene didn\u2019t start within 7 seconds \u2014 the three.js library was likely blocked or failed to load on this network.');
+      }
+    }, 7000);
+  });
 </script>
 
 <style>
@@ -203,6 +236,18 @@
   #detail #back:hover .arrow{transform:translateX(-4px);}
 
   /* ===== Loader ===== */
+  /* ===== Diagnostic message (only shown if the 3D scene fails) ===== */
+  #diag{
+    position:fixed;inset:0;z-index:200;display:none;cursor:default;
+    align-items:center;justify-content:center;flex-direction:column;text-align:center;
+    background:#0a0707;padding:30px;
+  }
+  #diag .seal{width:14px;height:14px;border:1.5px solid var(--gold);border-radius:50%;margin-bottom:22px;position:relative;}
+  #diag .seal::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--gold);}
+  #diag .dttl{font-family:'Playfair Display';font-style:italic;font-size:clamp(22px,4vw,34px);color:var(--parch);margin-bottom:14px;}
+  #diag .dmsg{font-family:'Lato';font-size:14px;line-height:1.7;color:rgba(239,230,211,.7);max-width:440px;}
+  #diag .dhint{margin-top:18px;font-size:12px;letter-spacing:.04em;color:rgba(239,230,211,.4);max-width:440px;}
+
   #loader{
     position:fixed;inset:0;z-index:50;background:var(--space);
     display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default;
@@ -285,6 +330,14 @@
     <div class="title"><span>The Living Library</span></div>
     <div class="bar"><i></i></div>
     <div class="pct">000</div>
+  </div>
+
+  <!-- shown only if the 3D scene fails to start -->
+  <div id="diag">
+    <div class="seal"></div>
+    <div class="dttl">The Living Library</div>
+    <div class="dmsg"></div>
+    <div class="dhint">Try a hard refresh (Ctrl+Shift+R). If it persists, the network may be blocking the 3D library.</div>
   </div>
 
 <script type="module">
@@ -854,6 +907,7 @@ function tick(){
 
   embers.rotation.y += dt*0.01;
   lensPass.uniforms.time.value=t;
+  window.__sceneAlive=true;
   composer.render();
   requestAnimationFrame(tick);
 }
