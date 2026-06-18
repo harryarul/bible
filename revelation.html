@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Revelation of John — The Visions on Patmos · Chapters 1–21</title>
+<meta name="description" content="An illuminated walk through the Book of Revelation, chapters 1 to 21 — every vision John saw on Patmos, in the order it unfolded.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --abyss:#0A0D1A;
+    --abyss-2:#0E1326;
+    --panel:#141A30;
+    --panel-2:#1B2240;
+    --gold:#C9A227;
+    --gold-2:#E7C95C;
+    --gold-soft:#9c842f;
+    --wine:#9A2D3A;
+    --wine-2:#C0505C;
+    --vellum:#ECE3CE;
+    --vellum-ink:#2A2417;
+    --sky:#93A4C5;
+    --mist:#5E6B86;
+    --line:rgba(201,162,39,0.22);
+    --line-soft:rgba(147,164,197,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 700px at 50% -8%, rgba(201,162,39,0.10), transparent 60%),
+      radial-gradient(900px 600px at 12% 30%, rgba(154,45,58,0.07), transparent 55%),
+      var(--abyss);
+    color:var(--sky);
+    font-family:"Spectral",Georgia,serif;
+    font-weight:400;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:rgba(201,162,39,0.28);color:var(--vellum);}
+  a{color:inherit;}
+
+  /* ---------- type ---------- */
+  h1,h2,h3{font-family:"Cormorant Garamond",serif;font-weight:400;color:var(--vellum);margin:0;line-height:1.05;letter-spacing:.01em;}
+  .rubric{
+    font-family:"Spectral SC","Spectral",serif;
+    text-transform:uppercase;letter-spacing:.34em;
+    font-size:.72rem;color:var(--gold);font-weight:500;
+  }
+  .wine-rubric{color:var(--wine-2);}
+  p{margin:0 0 1.1em;}
+
+  /* ---------- shell ---------- */
+  .wrap{max-width:980px;margin:0 auto;padding:0 26px;}
+
+  /* ---------- top spine nav ---------- */
+  .spine{
+    position:sticky;top:0;z-index:50;
+    background:linear-gradient(180deg, rgba(10,13,26,.96), rgba(10,13,26,.78));
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .spine-inner{display:flex;align-items:center;gap:22px;max-width:1180px;margin:0 auto;padding:11px 26px;}
+  .spine-mark{font-family:"Cormorant Garamond";font-size:1.15rem;color:var(--vellum);white-space:nowrap;letter-spacing:.02em;}
+  .spine-mark b{color:var(--gold);font-weight:600;}
+  .spine-nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto;}
+  .spine-nav::-webkit-scrollbar{display:none;}
+  .spine-nav a{
+    text-decoration:none;color:var(--mist);
+    font-family:"Spectral SC";font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+    padding:5px 9px;border-radius:3px;white-space:nowrap;transition:.25s;
+  }
+  .spine-nav a:hover{color:var(--gold-2);background:rgba(201,162,39,.08);}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:96px 0 64px;text-align:center;}
+  .hero .glyph{width:min(340px,72vw);margin:0 auto 34px;display:block;}
+  @media(prefers-reduced-motion:no-preference){
+    .rays{transform-origin:center;animation:spin 90s linear infinite;}
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .hero h1{font-size:clamp(2.9rem,9vw,5.6rem);font-weight:300;letter-spacing:.005em;}
+  .hero h1 em{font-style:italic;color:var(--gold-2);font-weight:400;}
+  .hero .sub{
+    margin:22px auto 0;max-width:600px;color:var(--sky);
+    font-size:1.12rem;font-style:italic;font-family:"Cormorant Garamond";font-weight:400;
+    font-size:1.45rem;line-height:1.5;
+  }
+  .patmos{
+    margin:30px auto 0;max-width:640px;color:var(--mist);font-size:1rem;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:18px 0;
+  }
+  .patmos b{color:var(--vellum);font-weight:500;}
+
+  /* ---------- overview map ---------- */
+  .overview{padding:34px 0 10px;}
+  .ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:10px;margin-top:26px;}
+  .ov{
+    display:block;text-decoration:none;position:relative;
+    padding:15px 15px 15px 52px;border:1px solid var(--line-soft);border-radius:5px;
+    background:linear-gradient(160deg, var(--panel), var(--abyss-2));
+    transition:.28s;overflow:hidden;
+  }
+  .ov:hover{border-color:var(--line);transform:translateY(-2px);background:linear-gradient(160deg,var(--panel-2),var(--panel));}
+  .ov .rn{
+    position:absolute;left:13px;top:13px;font-family:"Cormorant Garamond";
+    font-size:1.5rem;color:var(--gold);line-height:1;width:30px;text-align:center;
+  }
+  .ov .t{display:block;font-family:"Cormorant Garamond";font-size:1.28rem;color:var(--vellum);line-height:1.05;}
+  .ov .c{display:block;font-family:"Spectral SC";font-size:.66rem;letter-spacing:.16em;color:var(--mist);text-transform:uppercase;margin-top:5px;}
+
+  /* ---------- movements ---------- */
+  .movement{padding:74px 0 14px;position:relative;}
+  .mv-head{margin-bottom:30px;}
+  .mv-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+  .mv-eyebrow .num{
+    font-family:"Cormorant Garamond";font-size:2.1rem;color:var(--gold);line-height:1;
+    border:1px solid var(--line);border-radius:50%;width:54px;height:54px;
+    display:flex;align-items:center;justify-content:center;flex:none;
+    background:radial-gradient(circle at 38% 32%, rgba(231,201,92,.18), transparent 60%);
+  }
+  .mv-eyebrow .lbl .rubric{display:block;}
+  .mv-eyebrow .lbl-ch{font-family:"Spectral";font-size:.84rem;color:var(--mist);letter-spacing:.04em;}
+  .mv-head h2{font-size:clamp(2rem,5.4vw,3.1rem);font-weight:400;margin-top:6px;}
+  .mv-head h2 em{font-style:italic;color:var(--gold-2);}
+  .mv-essence{font-family:"Cormorant Garamond";font-size:1.4rem;font-style:italic;color:var(--sky);max-width:660px;margin-top:10px;line-height:1.45;}
+
+  /* event list */
+  .events{list-style:none;margin:8px 0 0;padding:0;}
+  .ev{
+    display:grid;grid-template-columns:54px 1fr;gap:18px;align-items:start;
+    padding:18px 0;border-top:1px solid var(--line-soft);
+  }
+  .ev:first-child{border-top:none;}
+  .ev .seal{
+    width:46px;height:46px;border-radius:50%;flex:none;margin-top:2px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Cormorant Garamond";font-size:1.15rem;color:var(--abyss);font-weight:600;
+    background:radial-gradient(circle at 36% 30%, var(--gold-2), var(--gold) 55%, var(--gold-soft));
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.18), 0 2px 10px rgba(201,162,39,.18);
+  }
+  .ev.wine .seal{
+    color:var(--vellum);
+    background:radial-gradient(circle at 36% 30%, var(--wine-2), var(--wine) 60%, #6f1d28);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.12), 0 2px 10px rgba(154,45,58,.25);
+  }
+  .ev .ev-t{font-family:"Cormorant Garamond";font-size:1.5rem;color:var(--vellum);line-height:1.12;}
+  .ev .ev-b{margin:5px 0 0;color:var(--sky);font-size:1.02rem;}
+  .ev .ev-b .em{color:var(--vellum);font-style:italic;}
+
+  /* scripture refs */
+  .refs{margin-top:9px;display:flex;flex-wrap:wrap;gap:7px;}
+  .ref{
+    text-decoration:none;font-family:"Spectral SC";font-size:.7rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--gold-2);
+    border:1px solid var(--line);border-radius:3px;padding:3px 8px;transition:.2s;
+  }
+  .ref:hover{background:rgba(201,162,39,.12);border-color:var(--gold);color:var(--vellum);}
+
+  /* vellum quote card */
+  .vellum-card{
+    background:linear-gradient(170deg,#efe7d3,#e3d8bd);
+    color:var(--vellum-ink);border-radius:6px;padding:26px 30px;margin:26px 0 6px;
+    position:relative;box-shadow:0 14px 40px rgba(0,0,0,.4);
+    border:1px solid #cdbf99;
+  }
+  .vellum-card::before{
+    content:"";position:absolute;inset:7px;border:1px solid rgba(42,36,23,.18);border-radius:3px;pointer-events:none;
+  }
+  .vellum-card .q{font-family:"Cormorant Garamond";font-size:1.6rem;line-height:1.35;font-style:italic;color:#241f12;}
+  .vellum-card .cite{display:block;margin-top:12px;font-family:"Spectral SC";font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#7a6326;}
+  .dropcap::first-letter{
+    font-family:"Cormorant Garamond";font-weight:600;float:left;font-size:3.4rem;line-height:.78;
+    padding:6px 10px 0 0;color:var(--wine);
+  }
+
+  /* illuminated svg figure block */
+  .figure{margin:30px auto 4px;text-align:center;}
+  .figure svg{width:min(420px,80vw);height:auto;}
+  .figure figcaption{font-family:"Spectral SC";font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);margin-top:10px;}
+
+  /* divider */
+  .rule{display:flex;align-items:center;gap:16px;margin:8px 0;color:var(--gold-soft);}
+  .rule::before,.rule::after{content:"";height:1px;background:var(--line);flex:1;}
+  .rule span{font-family:"Spectral SC";font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;}
+
+  /* note strip */
+  .note{
+    margin:22px 0 4px;padding:16px 20px;border-left:2px solid var(--wine);
+    background:rgba(154,45,58,.07);border-radius:0 5px 5px 0;color:var(--sky);font-size:.98rem;
+  }
+  .note b{color:var(--vellum);font-weight:500;}
+  .note .rubric{display:block;margin-bottom:5px;}
+
+  /* footer / coda */
+  .coda{padding:80px 0 40px;text-align:center;}
+  .coda h2{font-size:clamp(2rem,6vw,3.4rem);font-weight:300;}
+  .coda h2 em{font-style:italic;color:var(--gold-2);}
+  .coda p{max-width:600px;margin:18px auto 0;color:var(--sky);font-style:italic;font-family:"Cormorant Garamond";font-size:1.35rem;line-height:1.5;}
+  .coda .seal-row{display:flex;justify-content:center;gap:9px;margin-top:34px;flex-wrap:wrap;}
+  .coda .seal-row i{
+    width:13px;height:13px;border-radius:50%;display:inline-block;
+    background:radial-gradient(circle at 36% 30%, var(--gold-2), var(--gold-soft));opacity:.85;
+  }
+  footer{border-top:1px solid var(--line);padding:26px 0 60px;text-align:center;color:var(--mist);font-size:.86rem;}
+  footer a{color:var(--gold-soft);}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+  @media(max-width:560px){
+    .ev{grid-template-columns:40px 1fr;gap:13px;}
+    .ev .seal{width:38px;height:38px;font-size:1rem;}
+    .spine-mark{display:none;}
+    .vellum-card{padding:22px 20px;}
+    .hero{padding:74px 0 48px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= SPINE NAV ================= -->
+<nav class="spine">
+  <div class="spine-inner">
+    <span class="spine-mark"><b>Revelation</b> · the visions on Patmos</span>
+    <div class="spine-nav">
+      <a href="#m1">I · Patmos</a>
+      <a href="#m2">II · Churches</a>
+      <a href="#m3">III · Throne</a>
+      <a href="#m4">IV · Seals</a>
+      <a href="#m5">V · Trumpets</a>
+      <a href="#m6">VI · Beasts</a>
+      <a href="#m7">VII · Bowls</a>
+      <a href="#m8">VIII · Babylon</a>
+      <a href="#m9">IX · Triumph</a>
+      <a href="#m10">X · New Earth</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero wrap">
+  <svg class="glyph" viewBox="0 0 200 200" role="img" aria-label="Christ among the seven golden lampstands">
+    <defs>
+      <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#F2DD8A"/>
+        <stop offset="45%" stop-color="#E7C95C"/>
+        <stop offset="100%" stop-color="#C9A227"/>
+      </radialGradient>
+      <linearGradient id="lamp" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#E7C95C"/>
+        <stop offset="100%" stop-color="#9c842f"/>
+      </linearGradient>
+    </defs>
+    <!-- rays -->
+    <g class="rays" stroke="#C9A227" stroke-width="1" opacity="0.5">
+      <g>
+        <line x1="100" y1="100" x2="100" y2="10"/>
+        <line x1="100" y1="100" x2="164" y2="36"/>
+        <line x1="100" y1="100" x2="190" y2="100"/>
+        <line x1="100" y1="100" x2="164" y2="164"/>
+        <line x1="100" y1="100" x2="100" y2="190"/>
+        <line x1="100" y1="100" x2="36" y2="164"/>
+        <line x1="100" y1="100" x2="10" y2="100"/>
+        <line x1="100" y1="100" x2="36" y2="36"/>
+      </g>
+    </g>
+    <!-- seven stars -->
+    <g fill="#E7C95C">
+      <circle cx="100" cy="22" r="2.4"/><circle cx="143" cy="33" r="2.4"/>
+      <circle cx="171" cy="66" r="2.4"/><circle cx="178" cy="108" r="2.4"/>
+      <circle cx="29" cy="66" r="2.4"/><circle cx="22" cy="108" r="2.4"/>
+      <circle cx="57" cy="33" r="2.4"/>
+    </g>
+    <!-- central sun face (the Son of Man, face like the sun) -->
+    <circle cx="100" cy="100" r="40" fill="url(#sun)"/>
+    <circle cx="100" cy="100" r="40" fill="none" stroke="#fff6d8" stroke-width="0.8" opacity="0.5"/>
+    <!-- alpha & omega -->
+    <text x="84" y="108" font-family="Cormorant Garamond, serif" font-size="26" fill="#2A2417">Α</text>
+    <text x="104" y="108" font-family="Cormorant Garamond, serif" font-size="26" fill="#2A2417">Ω</text>
+    <!-- seven lampstands around the base arc -->
+    <g fill="url(#lamp)">
+      <g transform="translate(40,150)"><rect x="-1.4" y="0" width="2.8" height="14"/><path d="M-6 0 H6 L3 -5 H-3 Z"/><circle cx="0" cy="-9" r="2.6" fill="#E7C95C"/></g>
+      <g transform="translate(60,162)"><rect x="-1.4" y="0" width="2.8" height="12"/><path d="M-6 0 H6 L3 -5 H-3 Z"/><circle cx="0" cy="-9" r="2.6" fill="#E7C95C"/></g>
+      <g transform="translate(80,170)"><rect x="-1.4" y="0" width="2.8" height="10"/><path d="M-6 0 H6 L3 -5 H-3 Z"/><circle cx="0" cy="-9" r="2.6" fill="#E7C95C"/></g>
+      <g transform="translate(100,173)"><rect x="-1.4" y="0" width="2.8" height="10"/><path d="M-6 0 H6 L3 -5 H-3 Z"/><circle cx="0" cy="-9" r="2.6" fill="#E7C95C"/></g>
+      <g transform="translate(120,170)"><rect x="-1.4" y="0" width="2.8" height="10"/><path d="M-6 0 H6 L3 -5 H-3 Z"/><circle cx="0" cy="-9" r="2.6" fill="#E7C95C"/></g>
+      <g transform="translate(140,162)"><rect x="-1.4" y="0" width="2.8" height="12"/><path d="M-6 0 H6 L3 -5 H-3 Z"/><circle cx="0" cy="-9" r="2.6" fill="#E7C95C"/></g>
+      <g transform="translate(160,150)"><rect x="-1.4" y="0" width="2.8" height="14"/><path d="M-6 0 H6 L3 -5 H-3 Z"/><circle cx="0" cy="-9" r="2.6" fill="#E7C95C"/></g>
+    </g>
+  </svg>
+
+  <p class="rubric">The Apocalypse of Jesus Christ</p>
+  <h1>The Visions<br><em>on Patmos</em></h1>
+  <p class="sub">Every sight John was shown, unrolled in the order he saw it — from the lampstands to the city of gold.</p>
+  <p class="patmos">
+    <b>I, John,</b> your brother and partner in the tribulation, was on the island called <b>Patmos</b> for the word of God and the testimony of Jesus. On the Lord's Day I was in the Spirit, and I heard behind me a loud voice like a trumpet. <span class="rubric">Revelation 1:9–10</span>
+  </p>
+</header>
+
+<!-- ================= OVERVIEW MAP ================= -->
+<section class="overview wrap reveal">
+  <div class="rule"><span>Ten movements · Chapters 1–21</span></div>
+  <div class="ov-grid">
+    <a class="ov" href="#m1"><span class="rn">I</span><span class="t">The Unveiling</span><span class="c">Chapter 1</span></a>
+    <a class="ov" href="#m2"><span class="rn">II</span><span class="t">Seven Churches</span><span class="c">Chapters 2–3</span></a>
+    <a class="ov" href="#m3"><span class="rn">III</span><span class="t">The Throne</span><span class="c">Chapters 4–5</span></a>
+    <a class="ov" href="#m4"><span class="rn">IV</span><span class="t">Seven Seals</span><span class="c">Chapters 6–8:1</span></a>
+    <a class="ov" href="#m5"><span class="rn">V</span><span class="t">Seven Trumpets</span><span class="c">Chapters 8–11</span></a>
+    <a class="ov" href="#m6"><span class="rn">VI</span><span class="t">Dragon &amp; Beasts</span><span class="c">Chapters 12–14</span></a>
+    <a class="ov" href="#m7"><span class="rn">VII</span><span class="t">Seven Bowls</span><span class="c">Chapters 15–16</span></a>
+    <a class="ov" href="#m8"><span class="rn">VIII</span><span class="t">Fall of Babylon</span><span class="c">Chapters 17–18</span></a>
+    <a class="ov" href="#m9"><span class="rn">IX</span><span class="t">Triumph of the Lamb</span><span class="c">Chapters 19–20</span></a>
+    <a class="ov" href="#m10"><span class="rn">X</span><span class="t">New Heaven &amp; Earth</span><span class="c">Chapter 21</span></a>
+  </div>
+</section>
+
+<!-- ============ MOVEMENT I ============ -->
+<section class="movement wrap reveal" id="m1">
+  <div class="mv-head">
+    <div class="mv-eyebrow">
+      <span class="num">I</span>
+      <span class="lbl"><span class="rubric">The Unveiling</span><span class="lbl-ch">Chapter 1</span></span>
+    </div>
+    <h2>One like a <em>Son of Man</em></h2>
+    <p class="mv-essence">Before any prophecy of the future, John is given a vision of the risen Christ himself — the living centre from whom every later vision flows.</p>
+  </div>
+
+  <ul class="events">
+    <li class="ev"><span class="seal">1</span><div>
+      <div class="ev-t">A voice like a trumpet</div>
+      <p class="ev-b">In the Spirit on the Lord's Day, John hears a great voice behind him commanding him to write to seven churches in Asia.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+1:9-11&version=NIV">Rev 1:9–11</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">2</span><div>
+      <div class="ev-t">Seven golden lampstands</div>
+      <p class="ev-b">Turning, John sees seven lampstands and, among them, the glorified Lord — hair white as snow, eyes like flame, feet like burnished bronze, a sharp two-edged sword from his mouth, his face like the sun in full strength.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+1:12-16&version=NIV">Rev 1:12–16</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">3</span><div>
+      <div class="ev-t">"I hold the keys of Death and Hades"</div>
+      <p class="ev-b">John falls as though dead; Christ lays his hand on him: <span class="em">"Do not be afraid. I am the First and the Last, the Living One. I was dead, and behold, I am alive forevermore."</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+1:17-18&version=NIV">Rev 1:17–18</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">4</span><div>
+      <div class="ev-t">The commission &amp; the mystery</div>
+      <p class="ev-b">Write what you have seen, what is, and what is to come. The seven stars are the angels of the churches; the seven lampstands are the churches themselves.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+1:19-20&version=NIV">Rev 1:19–20</a></div>
+    </div></li>
+  </ul>
+</section>
+
+<!-- ============ MOVEMENT II ============ -->
+<section class="movement wrap reveal" id="m2">
+  <div class="mv-head">
+    <div class="mv-eyebrow">
+      <span class="num">II</span>
+      <span class="lbl"><span class="rubric">Letters to the Seven Churches</span><span class="lbl-ch">Chapters 2–3</span></span>
+    </div>
+    <h2>Words to the <em>lampstands</em></h2>
+    <p class="mv-essence">Christ dictates a letter to each church — a commendation, a rebuke, a call, and a promise to the one who overcomes.</p>
+  </div>
+
+  <ul class="events">
+    <li class="ev"><span class="seal">1</span><div>
+      <div class="ev-t">Ephesus — the loveless church</div>
+      <p class="ev-b">Hardworking and discerning, yet they have <span class="em">forsaken their first love</span>. Return and do the first works.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+2:1-7&version=NIV">Rev 2:1–7</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">2</span><div>
+      <div class="ev-t">Smyrna — the persecuted church</div>
+      <p class="ev-b">Poor yet rich; about to suffer. <span class="em">"Be faithful unto death, and I will give you the crown of life."</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+2:8-11&version=NIV">Rev 2:8–11</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">3</span><div>
+      <div class="ev-t">Pergamum — the compromising church</div>
+      <p class="ev-b">Faithful where Satan's throne is, yet tolerating false teaching. Hidden manna and a white stone await the overcomer.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+2:12-17&version=NIV">Rev 2:12–17</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">4</span><div>
+      <div class="ev-t">Thyatira — the corrupted church</div>
+      <p class="ev-b">Growing in love and service, but tolerating "Jezebel." Hold fast; the overcomer is given authority over the nations.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+2:18-29&version=NIV">Rev 2:18–29</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">5</span><div>
+      <div class="ev-t">Sardis — the dead church</div>
+      <p class="ev-b">A name for being alive, but dead. Wake up. The overcomer is clothed in white and kept in the book of life.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+3:1-6&version=NIV">Rev 3:1–6</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">6</span><div>
+      <div class="ev-t">Philadelphia — the faithful church</div>
+      <p class="ev-b">Little strength, yet they kept his word. He sets before them <span class="em">an open door no one can shut.</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+3:7-13&version=NIV">Rev 3:7–13</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">7</span><div>
+      <div class="ev-t">Laodicea — the lukewarm church</div>
+      <p class="ev-b">Neither hot nor cold; rich in their own eyes, but wretched and blind. <span class="em">"Behold, I stand at the door and knock."</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+3:14-22&version=NIV">Rev 3:14–22</a></div>
+    </div></li>
+  </ul>
+</section>
+
+<!-- ============ MOVEMENT III ============ -->
+<section class="movement wrap reveal" id="m3">
+  <div class="mv-head">
+    <div class="mv-eyebrow">
+      <span class="num">III</span>
+      <span class="lbl"><span class="rubric">The Throne Room of Heaven</span><span class="lbl-ch">Chapters 4–5</span></span>
+    </div>
+    <h2>The Lamb who is <em>worthy</em></h2>
+    <p class="mv-essence">A door opens in heaven. Everything that follows is set in motion here — at the throne, and by the one alone found worthy to open the scroll.</p>
+  </div>
+
+  <figure class="figure">
+    <svg viewBox="0 0 220 150" role="img" aria-label="The throne encircled by a rainbow, with the sealed scroll">
+      <defs>
+        <linearGradient id="thr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E7C95C"/><stop offset="1" stop-color="#9c842f"/></linearGradient>
+      </defs>
+      <path d="M30 70 A80 50 0 0 1 190 70" fill="none" stroke="#6E8CA8" stroke-width="3" opacity="0.7"/>
+      <path d="M36 74 A74 46 0 0 1 184 74" fill="none" stroke="#9A2D3A" stroke-width="3" opacity="0.55"/>
+      <path d="M42 78 A68 42 0 0 1 178 78" fill="none" stroke="#C9A227" stroke-width="3" opacity="0.7"/>
+      <!-- throne -->
+      <rect x="92" y="64" width="36" height="44" rx="3" fill="url(#thr)"/>
+      <rect x="88" y="58" width="44" height="12" rx="3" fill="#E7C95C"/>
+      <circle cx="110" cy="50" r="9" fill="url(#sun)"/>
+      <!-- sea of glass -->
+      <rect x="60" y="112" width="100" height="6" rx="3" fill="#6E8CA8" opacity="0.35"/>
+      <!-- scroll with seven seals -->
+      <g transform="translate(150,96)">
+        <rect x="0" y="0" width="34" height="20" rx="3" fill="#ECE3CE"/>
+        <circle cx="5" cy="20" r="3.4" fill="#9A2D3A"/><circle cx="13" cy="20" r="3.4" fill="#9A2D3A"/>
+        <circle cx="21" cy="20" r="3.4" fill="#9A2D3A"/><circle cx="29" cy="20" r="3.4" fill="#9A2D3A"/>
+      </g>
+    </svg>
+    <figcaption>A throne · a rainbow like an emerald · a scroll sealed seven times</figcaption>
+  </figure>
+
+  <ul class="events">
+    <li class="ev"><span class="seal">1</span><div>
+      <div class="ev-t">The throne and the rainbow</div>
+      <p class="ev-b">One seated on the throne, like jasper and carnelian, encircled by a rainbow like an emerald — surrounded by twenty-four elders and seven burning lamps, the seven spirits of God.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+4:2-6&version=NIV">Rev 4:2–6</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">2</span><div>
+      <div class="ev-t">The four living creatures</div>
+      <p class="ev-b">Lion, ox, man, eagle — covered with eyes, never resting: <span class="em">"Holy, holy, holy is the Lord God Almighty, who was and is and is to come."</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+4:6-11&version=NIV">Rev 4:6–11</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">3</span><div>
+      <div class="ev-t">"Who is worthy to open the scroll?"</div>
+      <p class="ev-b">A scroll sealed with seven seals; no one in heaven or earth can open it. John weeps much.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+5:1-4&version=NIV">Rev 5:1–4</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">4</span><div>
+      <div class="ev-t">The Lion who is the Lamb</div>
+      <p class="ev-b">"Weep no more — the Lion of Judah has conquered." John turns and sees <span class="em">a Lamb, looking as if it had been slain.</span> He takes the scroll, and all heaven sings a new song.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+5:5-14&version=NIV">Rev 5:5–14</a></div>
+    </div></li>
+  </ul>
+
+  <div class="vellum-card">
+    <p class="q dropcap">Worthy is the Lamb who was slain, to receive power and wealth and wisdom and might and honour and glory and blessing — to him be praise forever and ever.</p>
+    <span class="cite">Revelation 5:12–13</span>
+  </div>
+</section>
+
+<!-- ============ MOVEMENT IV ============ -->
+<section class="movement wrap reveal" id="m4">
+  <div class="mv-head">
+    <div class="mv-eyebrow">
+      <span class="num">IV</span>
+      <span class="lbl"><span class="rubric">The Seven Seals</span><span class="lbl-ch">Chapters 6 – 8:1</span></span>
+    </div>
+    <h2>The Lamb opens the <em>scroll</em></h2>
+    <p class="mv-essence">As each seal is broken, history is set loose — conquest, war, famine, death, the cry of the martyrs, and the shaking of the heavens.</p>
+  </div>
+
+  <figure class="figure">
+    <svg viewBox="0 0 320 90" role="img" aria-label="The four horsemen: white, red, black, and pale">
+      <g transform="translate(0,8)">
+        <!-- generic horse silhouette repeated in four colours -->
+        <g id="horse" transform="translate(8,10)">
+          <path d="M4 40 C2 30 10 24 16 24 C18 16 26 12 32 14 C36 8 44 8 48 12 L52 10 L50 16 C56 18 60 24 60 30 L58 44 L52 44 L52 34 L40 34 L40 44 L34 44 L34 32 C28 34 18 36 14 44 L8 44 Z"/>
+        </g>
+      </g>
+      <use href="#horse" x="0" fill="#ECE3CE"/>
+      <use href="#horse" x="76" fill="#9A2D3A"/>
+      <use href="#horse" x="152" fill="#2A2417" stroke="#5E6B86" stroke-width="0.6"/>
+      <use href="#horse" x="228" fill="#6E8CA8" opacity="0.85"/>
+    </svg>
+    <figcaption>White · Red · Black · Pale — the four horsemen</figcaption>
+  </figure>
+
+  <ul class="events">
+    <li class="ev wine"><span class="seal">1</span><div>
+      <div class="ev-t">Seal I — the White Horse</div>
+      <p class="ev-b">A rider with a bow and a crown, going out conquering and to conquer.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+6:1-2&version=NIV">Rev 6:1–2</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">2</span><div>
+      <div class="ev-t">Seal II — the Red Horse</div>
+      <p class="ev-b">Power to take peace from the earth, so that people kill one another; a great sword is given.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+6:3-4&version=NIV">Rev 6:3–4</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">3</span><div>
+      <div class="ev-t">Seal III — the Black Horse</div>
+      <p class="ev-b">A pair of scales — famine and scarcity: a day's wage for a quart of wheat.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+6:5-6&version=NIV">Rev 6:5–6</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">4</span><div>
+      <div class="ev-t">Seal IV — the Pale Horse</div>
+      <p class="ev-b">Its rider's name is Death, and Hades follows — given power over a fourth of the earth.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+6:7-8&version=NIV">Rev 6:7–8</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">5</span><div>
+      <div class="ev-t">Seal V — the souls under the altar</div>
+      <p class="ev-b">The martyrs cry out, <span class="em">"How long, O Lord?"</span> They are given white robes and told to wait a little longer.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+6:9-11&version=NIV">Rev 6:9–11</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">6</span><div>
+      <div class="ev-t">Seal VI — the great earthquake</div>
+      <p class="ev-b">The sun turns black, the moon to blood, stars fall, the sky rolls back. Kings and slaves alike cry to the mountains, <span class="em">"Hide us from the wrath of the Lamb."</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+6:12-17&version=NIV">Rev 6:12–17</a></div>
+    </div></li>
+  </ul>
+
+  <div class="note">
+    <span class="rubric">Interlude · Chapter 7</span>
+    Before the seventh seal, a pause: <b>144,000 are sealed</b> from the tribes of Israel, and John sees <b>a great multitude no one could number</b>, from every nation, in white robes before the throne — those who came out of the great tribulation.
+    <div class="refs" style="margin-top:9px"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+7&version=NIV">Rev 7:1–17</a></div>
+  </div>
+
+  <ul class="events">
+    <li class="ev"><span class="seal">7</span><div>
+      <div class="ev-t">Seal VII — silence in heaven</div>
+      <p class="ev-b">When the last seal is opened, there is silence in heaven for about half an hour — the hush before the trumpets.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+8:1&version=NIV">Rev 8:1</a></div>
+    </div></li>
+  </ul>
+</section>
+
+<!-- ============ MOVEMENT V ============ -->
+<section class="movement wrap reveal" id="m5">
+  <div class="mv-head">
+    <div class="mv-eyebrow">
+      <span class="num">V</span>
+      <span class="lbl"><span class="rubric">The Seven Trumpets</span><span class="lbl-ch">Chapters 8 – 11</span></span>
+    </div>
+    <h2>Seven angels <em>sound</em></h2>
+    <p class="mv-essence">The prayers of the saints rise with incense; fire is hurled to the earth; and seven trumpets announce a deeper round of judgment.</p>
+  </div>
+
+  <figure class="figure">
+    <svg viewBox="0 0 200 80" role="img" aria-label="A golden trumpet and a censer of incense">
+      <defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E7C95C"/><stop offset="1" stop-color="#9c842f"/></linearGradient></defs>
+      <path d="M20 40 L120 32 L120 48 Z" fill="url(#tg)"/>
+      <path d="M118 26 Q150 24 150 40 Q150 56 118 54 Z" fill="url(#tg)"/>
+      <circle cx="20" cy="40" r="6" fill="#E7C95C"/>
+      <!-- censer smoke -->
+      <g stroke="#6E8CA8" stroke-width="2" fill="none" opacity="0.6">
+        <path d="M170 60 q-6 -8 0 -16 q6 -8 0 -16"/>
+        <path d="M180 60 q6 -8 0 -16 q-6 -8 0 -16"/>
+      </g>
+      <path d="M165 60 h22 l-3 8 h-16 z" fill="url(#tg)"/>
+    </svg>
+    <figcaption>Incense, prayer, and the sounding of trumpets</figcaption>
+  </figure>
+
+  <ul class="events">
+    <li class="ev wine"><span class="seal">1</span><div>
+      <div class="ev-t">Trumpet I — hail and fire</div>
+      <p class="ev-b">Hail and fire mixed with blood fall; a third of the earth and trees and all green grass are burned.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+8:7&version=NIV">Rev 8:7</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">2</span><div>
+      <div class="ev-t">Trumpet II — the burning mountain</div>
+      <p class="ev-b">A great blazing mountain is thrown into the sea; a third of the sea becomes blood.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+8:8-9&version=NIV">Rev 8:8–9</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">3</span><div>
+      <div class="ev-t">Trumpet III — Wormwood</div>
+      <p class="ev-b">A great star called Wormwood falls; a third of the rivers and springs turn bitter.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+8:10-11&version=NIV">Rev 8:10–11</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">4</span><div>
+      <div class="ev-t">Trumpet IV — the darkened sky</div>
+      <p class="ev-b">A third of the sun, moon, and stars are struck dark. An eagle cries: <span class="em">"Woe, woe, woe to those who dwell on the earth."</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+8:12-13&version=NIV">Rev 8:12–13</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">5</span><div>
+      <div class="ev-t">Trumpet V — locusts from the abyss <span style="font-size:.8rem;color:var(--mist)">(1st Woe)</span></div>
+      <p class="ev-b">The abyss is opened; locusts like war-horses torment those without God's seal. Their king is Abaddon, Apollyon — the Destroyer.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+9:1-12&version=NIV">Rev 9:1–12</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">6</span><div>
+      <div class="ev-t">Trumpet VI — the army at the Euphrates <span style="font-size:.8rem;color:var(--mist)">(2nd Woe)</span></div>
+      <p class="ev-b">Four bound angels are released; an army of two hundred million kills a third of mankind — yet the rest still refuse to repent.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+9:13-21&version=NIV">Rev 9:13–21</a></div>
+    </div></li>
+  </ul>
+
+  <div class="note">
+    <span class="rubric">Interlude · Chapters 10 – 11</span>
+    A mighty angel gives John <b>a little scroll</b> to eat — sweet as honey in the mouth, bitter in the stomach. He measures the temple, and <b>two witnesses</b> prophesy, are killed, lie in the street, and after three and a half days are raised and called up to heaven.
+    <div class="refs" style="margin-top:9px"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+10&version=NIV">Rev 10</a><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+11:1-14&version=NIV">Rev 11:1–14</a></div>
+  </div>
+
+  <ul class="events">
+    <li class="ev"><span class="seal">7</span><div>
+      <div class="ev-t">Trumpet VII — the kingdom proclaimed</div>
+      <p class="ev-b">Loud voices in heaven: <span class="em">"The kingdom of the world has become the kingdom of our Lord and of his Christ, and he shall reign forever and ever."</span> The temple in heaven opens.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+11:15-19&version=NIV">Rev 11:15–19</a></div>
+    </div></li>
+  </ul>
+</section>
+
+<!-- ============ MOVEMENT VI ============ -->
+<section class="movement wrap reveal" id="m6">
+  <div class="mv-head">
+    <div class="mv-eyebrow">
+      <span class="num">VI</span>
+      <span class="lbl"><span class="rubric">The Dragon &amp; the Beasts</span><span class="lbl-ch">Chapters 12–14</span></span>
+    </div>
+    <h2>The war behind the <em>war</em></h2>
+    <p class="mv-essence">The curtain is pulled back on the conflict itself — a woman, a dragon, and two beasts — and the players in the cosmic struggle are unmasked.</p>
+  </div>
+
+  <figure class="figure">
+    <svg viewBox="0 0 220 120" role="img" aria-label="The woman clothed with the sun and the great red dragon">
+      <!-- woman clothed with the sun -->
+      <g transform="translate(58,60)">
+        <circle cx="0" cy="0" r="26" fill="url(#sun)" opacity="0.9"/>
+        <circle cx="0" cy="0" r="26" fill="none" stroke="#E7C95C" stroke-width="1"/>
+        <!-- twelve stars crown -->
+        <g fill="#fff6d8"><circle cx="0" cy="-30" r="1.8"/><circle cx="15" cy="-26" r="1.8"/><circle cx="26" cy="-15" r="1.8"/><circle cx="30" cy="0" r="1.8"/><circle cx="26" cy="15" r="1.8"/><circle cx="15" cy="26" r="1.8"/><circle cx="0" cy="30" r="1.8"/><circle cx="-15" cy="26" r="1.8"/><circle cx="-26" cy="15" r="1.8"/><circle cx="-30" cy="0" r="1.8"/><circle cx="-26" cy="-15" r="1.8"/><circle cx="-15" cy="-26" r="1.8"/></g>
+        <!-- crescent moon at feet -->
+        <path d="M-14 30 a16 16 0 0 0 28 0 a20 20 0 0 1 -28 0" fill="#ECE3CE" opacity="0.7"/>
+      </g>
+      <!-- red dragon -->
+      <g transform="translate(150,60)" fill="#9A2D3A">
+        <path d="M0 0 C20 -18 44 -14 54 4 C44 -2 40 2 44 12 C36 6 32 10 34 20 C26 12 22 16 22 26 C16 16 10 18 8 28 C4 16 -2 16 -8 22 C-6 10 -2 6 0 0 Z"/>
+        <!-- seven heads hint -->
+        <g fill="#C0505C"><circle cx="50" cy="2" r="3"/><circle cx="42" cy="-4" r="2.4"/><circle cx="34" cy="-6" r="2.4"/></g>
+        <circle cx="52" cy="1" r="1" fill="#E7C95C"/>
+      </g>
+    </svg>
+    <figcaption>The woman clothed with the sun · the great red dragon</figcaption>
+  </figure>
+
+  <ul class="events">
+    <li class="ev wine"><span class="seal">1</span><div>
+      <div class="ev-t">The woman, the child &amp; the dragon</div>
+      <p class="ev-b">A woman clothed with the sun gives birth to a son who will rule the nations; a great red dragon waits to devour the child, but the child is caught up to God.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+12:1-6&version=NIV">Rev 12:1–6</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">2</span><div>
+      <div class="ev-t">War in heaven</div>
+      <p class="ev-b">Michael and his angels fight the dragon. The ancient serpent — the devil, Satan — is hurled down to the earth. <span class="em">"They overcame him by the blood of the Lamb and the word of their testimony."</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+12:7-17&version=NIV">Rev 12:7–17</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">3</span><div>
+      <div class="ev-t">The beast from the sea</div>
+      <p class="ev-b">Seven heads, ten horns, mouth of blasphemy. The dragon gives it authority for forty-two months, and the whole earth marvels and worships it.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+13:1-10&version=NIV">Rev 13:1–10</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">4</span><div>
+      <div class="ev-t">The beast from the earth — the mark</div>
+      <p class="ev-b">A second beast, like a lamb but speaking like a dragon, forces all to receive a mark to buy or sell. Here is wisdom: its number is <span class="em">666</span>.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+13:11-18&version=NIV">Rev 13:11–18</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">5</span><div>
+      <div class="ev-t">The Lamb and the 144,000</div>
+      <p class="ev-b">On Mount Zion, the Lamb stands with the redeemed, who sing a new song no one else can learn — the firstfruits, blameless before God.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+14:1-5&version=NIV">Rev 14:1–5</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">6</span><div>
+      <div class="ev-t">Three angels &amp; the harvest</div>
+      <p class="ev-b">Angels proclaim the eternal gospel, announce <span class="em">"Fallen is Babylon"</span>, and warn against the mark. Then the earth is reaped, and the winepress of God's wrath is trodden.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+14:6-20&version=NIV">Rev 14:6–20</a></div>
+    </div></li>
+  </ul>
+</section>
+
+<!-- ============ MOVEMENT VII ============ -->
+<section class="movement wrap reveal" id="m7">
+  <div class="mv-head">
+    <div class="mv-eyebrow">
+      <span class="num">VII</span>
+      <span class="lbl"><span class="rubric">The Seven Bowls of Wrath</span><span class="lbl-ch">Chapters 15–16</span></span>
+    </div>
+    <h2>The last <em>plagues</em></h2>
+    <p class="mv-essence">By the sea of glass mixed with fire, the redeemed sing the song of Moses and the Lamb — then seven angels pour out the final, unmingled wrath of God.</p>
+  </div>
+
+  <ul class="events">
+    <li class="ev wine"><span class="seal">1</span><div>
+      <div class="ev-t">Bowl I — festering sores</div>
+      <p class="ev-b">Poured on the land; ugly, painful sores break out on those who bear the mark of the beast.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+16:2&version=NIV">Rev 16:2</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">2</span><div>
+      <div class="ev-t">Bowl II — the sea to blood</div>
+      <p class="ev-b">The sea becomes like the blood of a corpse; every living thing in it dies.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+16:3&version=NIV">Rev 16:3</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">3</span><div>
+      <div class="ev-t">Bowl III — the rivers to blood</div>
+      <p class="ev-b">Rivers and springs turn to blood. The angel declares God just: they shed the blood of saints.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+16:4-7&version=NIV">Rev 16:4–7</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">4</span><div>
+      <div class="ev-t">Bowl IV — scorching sun</div>
+      <p class="ev-b">The sun is allowed to scorch people with fire — yet they curse God and refuse to repent.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+16:8-9&version=NIV">Rev 16:8–9</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">5</span><div>
+      <div class="ev-t">Bowl V — darkness</div>
+      <p class="ev-b">Poured on the throne of the beast; its kingdom is plunged into darkness, and people gnaw their tongues in agony.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+16:10-11&version=NIV">Rev 16:10–11</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">6</span><div>
+      <div class="ev-t">Bowl VI — the Euphrates &amp; Armageddon</div>
+      <p class="ev-b">The great river dries to prepare the way for kings from the east; unclean spirits gather them for battle at <span class="em">Armageddon</span>.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+16:12-16&version=NIV">Rev 16:12–16</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">7</span><div>
+      <div class="ev-t">Bowl VII — "It is done"</div>
+      <p class="ev-b">A loud voice from the throne. The greatest earthquake in history; cities fall, islands flee, and great Babylon is remembered to drink the cup of God's fury.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+16:17-21&version=NIV">Rev 16:17–21</a></div>
+    </div></li>
+  </ul>
+</section>
+
+<!-- ============ MOVEMENT VIII ============ -->
+<section class="movement wrap reveal" id="m8">
+  <div class="mv-head">
+    <div class="mv-eyebrow">
+      <span class="num">VIII</span>
+      <span class="lbl"><span class="rubric">The Fall of Babylon</span><span class="lbl-ch">Chapters 17–18</span></span>
+    </div>
+    <h2>The great city <em>falls</em></h2>
+    <p class="mv-essence">The seventh bowl named Babylon; now her judgment is shown in full — the gilded harlot of empire, and the dirge of a world that loved her.</p>
+  </div>
+
+  <ul class="events">
+    <li class="ev wine"><span class="seal">1</span><div>
+      <div class="ev-t">The woman on the scarlet beast</div>
+      <p class="ev-b">A prostitute arrayed in purple and scarlet, holding a golden cup of abominations, drunk with the blood of the saints. On her forehead: <span class="em">"Mystery, Babylon the Great."</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+17:1-6&version=NIV">Rev 17:1–6</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">2</span><div>
+      <div class="ev-t">The mystery explained</div>
+      <p class="ev-b">The seven heads and ten kings make war on the Lamb — <span class="em">"and the Lamb will conquer them, for he is Lord of lords and King of kings."</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+17:7-18&version=NIV">Rev 17:7–18</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">3</span><div>
+      <div class="ev-t">"Fallen, fallen is Babylon"</div>
+      <p class="ev-b">An angel of great authority lights the earth with his glory. A voice from heaven calls, <span class="em">"Come out of her, my people, that you take no part in her sins."</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+18:1-8&version=NIV">Rev 18:1–8</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">4</span><div>
+      <div class="ev-t">The lament of the world</div>
+      <p class="ev-b">Kings, merchants, and sea-captains weep for their lost trade. A mighty angel hurls a millstone into the sea: so will Babylon be thrown down, never to be found again.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+18:9-24&version=NIV">Rev 18:9–24</a></div>
+    </div></li>
+  </ul>
+</section>
+
+<!-- ============ MOVEMENT IX ============ -->
+<section class="movement wrap reveal" id="m9">
+  <div class="mv-head">
+    <div class="mv-eyebrow">
+      <span class="num">IX</span>
+      <span class="lbl"><span class="rubric">The Triumph of the Lamb</span><span class="lbl-ch">Chapters 19–20</span></span>
+    </div>
+    <h2>Faithful and <em>True</em></h2>
+    <p class="mv-essence">Heaven erupts in Hallelujahs; the King rides out; the beast, the false prophet, and at last the dragon himself meet the lake of fire, and the dead are judged.</p>
+  </div>
+
+  <figure class="figure">
+    <svg viewBox="0 0 200 110" role="img" aria-label="The rider on the white horse, King of kings">
+      <g transform="translate(30,28)" fill="#ECE3CE" stroke="#C9A227" stroke-width="0.8">
+        <path d="M4 50 C2 38 12 30 20 30 C22 20 32 16 40 18 C46 10 56 10 62 16 L68 12 L65 22 C72 24 78 32 78 40 L74 58 L66 58 L66 44 L50 44 L50 58 L42 58 L42 42 C34 44 22 46 18 58 L10 58 Z"/>
+      </g>
+      <!-- rider crown of many crowns -->
+      <g fill="#E7C95C"><circle cx="96" cy="30" r="6"/><path d="M88 30 l2 -8 3 5 3 -7 3 7 3 -5 2 8 z"/></g>
+      <!-- sword from mouth -->
+      <path d="M96 32 L150 30 L96 36 Z" fill="#9A2D3A" opacity="0.7"/>
+    </svg>
+    <figcaption>King of kings and Lord of lords</figcaption>
+  </figure>
+
+  <ul class="events">
+    <li class="ev"><span class="seal">1</span><div>
+      <div class="ev-t">Hallelujah &amp; the wedding of the Lamb</div>
+      <p class="ev-b">A great multitude in heaven roars <span class="em">"Hallelujah!"</span> The bride has made herself ready; blessed are those invited to the marriage supper of the Lamb.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+19:1-10&version=NIV">Rev 19:1–10</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">2</span><div>
+      <div class="ev-t">The rider on the white horse</div>
+      <p class="ev-b">Heaven opens. He is called Faithful and True; his eyes are flame, his robe dipped in blood, his name the Word of God. On his thigh: <span class="em">King of kings and Lord of lords.</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+19:11-16&version=NIV">Rev 19:11–16</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">3</span><div>
+      <div class="ev-t">The beast &amp; false prophet judged</div>
+      <p class="ev-b">The beast and the false prophet are captured and thrown alive into the lake of fire burning with sulphur.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+19:17-21&version=NIV">Rev 19:17–21</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">4</span><div>
+      <div class="ev-t">Satan bound — the thousand years</div>
+      <p class="ev-b">An angel seizes the dragon, binds him, and casts him into the abyss for a thousand years. The faithful reign with Christ in the first resurrection.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+20:1-6&version=NIV">Rev 20:1–6</a></div>
+    </div></li>
+    <li class="ev wine"><span class="seal">5</span><div>
+      <div class="ev-t">The last rebellion &amp; the dragon's end</div>
+      <p class="ev-b">Released, Satan gathers Gog and Magog for battle; fire comes down from heaven. The devil is thrown into the lake of fire forever.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+20:7-10&version=NIV">Rev 20:7–10</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">6</span><div>
+      <div class="ev-t">The great white throne</div>
+      <p class="ev-b">Earth and sky flee away. The dead are judged by what is written in the books — and by the <span class="em">book of life</span>. Death and Hades themselves are thrown into the lake of fire.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+20:11-15&version=NIV">Rev 20:11–15</a></div>
+    </div></li>
+  </ul>
+</section>
+
+<!-- ============ MOVEMENT X ============ -->
+<section class="movement wrap reveal" id="m10">
+  <div class="mv-head">
+    <div class="mv-eyebrow">
+      <span class="num">X</span>
+      <span class="lbl"><span class="rubric">A New Heaven &amp; a New Earth</span><span class="lbl-ch">Chapter 21</span></span>
+    </div>
+    <h2>The city of <em>gold</em></h2>
+    <p class="mv-essence">Every vision of judgment was clearing the ground for this — the home of God with his people, where the old order of tears is gone forever.</p>
+  </div>
+
+  <figure class="figure">
+    <svg viewBox="0 0 200 130" role="img" aria-label="The New Jerusalem descending, a cube of gold with twelve jewelled gates">
+      <defs><linearGradient id="city" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E7C95C"/><stop offset="1" stop-color="#9c842f"/></linearGradient></defs>
+      <!-- descending rays -->
+      <g stroke="#C9A227" stroke-width="0.7" opacity="0.4"><line x1="100" y1="0" x2="60" y2="40"/><line x1="100" y1="0" x2="100" y2="40"/><line x1="100" y1="0" x2="140" y2="40"/></g>
+      <!-- cube city -->
+      <g transform="translate(60,42)">
+        <path d="M0 20 L40 0 L80 20 L40 40 Z" fill="url(#city)" opacity="0.9"/>
+        <path d="M0 20 L0 64 L40 84 L40 40 Z" fill="#9c842f"/>
+        <path d="M80 20 L80 64 L40 84 L40 40 Z" fill="#b8972f"/>
+        <!-- jewelled gates -->
+        <g fill="#C0505C"><circle cx="14" cy="38" r="2.4"/><circle cx="26" cy="46" r="2.4"/></g>
+        <g fill="#6E8CA8"><circle cx="54" cy="46" r="2.4"/><circle cx="66" cy="38" r="2.4"/></g>
+        <g fill="#7FB37A"><circle cx="20" cy="58" r="2.4"/><circle cx="40" cy="68" r="2.4"/><circle cx="60" cy="58" r="2.4"/></g>
+      </g>
+    </svg>
+    <figcaption>The holy city, New Jerusalem, coming down out of heaven</figcaption>
+  </figure>
+
+  <ul class="events">
+    <li class="ev"><span class="seal">1</span><div>
+      <div class="ev-t">The holy city descends</div>
+      <p class="ev-b">A new heaven and a new earth; the old has passed. The New Jerusalem comes down from God, <span class="em">prepared as a bride adorned for her husband.</span></p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+21:1-2&version=NIV">Rev 21:1–2</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">2</span><div>
+      <div class="ev-t">"Behold, I make all things new"</div>
+      <p class="ev-b">God dwells with his people. He wipes away every tear; <span class="em">death shall be no more, nor mourning, nor crying, nor pain</span> — the former things have passed away.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+21:3-8&version=NIV">Rev 21:3–8</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">3</span><div>
+      <div class="ev-t">The city of jasper and gold</div>
+      <p class="ev-b">Twelve gates of pearl named for the twelve tribes; twelve foundations named for the twelve apostles, each a different jewel. The city is pure gold, clear as glass — a perfect cube.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+21:9-21&version=NIV">Rev 21:9–21</a></div>
+    </div></li>
+    <li class="ev"><span class="seal">4</span><div>
+      <div class="ev-t">No temple, no sun, no night</div>
+      <p class="ev-b">There is no temple — the Lord God and the Lamb are its temple. There is no sun — <span class="em">the glory of God is its light, and the Lamb is its lamp.</span> Its gates are never shut, for there is no night there.</p>
+      <div class="refs"><a class="ref" target="_blank" rel="noopener" href="https://www.biblegateway.com/passage/?search=Revelation+21:22-27&version=NIV">Rev 21:22–27</a></div>
+    </div></li>
+  </ul>
+
+  <div class="vellum-card">
+    <p class="q dropcap">He will wipe away every tear from their eyes, and death shall be no more, neither shall there be mourning, nor crying, nor pain anymore, for the former things have passed away.</p>
+    <span class="cite">Revelation 21:4</span>
+  </div>
+</section>
+
+<!-- ============ CODA ============ -->
+<section class="coda wrap reveal">
+  <div class="rule"><span>The vision continues</span></div>
+  <h2>And the Spirit and the Bride say, <em>"Come."</em></h2>
+  <p>The scroll does not quite close here. Chapter 22 unrolls the last sight — the river of the water of life, the tree of life with healing leaves, and the final promise: <span style="font-style:normal;color:var(--gold-2)">"Surely I am coming soon."</span> A natural place to take this study next.</p>
+  <div class="seal-row"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<footer class="wrap">
+  Revelation 1–21 · the visions on Patmos, in sequence &nbsp;·&nbsp; scripture links open <a href="https://www.biblegateway.com/" target="_blank" rel="noopener">BibleGateway (NIV)</a>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
