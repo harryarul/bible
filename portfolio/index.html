@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Iris Calderón — Product &amp; Interaction Designer</title>
+<meta name="description" content="Iris Calderón is a product & interaction designer between Lisbon and Berlin, designing interfaces that feel inevitable." />
+<meta name="theme-color" content="#0B0B10" />
+
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --bg:#0B0B10;--bg-soft:#14131C;--paper:#ECE7DB;--paper-ink:#171520;
+  --text:#F5F2EC;--muted:#8E8AA0;--line:rgba(245,242,236,.12);
+  --violet:#7C6CFF;--aqua:#57E8C9;--magenta:#C66BFF;
+  --display:"Clash Display","General Sans",system-ui,sans-serif;
+  --sans:"General Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --mono:"Space Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.22,1,.36,1);--gutter:clamp(20px,5vw,80px);--maxw:1480px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:clamp(15px,1.05vw,17px);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+body.loading{overflow:hidden;height:100vh}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--violet);color:#fff}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+.muted{color:var(--muted)}
+
+#preloader{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:flex-end;justify-content:space-between;padding:var(--gutter)}
+#preloader .pl-name{font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,9vw,7rem);line-height:.9;letter-spacing:-.02em;overflow:hidden}
+#preloader .pl-name span{display:inline-block;transform:translateY(110%)}
+.pl-count{font-family:var(--mono);font-size:clamp(2.2rem,9vw,7rem);line-height:.9;font-weight:700;color:var(--muted)}
+.pl-bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,var(--violet),var(--aqua))}
+
+.cursor{position:fixed;top:0;left:0;width:9px;height:9px;border-radius:50%;background:var(--text);pointer-events:none;z-index:900;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .3s var(--ease),height .3s var(--ease)}
+.cursor-ring{position:fixed;top:0;left:0;width:40px;height:40px;border:1px solid rgba(245,242,236,.4);border-radius:50%;pointer-events:none;z-index:900;transform:translate(-50%,-50%);transition:width .35s var(--ease),height .35s var(--ease),opacity .3s,background .3s,border-color .3s}
+body.cursor-hover .cursor{width:0;height:0}
+body.cursor-hover .cursor-ring{width:74px;height:74px;background:rgba(124,108,255,.12);border-color:transparent}
+@media (hover:none),(pointer:coarse){.cursor,.cursor-ring{display:none}}
+
+header.nav{position:fixed;top:0;left:0;width:100%;z-index:200;padding:clamp(16px,2vw,26px) var(--gutter);display:flex;align-items:center;justify-content:space-between;mix-blend-mode:difference}
+.nav .logo{font-family:var(--display);font-weight:600;font-size:1.15rem;letter-spacing:-.01em;display:flex;align-items:center;gap:.5em}
+.nav .logo .dot{width:9px;height:9px;border-radius:50%;background:var(--aqua);display:inline-block}
+.nav-links{display:flex;gap:clamp(18px,2.2vw,40px);align-items:center}
+.nav-links a{font-size:.82rem;letter-spacing:.04em;position:relative;padding:4px 0}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:currentColor;transition:width .4s var(--ease)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--line);border-radius:100px;padding:.7em 1.25em;transition:background .3s,color .3s}
+.nav-cta:hover{background:var(--text);color:var(--bg)}
+.menu-toggle{display:none;flex-direction:column;gap:6px;width:34px;height:34px;justify-content:center;align-items:flex-end;z-index:210}
+.menu-toggle span{display:block;height:2px;width:26px;background:var(--text);transition:transform .4s var(--ease),opacity .3s,width .3s}
+body.menu-open .menu-toggle span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+body.menu-open .menu-toggle span:nth-child(2){opacity:0}
+body.menu-open .menu-toggle span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+.mobile-menu{position:fixed;inset:0;z-index:205;background:var(--bg-soft);clip-path:circle(0% at 100% 0);transition:clip-path .7s var(--ease);display:flex;flex-direction:column;justify-content:center;padding:var(--gutter);pointer-events:none}
+body.menu-open .mobile-menu{clip-path:circle(150% at 100% 0);pointer-events:auto}
+.mobile-menu a{font-family:var(--display);font-weight:500;font-size:clamp(2.4rem,11vw,4rem);line-height:1.1;letter-spacing:-.02em;padding:.1em 0;display:flex;align-items:baseline;gap:.4em;opacity:0;transform:translateY(30px)}
+body.menu-open .mobile-menu a{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+body.menu-open .mobile-menu a:nth-child(1){transition-delay:.18s}
+body.menu-open .mobile-menu a:nth-child(2){transition-delay:.26s}
+body.menu-open .mobile-menu a:nth-child(3){transition-delay:.34s}
+body.menu-open .mobile-menu a:nth-child(4){transition-delay:.42s}
+body.menu-open .mobile-menu a:nth-child(5){transition-delay:.5s}
+.mobile-menu a .idx{font-family:var(--mono);font-size:.8rem;color:var(--aqua);letter-spacing:.1em}
+.mobile-menu .mm-foot{margin-top:auto;display:flex;gap:24px;flex-wrap:wrap}
+
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+#aurora{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 80% at 50% 120%,rgba(11,11,16,0) 35%,rgba(11,11,16,.85) 100%),linear-gradient(180deg,rgba(11,11,16,.55) 0%,rgba(11,11,16,0) 22%)}
+.hero-inner{position:relative;z-index:2;width:100%;padding-bottom:clamp(28px,5vh,60px)}
+.hero-eyebrow{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px;margin-bottom:clamp(20px,4vh,44px)}
+.hero-eyebrow .loc{max-width:30ch;color:var(--muted)}
+.hero h1{font-family:var(--display);font-weight:600;line-height:.86;letter-spacing:-.025em;font-size:clamp(3.4rem,15.5vw,15rem);text-transform:uppercase}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line .in{display:inline-block;transform:translateY(110%)}
+.hero h1 .line:nth-child(2){text-align:right}
+.hero-sub{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap;margin-top:clamp(18px,3vh,30px)}
+.hero-role{font-size:clamp(1rem,1.6vw,1.35rem);font-weight:500;line-height:1.3;max-width:24ch}
+.hero-role .rot{color:var(--aqua)}
+.scrollcue{display:flex;align-items:center;gap:12px;color:var(--muted)}
+.scrollcue .ln{width:60px;height:1px;background:var(--muted);position:relative;overflow:hidden}
+.scrollcue .ln::after{content:"";position:absolute;inset:0;background:var(--text);transform:translateX(-100%);animation:cue 2.4s var(--ease) infinite}
+@keyframes cue{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+
+.marquee{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:clamp(14px,2vw,22px) 0;background:var(--bg)}
+.marquee .track{display:inline-flex;will-change:transform}
+.marquee .track span{font-family:var(--display);font-weight:500;font-size:clamp(1.4rem,4vw,2.6rem);letter-spacing:-.01em;padding-inline:clamp(20px,3vw,46px);display:inline-flex;align-items:center;gap:clamp(20px,3vw,46px)}
+.marquee .track span::after{content:"✦";color:var(--violet);font-size:.6em}
+
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(36px,6vh,72px)}
+.sec-head h2{font-family:var(--display);font-weight:600;font-size:clamp(2rem,6vw,4.6rem);line-height:.95;letter-spacing:-.02em}
+.sec-tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--aqua);display:inline-flex;align-items:center;gap:10px}
+.sec-tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--aqua)}
+
+.work{padding:clamp(70px,12vh,150px) 0 clamp(40px,7vh,90px)}
+.work-list{border-top:1px solid var(--line)}
+.work-row{position:relative;display:grid;grid-template-columns:auto 1fr auto auto auto;align-items:center;gap:clamp(14px,3vw,40px);padding:clamp(22px,3.4vw,40px) 4px;border-bottom:1px solid var(--line);transition:padding-left .5s var(--ease)}
+.work-row .m-banner,.work-row .meta-row{display:none}
+.work-row .idx{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.work-row .title{font-family:var(--display);font-weight:500;font-size:clamp(1.6rem,5.2vw,3.4rem);line-height:1;letter-spacing:-.02em;transition:transform .5s var(--ease),color .4s}
+.work-row .cat{color:var(--muted);font-size:.86rem;white-space:nowrap}
+.work-row .yr{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.work-row .arrow{font-size:1.4rem;color:var(--muted);transition:transform .5s var(--ease),color .4s;justify-self:end}
+@media (hover:hover){
+  .work-row:hover{padding-left:clamp(14px,2vw,34px)}
+  .work-row:hover .title{transform:translateX(6px)}
+  .work-row:hover .title,.work-row:hover .arrow{color:var(--text)}
+  .work-row:hover .arrow{transform:translate(6px,-6px)}
+}
+.work-preview{position:fixed;top:0;left:0;width:300px;height:380px;border-radius:14px;overflow:hidden;pointer-events:none;z-index:120;opacity:0;transform:translate(-50%,-50%) scale(.85);transition:opacity .35s var(--ease),transform .45s var(--ease);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.work-preview .pv{position:absolute;inset:0;opacity:0;transition:opacity .35s}
+.work-preview .pv.active{opacity:1}
+.pv-label{position:absolute;left:16px;bottom:14px;z-index:2;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;mix-blend-mode:difference}
+@media (hover:none),(pointer:coarse){.work-preview{display:none}}
+
+@media (hover:none),(pointer:coarse){
+  .work-row{grid-template-columns:1fr;gap:14px}
+  .work-row .idx{display:none}
+  .work-row .title{font-size:clamp(2rem,9vw,3rem)}
+  .work-row>.cat,.work-row>.yr,.work-row>.arrow{display:none}
+  .work-row .m-banner{display:block;height:170px;border-radius:12px;overflow:hidden;position:relative;order:-1}
+  .work-row .meta-row{display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .work-row .meta-row .cat{white-space:normal}
+}
+
+.art{position:absolute;inset:0}
+.art-grain{position:absolute;inset:0;opacity:.5;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+.art-1{background:radial-gradient(120% 120% at 20% 10%,#7C6CFF 0%,#4634b8 38%,#171326 80%)}
+.art-2{background:radial-gradient(120% 120% at 80% 15%,#57E8C9 0%,#1f8f86 42%,#0e1726 82%)}
+.art-3{background:radial-gradient(130% 130% at 25% 80%,#C66BFF 0%,#7a2fb0 40%,#1a1226 82%)}
+.art-4{background:radial-gradient(120% 120% at 70% 80%,#FFB36B 0%,#b85f6a 40%,#241324 82%)}
+.art-5{background:linear-gradient(135deg,#7C6CFF 0%,#57E8C9 55%,#C66BFF 100%)}
+.art .glyph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:5rem;color:rgba(255,255,255,.16);letter-spacing:-.04em}
+
+.about{background:var(--paper);color:var(--paper-ink);padding:clamp(80px,14vh,170px) 0;position:relative}
+.about .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,6vw,90px);align-items:center}
+.about .sec-tag{color:#6a4cc9}
+.about .sec-tag::before{background:#6a4cc9}
+.about .lead{font-family:var(--display);font-weight:500;font-size:clamp(1.5rem,3.4vw,2.7rem);line-height:1.12;letter-spacing:-.015em;margin-bottom:1.2em}
+.about .lead em{font-style:italic;color:#6a4cc9}
+.about p.body{font-size:clamp(1rem,1.3vw,1.12rem);color:#403b52;max-width:46ch;margin-bottom:1.4em}
+.about .stats{display:flex;gap:clamp(24px,4vw,56px);flex-wrap:wrap;margin-top:2em;border-top:1px solid rgba(23,21,32,.14);padding-top:1.6em}
+.about .stats .n{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,4vw,3rem);line-height:1;letter-spacing:-.02em}
+.about .stats .l{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:#6c6680;margin-top:.5em}
+.portrait{aspect-ratio:4/5;border-radius:16px;overflow:hidden;position:relative;background:#171326}
+.portrait .ring{position:absolute;inset:0;display:grid;place-items:center}
+.portrait .mono-mark{font-family:var(--display);font-weight:600;font-size:clamp(4rem,12vw,9rem);color:rgba(255,255,255,.92);letter-spacing:-.05em;line-height:.8;text-align:center;z-index:2}
+.portrait .cap{position:absolute;left:16px;bottom:14px;z-index:2;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+
+.cap{padding:clamp(80px,13vh,160px) 0}
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.cap-cell{background:var(--bg);padding:clamp(26px,3vw,44px);min-height:230px;display:flex;flex-direction:column;justify-content:space-between;transition:background .5s}
+.cap-cell:hover{background:var(--bg-soft)}
+.cap-cell .num{font-family:var(--mono);font-size:.74rem;color:var(--aqua);letter-spacing:.14em}
+.cap-cell h3{font-family:var(--display);font-weight:500;font-size:clamp(1.3rem,2.4vw,1.85rem);line-height:1.05;letter-spacing:-.01em;margin-top:auto}
+.cap-cell p{color:var(--muted);font-size:.92rem;margin-top:.7em;max-width:32ch}
+
+.process{margin-top:clamp(60px,9vh,120px);border-top:1px solid var(--line);padding-top:clamp(40px,6vh,70px)}
+.process-row{display:grid;grid-template-columns:auto 1fr 2fr;gap:clamp(16px,3vw,50px);align-items:baseline;padding:clamp(20px,3vh,38px) 0;border-bottom:1px solid var(--line)}
+.process-row .pn{font-family:var(--display);font-weight:600;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.02em;color:var(--violet);line-height:1}
+.process-row h4{font-family:var(--display);font-weight:500;font-size:clamp(1.2rem,2.4vw,1.7rem);letter-spacing:-.01em}
+.process-row p{color:var(--muted);font-size:.95rem;max-width:52ch}
+
+.awards{padding:clamp(70px,11vh,140px) 0}
+.awards-list{display:grid;grid-template-columns:repeat(2,1fr)}
+.award{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:clamp(18px,2.4vw,28px) 0;border-bottom:1px solid var(--line)}
+.award .a-name{font-family:var(--display);font-weight:500;font-size:clamp(1.1rem,2.2vw,1.5rem);letter-spacing:-.01em}
+.award .a-meta{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--muted);text-align:right;white-space:nowrap}
+.award .a-meta b{color:var(--aqua);font-weight:700}
+.award:nth-child(odd){padding-right:clamp(20px,3vw,50px)}
+.award:nth-child(even){padding-left:clamp(20px,3vw,50px);border-left:1px solid var(--line)}
+@media (max-width:760px){.awards-list{grid-template-columns:1fr}.award:nth-child(even){padding-left:0;border-left:none}.award:nth-child(odd){padding-right:0}}
+
+.cta{position:relative;padding:clamp(90px,16vh,200px) 0 clamp(50px,8vh,90px);text-align:center;overflow:hidden}
+.cta .big{font-family:var(--display);font-weight:600;font-size:clamp(2.6rem,11vw,9rem);line-height:.9;letter-spacing:-.03em;text-transform:uppercase}
+.cta .big .ax{color:var(--aqua)}
+.cta .sub{color:var(--muted);max-width:40ch;margin:clamp(20px,3vh,34px) auto 0;font-size:clamp(1rem,1.4vw,1.18rem)}
+.magnetic-wrap{display:flex;justify-content:center;margin-top:clamp(34px,5vh,56px)}
+.magnetic{position:relative;display:inline-flex;align-items:center;gap:14px;padding:1.15em 2.2em;border-radius:100px;background:var(--text);color:var(--bg);font-weight:600;font-size:1.02rem;letter-spacing:-.01em;will-change:transform;overflow:hidden}
+.magnetic .lab{position:relative;z-index:2;display:flex;align-items:center;gap:12px}
+.magnetic .fill{position:absolute;inset:0;z-index:1;background:linear-gradient(120deg,var(--violet),var(--magenta));transform:scale(0);border-radius:50%;transition:transform .55s var(--ease)}
+.magnetic:hover .fill{transform:scale(2.6)}
+.magnetic:hover{color:#fff}
+
+footer{border-top:1px solid var(--line);padding:clamp(40px,6vh,70px) 0 clamp(26px,4vh,40px)}
+.foot-grid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+.foot-grid .col h5{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1em}
+.foot-grid .col a{display:block;font-size:1.05rem;padding:.18em 0;position:relative;width:fit-content}
+.foot-grid .col a::after{content:"↗";font-size:.7em;margin-left:.4em;opacity:0;transition:opacity .3s,transform .3s;display:inline-block}
+.foot-grid .col a:hover::after{opacity:1;transform:translate(2px,-2px)}
+.foot-name{font-family:var(--display);font-weight:600;font-size:clamp(3rem,16vw,13rem);line-height:.8;letter-spacing:-.03em;margin-top:clamp(40px,7vh,90px);text-transform:uppercase;overflow:hidden;white-space:nowrap}
+.foot-base{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:clamp(24px,4vh,40px);color:var(--muted);font-size:.8rem}
+.foot-base .clock{font-family:var(--mono);letter-spacing:.1em}
+
+@media (max-width:900px){
+  .nav-links{display:none}
+  .menu-toggle{display:flex}
+  .about .grid{grid-template-columns:1fr}
+  .portrait{order:-1;max-width:380px}
+  .cap-grid{grid-template-columns:1fr 1fr}
+  .process-row{grid-template-columns:auto 1fr;gap:14px 22px}
+  .process-row p{grid-column:1/-1}
+}
+@media (max-width:560px){
+  .cap-grid{grid-template-columns:1fr}
+  .hero-eyebrow .loc{max-width:24ch}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body class="loading">
+
+<div id="preloader">
+  <div class="pl-name" aria-hidden="true"><span>I</span><span>C</span></div>
+  <div class="pl-count" id="plCount">00</div>
+  <div class="pl-bar" id="plBar"></div>
+</div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<header class="nav">
+  <a href="#top" class="logo" data-hover><span class="dot"></span> Iris&nbsp;Calderón</a>
+  <nav class="nav-links">
+    <a href="#work" data-hover>Work</a>
+    <a href="#studio" data-hover>Studio</a>
+    <a href="#process" data-hover>Process</a>
+    <a href="#recognition" data-hover>Recognition</a>
+  </nav>
+  <a href="#contact" class="nav-cta" data-hover>Let's talk</a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="#work"><span class="idx">01</span> Work</a>
+  <a href="#studio"><span class="idx">02</span> Studio</a>
+  <a href="#process"><span class="idx">03</span> Process</a>
+  <a href="#recognition"><span class="idx">04</span> Recognition</a>
+  <a href="#contact"><span class="idx">05</span> Contact</a>
+  <div class="mm-foot mono muted">
+    <span>hello@iriscalderon.studio</span>
+    <span>Lisbon · Berlin</span>
+  </div>
+</nav>
+
+<main id="top">
+
+  <section class="hero">
+    <canvas id="aurora"></canvas>
+    <div class="hero-inner wrap">
+      <div class="hero-eyebrow">
+        <span class="mono">Product &amp; Interaction Designer</span>
+        <span class="loc">Independent designer working between Lisbon &amp; Berlin with studios &amp; founders who care about the last 10%.</span>
+        <span class="mono" id="availTag">◍ Available · Q3 2026</span>
+      </div>
+      <h1 aria-label="Iris Calderón">
+        <span class="line"><span class="in">Iris</span></span>
+        <span class="line"><span class="in">Calderón</span></span>
+      </h1>
+      <div class="hero-sub">
+        <p class="hero-role">I design interfaces that feel <span class="rot" id="rotWord">inevitable</span>.</p>
+        <div class="scrollcue mono"><span>Scroll</span><span class="ln"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track" id="marqueeTrack">
+      <span>Interaction Design</span><span>Design Systems</span><span>Prototyping</span><span>Motion</span><span>Design Engineering</span><span>Product Strategy</span><span>Research</span>
+    </div>
+  </div>
+
+  <section class="work wrap" id="work">
+    <div class="sec-head">
+      <div>
+        <span class="sec-tag reveal">Selected Work</span>
+        <h2 class="reveal" style="margin-top:.3em">Things I've<br>shipped</h2>
+      </div>
+      <p class="muted reveal" style="max-width:34ch">A slice of recent product work. Five problems, five teams, one obsession with how it actually feels in the hand.</p>
+    </div>
+
+    <div class="work-list" id="workList">
+      <a class="work-row" href="#contact" data-art="1" data-hover>
+        <span class="idx">01</span>
+        <span class="title">Tidal</span>
+        <span class="cat">Neobank · Money movement reborn</span>
+        <span class="yr">2025</span>
+        <span class="arrow">↗</span>
+        <span class="m-banner"><span class="art art-1"><span class="art-grain"></span><span class="glyph">T</span></span></span>
+        <span class="meta-row"><span class="cat">Neobank · Money movement</span><span class="yr">2025</span></span>
+      </a>
+      <a class="work-row" href="#contact" data-art="2" data-hover>
+        <span class="idx">02</span>
+        <span class="title">Cosmos OS</span>
+        <span class="cat">Orbital logistics · Control-room system</span>
+        <span class="yr">2024</span>
+        <span class="arrow">↗</span>
+        <span class="m-banner"><span class="art art-2"><span class="art-grain"></span><span class="glyph">C</span></span></span>
+        <span class="meta-row"><span class="cat">Orbital logistics · Design system</span><span class="yr">2024</span></span>
+      </a>
+      <a class="work-row" href="#contact" data-art="3" data-hover>
+        <span class="idx">03</span>
+        <span class="title">Frequency</span>
+        <span class="cat">Music · Real-time co-writing</span>
+        <span class="yr">2024</span>
+        <span class="arrow">↗</span>
+        <span class="m-banner"><span class="art art-3"><span class="art-grain"></span><span class="glyph">F</span></span></span>
+        <span class="meta-row"><span class="cat">Music · Real-time co-writing</span><span class="yr">2024</span></span>
+      </a>
+      <a class="work-row" href="#contact" data-art="4" data-hover>
+        <span class="idx">04</span>
+        <span class="title">Almanac</span>
+        <span class="cat">Productivity · A calm OS for deep work</span>
+        <span class="yr">2023</span>
+        <span class="arrow">↗</span>
+        <span class="m-banner"><span class="art art-4"><span class="art-grain"></span><span class="glyph">A</span></span></span>
+        <span class="meta-row"><span class="cat">Productivity · Deep work OS</span><span class="yr">2023</span></span>
+      </a>
+      <a class="work-row" href="#contact" data-art="5" data-hover>
+        <span class="idx">05</span>
+        <span class="title">Vellum</span>
+        <span class="cat">AI · A canvas that thinks in paragraphs</span>
+        <span class="yr">2025</span>
+        <span class="arrow">↗</span>
+        <span class="m-banner"><span class="art art-5"><span class="art-grain"></span><span class="glyph">V</span></span></span>
+        <span class="meta-row"><span class="cat">AI · Writing canvas</span><span class="yr">2025</span></span>
+      </a>
+    </div>
+  </section>
+
+  <div class="work-preview" id="workPreview" aria-hidden="true">
+    <div class="pv" data-pv="1"><span class="art art-1"><span class="art-grain"></span><span class="glyph">T</span></span></div>
+    <div class="pv" data-pv="2"><span class="art art-2"><span class="art-grain"></span><span class="glyph">C</span></span></div>
+    <div class="pv" data-pv="3"><span class="art art-3"><span class="art-grain"></span><span class="glyph">F</span></span></div>
+    <div class="pv" data-pv="4"><span class="art art-4"><span class="art-grain"></span><span class="glyph">A</span></span></div>
+    <div class="pv" data-pv="5"><span class="art art-5"><span class="art-grain"></span><span class="glyph">V</span></span></div>
+    <span class="pv-label">View case study →</span>
+  </div>
+
+  <section class="about" id="studio">
+    <div class="wrap grid">
+      <div>
+        <span class="sec-tag reveal">The Studio</span>
+        <p class="lead reveal" style="margin-top:.6em">Good design disappears. I sweat the <em>micro-decisions</em> — the timing of a transition, the weight of a word, the moment a tap becomes trust.</p>
+        <p class="body reveal">For eight years I've helped founders and product teams turn fuzzy ambition into interfaces people reach for daily. I work end-to-end: strategy and research through to the production-ready front-end, because the magic usually lives in the handoff nobody owns.</p>
+        <p class="body reveal">Previously design lead at two venture-backed startups; now independent, taking on a handful of partners a year.</p>
+        <div class="stats reveal">
+          <div><div class="n">8<span style="color:#6a4cc9">+</span></div><div class="l">Years designing</div></div>
+          <div><div class="n">40<span style="color:#6a4cc9">+</span></div><div class="l">Products shipped</div></div>
+          <div><div class="n">6</div><div class="l">Industry awards</div></div>
+        </div>
+      </div>
+      <div class="portrait reveal">
+        <span class="art art-5"></span>
+        <div class="ring"><div class="mono-mark">IC</div></div>
+        <span class="cap">Iris Calderón · Est. Lisbon</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cap wrap" id="process">
+    <div class="sec-head">
+      <div>
+        <span class="sec-tag reveal">Capabilities</span>
+        <h2 class="reveal" style="margin-top:.3em">How I can help</h2>
+      </div>
+      <p class="muted reveal" style="max-width:32ch">A full-stack design practice — from the first whiteboard to the shipped pixel.</p>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap-cell reveal"><span class="num">01</span><h3>Product Strategy</h3><p>Turning ambiguity into a roadmap and a clear first version worth building.</p></div>
+      <div class="cap-cell reveal"><span class="num">02</span><h3>Interaction Design</h3><p>Flows, states and edge cases designed so the obvious path is the right one.</p></div>
+      <div class="cap-cell reveal"><span class="num">03</span><h3>Design Systems</h3><p>Tokenised, documented systems that scale across teams without losing soul.</p></div>
+      <div class="cap-cell reveal"><span class="num">04</span><h3>Motion &amp; Prototyping</h3><p>High-fidelity, code-true prototypes that prove the feel before a line ships.</p></div>
+      <div class="cap-cell reveal"><span class="num">05</span><h3>Design Engineering</h3><p>I write the front-end — React, CSS, WebGL — so intent survives the handoff.</p></div>
+      <div class="cap-cell reveal"><span class="num">06</span><h3>Research</h3><p>Lightweight, continuous discovery that keeps decisions honest and grounded.</p></div>
+    </div>
+
+    <div class="process">
+      <div class="sec-tag reveal" style="margin-bottom:2em">The Process</div>
+      <div class="process-row reveal"><span class="pn">01</span><h4>Listen</h4><p>Immersion in the problem, the users and the constraints nobody wrote down.</p></div>
+      <div class="process-row reveal"><span class="pn">02</span><h4>Frame</h4><p>Sharpening the real question, the metric that matters and the smallest bet.</p></div>
+      <div class="process-row reveal"><span class="pn">03</span><h4>Shape</h4><p>Fast, divergent exploration — sketches, systems and many wrong answers.</p></div>
+      <div class="process-row reveal"><span class="pn">04</span><h4>Build</h4><p>Production-grade design and front-end, refined against the live feel.</p></div>
+      <div class="process-row reveal"><span class="pn">05</span><h4>Refine</h4><p>The last 10% — the polish that separates fine from unforgettable.</p></div>
+    </div>
+  </section>
+
+  <section class="awards wrap" id="recognition">
+    <div class="sec-head">
+      <div>
+        <span class="sec-tag reveal">Recognition</span>
+        <h2 class="reveal" style="margin-top:.3em">Kind of<br>a big deal</h2>
+      </div>
+      <p class="muted reveal" style="max-width:30ch">Selected awards &amp; features. Lovely, but the work is the point.</p>
+    </div>
+    <div class="awards-list">
+      <div class="award reveal"><span class="a-name">Awwwards — Site of the Day</span><span class="a-meta"><b>×3</b> · 2023–25</span></div>
+      <div class="award reveal"><span class="a-name">FWA of the Day</span><span class="a-meta"><b>FWA</b> · 2024</span></div>
+      <div class="award reveal"><span class="a-name">CSS Design Awards — Best UI</span><span class="a-meta"><b>CSSDA</b> · 2024</span></div>
+      <div class="award reveal"><span class="a-name">The Webby Awards — Honoree</span><span class="a-meta"><b>Webby</b> · 2025</span></div>
+      <div class="award reveal"><span class="a-name">Communication Arts — Interactive</span><span class="a-meta"><b>CA</b> · 2023</span></div>
+      <div class="award reveal"><span class="a-name">Fast Company — Innovation by Design</span><span class="a-meta"><b>Finalist</b> · 2025</span></div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <h2 class="big reveal">Let's make<br>something <span class="ax">inevitable</span></h2>
+      <p class="sub reveal">Have a product worth getting right? I take on a few partners each quarter. Tell me what you're building.</p>
+      <div class="magnetic-wrap reveal">
+        <a class="magnetic" id="magnetic" href="mailto:hello@iriscalderon.studio" data-hover>
+          <span class="fill"></span>
+          <span class="lab">hello@iriscalderon.studio <span>→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="col">
+          <h5>Contact</h5>
+          <a href="mailto:hello@iriscalderon.studio" data-hover>hello@iriscalderon.studio</a>
+          <a href="#contact" data-hover>Book a call</a>
+        </div>
+        <div class="col">
+          <h5>Elsewhere</h5>
+          <a href="#" data-hover>Instagram</a>
+          <a href="#" data-hover>LinkedIn</a>
+          <a href="#" data-hover>Read.cv</a>
+          <a href="#" data-hover>Dribbble</a>
+        </div>
+        <div class="col">
+          <h5>Studio</h5>
+          <a href="#work" data-hover>Selected work</a>
+          <a href="#process" data-hover>Capabilities</a>
+          <a href="#recognition" data-hover>Recognition</a>
+        </div>
+      </div>
+      <div class="foot-name" aria-hidden="true">Let's talk →</div>
+      <div class="foot-base">
+        <span>© 2026 Iris Calderón — Product &amp; Interaction Design</span>
+        <span class="clock" id="clock">Lisbon —:—</span>
+        <span>Built with care · GSAP + WebGL</span>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ============================================================
+   Iris Calderón — portfolio interactions
+   GSAP + ScrollTrigger + three.js (all loaded globally)
+   Defensive: nothing here should ever blank the page.
+============================================================ */
+(function () {
+  "use strict";
+
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var isTouch = window.matchMedia && window.matchMedia("(hover:none),(pointer:coarse)").matches;
+  var hasGSAP = typeof window.gsap !== "undefined";
+  if (hasGSAP && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- helpers ---------- */
+  function $(s, c) { return (c || document).querySelector(s); }
+  function $all(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+  function lerp(a, b, n) { return (1 - n) * a + n * b; }
+
+  /* ============================================================
+     1. PRELOADER
+  ============================================================ */
+  function runPreloader(done) {
+    var pre = $("#preloader"), count = $("#plCount"), bar = $("#plBar");
+    if (!pre) { done(); return; }
+    if (reduceMotion || !hasGSAP) {
+      if (count) count.textContent = "100";
+      pre.style.display = "none";
+      document.body.classList.remove("loading");
+      done();
+      return;
+    }
+    var obj = { v: 0 };
+    var tl = gsap.timeline({
+      onComplete: function () { document.body.classList.remove("loading"); done(); }
+    });
+    tl.to(obj, {
+      v: 100, duration: 1.6, ease: "power2.inOut",
+      onUpdate: function () {
+        var val = Math.round(obj.v);
+        if (count) count.textContent = (val < 10 ? "0" : "") + val;
+        if (bar) bar.style.width = obj.v + "%";
+      }
+    })
+    .to("#preloader .pl-name span", { y: "0%", duration: .7, stagger: .08, ease: "power3.out" }, "-=1.2")
+    .to("#preloader .pl-name span", { y: "-110%", duration: .6, stagger: .06, ease: "power3.in" }, "+=.15")
+    .to("#plCount", { y: -30, autoAlpha: 0, duration: .5, ease: "power3.in" }, "<")
+    .to("#preloader", { yPercent: -100, duration: .8, ease: "power4.inOut" }, "-=.1")
+    .set("#preloader", { display: "none" });
+  }
+
+  /* ============================================================
+     2. HERO INTRO (after preloader)
+  ============================================================ */
+  function heroIntro() {
+    var ins = $all(".hero h1 .in");
+    if (!hasGSAP || reduceMotion) {
+      ins.forEach(function (e) { e.style.transform = "translateY(0)"; });
+      return;
+    }
+    var tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+    tl.to(".hero h1 .line .in", { y: "0%", duration: 1.1, stagger: .12 })
+      .from(".hero-eyebrow > *", { y: 20, autoAlpha: 0, duration: .8, stagger: .1 }, "-=.7")
+      .from(".hero-sub > *", { y: 20, autoAlpha: 0, duration: .8, stagger: .1 }, "-=.6")
+      .from(".nav .logo, .nav-links a, .nav-cta, .menu-toggle", { y: -16, autoAlpha: 0, duration: .6, stagger: .05 }, "-=.8");
+  }
+
+  /* ============================================================
+     3. ROTATING WORD
+  ============================================================ */
+  function rotatingWord() {
+    var el = $("#rotWord");
+    if (!el) return;
+    var words = ["inevitable", "effortless", "alive", "honest", "human"];
+    var i = 0;
+    if (reduceMotion || !hasGSAP) return;
+    setInterval(function () {
+      i = (i + 1) % words.length;
+      gsap.to(el, {
+        y: -14, autoAlpha: 0, duration: .35, ease: "power2.in",
+        onComplete: function () {
+          el.textContent = words[i];
+          gsap.fromTo(el, { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .4, ease: "power2.out" });
+        }
+      });
+    }, 2600);
+  }
+
+  /* ============================================================
+     4. CUSTOM CURSOR (desktop only)
+  ============================================================ */
+  function cursor() {
+    if (isTouch) return;
+    var dot = $("#cursor"), ring = $("#cursorRing");
+    if (!dot || !ring) return;
+    var mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    var rx = mx, ry = my;
+    window.addEventListener("mousemove", function (e) {
+      mx = e.clientX; my = e.clientY;
+      dot.style.transform = "translate(" + mx + "px," + my + "px) translate(-50%,-50%)";
+    });
+    function raf() {
+      rx = lerp(rx, mx, .18); ry = lerp(ry, my, .18);
+      ring.style.transform = "translate(" + rx + "px," + ry + "px) translate(-50%,-50%)";
+      requestAnimationFrame(raf);
+    }
+    raf();
+    $all("[data-hover]").forEach(function (el) {
+      el.addEventListener("mouseenter", function () { document.body.classList.add("cursor-hover"); });
+      el.addEventListener("mouseleave", function () { document.body.classList.remove("cursor-hover"); });
+    });
+  }
+
+  /* ============================================================
+     5. MOBILE MENU
+  ============================================================ */
+  function mobileMenu() {
+    var toggle = $("#menuToggle"), menu = $("#mobileMenu");
+    if (!toggle || !menu) return;
+    function close() { document.body.classList.remove("menu-open"); menu.setAttribute("aria-hidden", "true"); }
+    toggle.addEventListener("click", function () {
+      var open = document.body.classList.toggle("menu-open");
+      menu.setAttribute("aria-hidden", open ? "false" : "true");
+    });
+    $all("a", menu).forEach(function (a) { a.addEventListener("click", close); });
+  }
+
+  /* ============================================================
+     6. MARQUEE (seamless loop)
+  ============================================================ */
+  function marquee() {
+    var track = $("#marqueeTrack");
+    if (!track) return;
+    var original = track.innerHTML;
+    track.innerHTML = original + original; // duplicate for seamless loop
+    if (reduceMotion || !hasGSAP) return;
+    var half = track.scrollWidth / 2;
+    gsap.to(track, {
+      x: -half, duration: 22, ease: "none", repeat: -1,
+      modifiers: { x: function (x) { var v = parseFloat(x); return (v % half) + "px"; } }
+    });
+  }
+
+  /* ============================================================
+     7. SCROLL REVEALS
+  ============================================================ */
+  function reveals() {
+    if (!hasGSAP || !window.ScrollTrigger) return;
+    if (reduceMotion) { $all(".reveal").forEach(function (e) { e.style.opacity = 1; }); return; }
+    $all(".reveal").forEach(function (el) {
+      gsap.from(el, {
+        y: 34, autoAlpha: 0, duration: .9, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 88%" }
+      });
+    });
+    // headings sweep
+    $all(".sec-head h2").forEach(function (h) {
+      gsap.from(h, {
+        yPercent: 18, autoAlpha: 0, duration: 1, ease: "power3.out",
+        scrollTrigger: { trigger: h, start: "top 90%" }
+      });
+    });
+  }
+
+  /* ============================================================
+     8. WORK HOVER PREVIEW (desktop)
+  ============================================================ */
+  function workPreview() {
+    if (isTouch) return;
+    var preview = $("#workPreview");
+    var rows = $all(".work-row");
+    if (!preview || !rows.length) return;
+    var pvs = $all(".pv", preview);
+    var px = 0, py = 0, tx = 0, ty = 0, active = false;
+
+    rows.forEach(function (row) {
+      row.addEventListener("mouseenter", function () {
+        active = true;
+        var id = row.getAttribute("data-art");
+        pvs.forEach(function (p) { p.classList.toggle("active", p.getAttribute("data-pv") === id); });
+        preview.style.opacity = "1";
+        preview.style.transform = "translate(-50%,-50%) scale(1)";
+      });
+      row.addEventListener("mouseleave", function () {
+        active = false;
+        preview.style.opacity = "0";
+        preview.style.transform = "translate(-50%,-50%) scale(.85)";
+      });
+    });
+    window.addEventListener("mousemove", function (e) { tx = e.clientX; ty = e.clientY; });
+    function raf() {
+      px = lerp(px, tx, .12); py = lerp(py, ty, .12);
+      if (active) preview.style.left = px + "px", preview.style.top = py + "px";
+      requestAnimationFrame(raf);
+    }
+    raf();
+  }
+
+  /* ============================================================
+     9. MAGNETIC BUTTON
+  ============================================================ */
+  function magnetic() {
+    if (isTouch || !hasGSAP) return;
+    var btn = $("#magnetic");
+    if (!btn) return;
+    var lab = $(".lab", btn);
+    btn.addEventListener("mousemove", function (e) {
+      var r = btn.getBoundingClientRect();
+      var x = e.clientX - r.left - r.width / 2;
+      var y = e.clientY - r.top - r.height / 2;
+      gsap.to(btn, { x: x * .3, y: y * .4, duration: .6, ease: "power3.out" });
+      if (lab) gsap.to(lab, { x: x * .15, y: y * .2, duration: .6, ease: "power3.out" });
+    });
+    btn.addEventListener("mouseleave", function () {
+      gsap.to(btn, { x: 0, y: 0, duration: .6, ease: "elastic.out(1,.4)" });
+      if (lab) gsap.to(lab, { x: 0, y: 0, duration: .6, ease: "elastic.out(1,.4)" });
+    });
+  }
+
+  /* ============================================================
+     10. LOCAL CLOCK (Lisbon)
+  ============================================================ */
+  function clock() {
+    var el = $("#clock");
+    if (!el) return;
+    function tick() {
+      try {
+        var t = new Date().toLocaleTimeString("en-GB", {
+          timeZone: "Europe/Lisbon", hour: "2-digit", minute: "2-digit"
+        });
+        el.textContent = "Lisbon " + t;
+      } catch (e) { el.textContent = ""; }
+    }
+    tick(); setInterval(tick, 10000);
+  }
+
+  /* ============================================================
+     11. SMOOTH ANCHORS
+  ============================================================ */
+  function smoothAnchors() {
+    $all('a[href^="#"]').forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var id = a.getAttribute("href");
+        if (id === "#" || id === "#top") {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+          return;
+        }
+        var target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          var y = target.getBoundingClientRect().top + window.pageYOffset - 10;
+          window.scrollTo({ top: y, behavior: reduceMotion ? "auto" : "smooth" });
+        }
+      });
+    });
+  }
+
+  /* ============================================================
+     12. THREE.JS — RAYMARCHED GLASSY MORPHING ORB (hero)
+  ============================================================ */
+  function heroOrb() {
+    var canvas = $("#aurora");
+    if (!canvas) return;
+    if (typeof window.THREE === "undefined") { fallbackGradient(canvas); return; }
+
+    var renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false, alpha: true, powerPreference: "high-performance" });
+    } catch (e) { fallbackGradient(canvas); return; }
+    if (!renderer.getContext()) { fallbackGradient(canvas); return; }
+
+    var mobile = window.innerWidth < 760;
+    var DPR = Math.min(window.devicePixelRatio || 1, mobile ? 1.0 : 1.5);
+    renderer.setPixelRatio(DPR);
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.Camera(); // unused transform; vertex writes clip-space directly
+
+    var uniforms = {
+      uTime: { value: 0 },
+      uRes: { value: new THREE.Vector2(1, 1) },
+      uMouse: { value: new THREE.Vector2(0, 0) },
+      uColorA: { value: new THREE.Color(0x7C6CFF) }, // violet
+      uColorB: { value: new THREE.Color(0x57E8C9) }, // aqua
+      uColorC: { value: new THREE.Color(0xC66BFF) }  // magenta
+    };
+
+    var vert = [
+      "void main(){ gl_Position = vec4(position.xy, 0.0, 1.0); }"
+    ].join("\n");
+
+    var STEPS = mobile ? 60 : 96;
+    var frag = [
+      "precision highp float;",
+      "uniform float uTime;",
+      "uniform vec2 uRes;",
+      "uniform vec2 uMouse;",
+      "uniform vec3 uColorA;",
+      "uniform vec3 uColorB;",
+      "uniform vec3 uColorC;",
+
+      "mat2 rot(float a){ float c=cos(a), s=sin(a); return mat2(c,-s,s,c); }",
+
+      "float smin(float a, float b, float k){",
+      "  float h = clamp(0.5 + 0.5*(b-a)/k, 0.0, 1.0);",
+      "  return mix(b, a, h) - k*h*(1.0-h);",
+      "}",
+
+      // morphing metaball field + surface ripple
+      "float map(vec3 p){",
+      "  float t = uTime*0.5;",
+      "  vec3 c1 = vec3(sin(t)*0.42, cos(t*0.9)*0.34, sin(t*0.6)*0.2);",
+      "  vec3 c2 = vec3(sin(t*1.3+1.0)*0.48, sin(t*0.7)*0.4, cos(t*1.1)*0.3);",
+      "  vec3 c3 = vec3(cos(t*0.8)*0.4, sin(t*1.1+2.0)*0.44, sin(t*0.9)*0.34);",
+      "  float d = length(p - c1) - 0.62;",
+      "  d = smin(d, length(p - c2) - 0.56, 0.5);",
+      "  d = smin(d, length(p - c3) - 0.5, 0.5);",
+      "  d += 0.035 * sin(6.0*p.x + t*2.0) * sin(6.0*p.y - t*1.7) * sin(6.0*p.z + t);",
+      "  return d;",
+      "}",
+
+      "vec3 calcNormal(vec3 p){",
+      "  vec2 e = vec2(0.0018, 0.0);",
+      "  return normalize(vec3(",
+      "    map(p+e.xyy)-map(p-e.xyy),",
+      "    map(p+e.yxy)-map(p-e.yxy),",
+      "    map(p+e.yyx)-map(p-e.yyx)));",
+      "}",
+
+      "void main(){",
+      "  vec2 uv = (gl_FragCoord.xy - 0.5*uRes) / uRes.y;",
+      "  vec3 ro = vec3(0.0, 0.0, 3.0);",
+      "  vec3 rd = normalize(vec3(uv, -1.4));",
+
+      "  float a1 = 0.32*sin(uTime*0.15) + uMouse.x*0.55;",
+      "  float a2 = uMouse.y*0.4 + 0.1;",
+      "  mat2 R1 = rot(a1);",
+      "  mat2 R2 = rot(a2);",
+
+      "  float t = 0.0; float glow = 0.0; float hit = 0.0; vec3 p;",
+      "  for(int i=0;i<" + STEPS + ";i++){",
+      "    p = ro + rd*t;",
+      "    p.xz = R1 * p.xz;",
+      "    p.yz = R2 * p.yz;",
+      "    float d = map(p);",
+      "    glow += 0.011 / (0.55 + d*d*16.0);",
+      "    if(d < 0.001){ hit = 1.0; break; }",
+      "    t += d*0.6;",
+      "    if(t > 7.0) break;",
+      "  }",
+
+      "  vec3 col = vec3(0.0); float alpha = 0.0;",
+      "  if(hit > 0.5){",
+      "    vec3 n = calcNormal(p);",
+      "    vec3 viewDir = -rd;",
+      "    vec3 l1 = normalize(vec3(0.7, 0.9, 0.6));",
+      "    float diff = clamp(dot(n, l1), 0.0, 1.0);",
+      "    float fres = pow(1.0 - clamp(dot(n, viewDir), 0.0, 1.0), 2.5);",
+      "    vec3 hlf = normalize(l1 + viewDir);",
+      "    float spec = pow(clamp(dot(n, hlf), 0.0, 1.0), 60.0);",
+      "    float g = clamp(0.5 + 0.5*n.y, 0.0, 1.0);",
+      "    vec3 base = mix(uColorA, uColorB, g);",
+      "    base = mix(base, uColorC, clamp(0.5+0.5*n.x,0.0,1.0)*0.6);",
+      "    vec3 rdir = refract(rd, n, 0.82);",
+      "    float inner = clamp(0.5 + 0.5*rdir.y, 0.0, 1.0);",
+      "    vec3 innerCol = mix(uColorC, uColorB, inner);",
+      "    col = base * (0.25 + 0.75*diff);",
+      "    col = mix(col, innerCol, 0.35);",
+      "    col += fres * mix(uColorB, uColorA, 0.5) * 1.1;",
+      "    col += spec * vec3(1.0) * 0.9;",
+      "    alpha = 1.0;",
+      "  }",
+
+      "  vec3 aura = mix(uColorA, uColorC, 0.5) * glow;",
+      "  col += aura * (1.0 - alpha*0.6);",
+      "  alpha = max(alpha, clamp(glow*0.9, 0.0, 0.82));",
+      "  col = col / (1.0 + col*0.4);",       // soft tonemap
+      "  gl_FragColor = vec4(col, alpha);",
+      "}"
+    ].join("\n");
+
+    var mat = new THREE.ShaderMaterial({
+      uniforms: uniforms, vertexShader: vert, fragmentShader: frag,
+      transparent: true, depthTest: false, depthWrite: false
+    });
+    var quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat);
+    quad.frustumCulled = false;
+    scene.add(quad);
+
+    function resize() {
+      var w = canvas.clientWidth || window.innerWidth;
+      var h = canvas.clientHeight || window.innerHeight;
+      renderer.setSize(w, h, false);
+      uniforms.uRes.value.set(canvas.width, canvas.height);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    // pointer parallax
+    var targetMX = 0, targetMY = 0, curMX = 0, curMY = 0;
+    window.addEventListener("mousemove", function (e) {
+      targetMX = (e.clientX / window.innerWidth) * 2 - 1;
+      targetMY = -((e.clientY / window.innerHeight) * 2 - 1);
+    });
+    window.addEventListener("touchmove", function (e) {
+      if (!e.touches[0]) return;
+      targetMX = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+      targetMY = -((e.touches[0].clientY / window.innerHeight) * 2 - 1);
+    }, { passive: true });
+
+    // reduced motion: render one static frame, no loop
+    if (reduceMotion) {
+      uniforms.uTime.value = 2.0;
+      uniforms.uMouse.value.set(0, 0);
+      renderer.render(scene, camera);
+      canvas.addEventListener("webglcontextlost", function (ev) { ev.preventDefault(); }, false);
+      return;
+    }
+
+    var clock3 = new THREE.Clock();
+    var paused = false;
+    document.addEventListener("visibilitychange", function () { paused = document.hidden; });
+
+    function render() {
+      requestAnimationFrame(render);
+      if (paused) return;
+      uniforms.uTime.value += clock3.getDelta();
+      curMX = lerp(curMX, targetMX, .05);
+      curMY = lerp(curMY, targetMY, .05);
+      uniforms.uMouse.value.set(curMX, curMY);
+      renderer.render(scene, camera);
+    }
+    render();
+
+    canvas.addEventListener("webglcontextlost", function (ev) { ev.preventDefault(); }, false);
+  }
+
+  function fallbackGradient(canvas) {
+    // CSS gradient backup if WebGL unavailable
+    canvas.style.background =
+      "radial-gradient(60% 80% at 30% 20%, rgba(124,108,255,.45), transparent 60%)," +
+      "radial-gradient(50% 60% at 75% 30%, rgba(87,232,201,.35), transparent 60%)," +
+      "radial-gradient(70% 70% at 60% 90%, rgba(198,107,255,.30), transparent 60%)," +
+      "#0B0B10";
+  }
+
+  /* ============================================================
+     BOOT
+  ============================================================ */
+  function boot() {
+    cursor();
+    mobileMenu();
+    marquee();
+    rotatingWord();
+    workPreview();
+    magnetic();
+    clock();
+    smoothAnchors();
+    heroOrb();
+    reveals();
+    runPreloader(heroIntro);
+    // make sure ScrollTrigger measures correctly after fonts/layout settle
+    if (hasGSAP && window.ScrollTrigger) {
+      window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+      setTimeout(function () { ScrollTrigger.refresh(); }, 1200);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else { boot(); }
+})();
+
+</script>
+</body>
+</html>
