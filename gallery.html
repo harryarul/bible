@@ -492,7 +492,7 @@ function makeCardTexture(book, seed){
   }
   // bottom darken for title legibility
   const vg=ctx.createLinearGradient(0,ay+ah*0.55,0,ay+ah);
-  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(8,4,4,0.85)');
+  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(8,4,4,0.38)');
   ctx.fillStyle=vg; ctx.fillRect(ax,ay,aw,ah);
 
   // title (inside art, lower-left) — Playfair
@@ -646,6 +646,7 @@ const LensShader={
       float g = texture2D(tDiffuse, uv).g;
       float b = texture2D(tDiffuse, uv - dir*ca).b;
       vec3 col = vec3(r,g,b);
+      col = vec3(1.0) - exp(-col * 2.6);   // exposure lift
       float v = smoothstep(0.85, 0.18, d*vignette);
       col *= mix(1.0, v, 0.5);
       float grain = fract(sin(dot(vUv*(time*0.5+1.0), vec2(12.9898,78.233)))*43758.5453);
@@ -893,7 +894,7 @@ function tick(){
     const s=(c.userData.baseScale)*breathe*(1+hv*0.12);
     c.scale.x += (s - c.scale.x)*Math.min(1,dt*8);
     c.scale.y += (s - c.scale.y)*Math.min(1,dt*8);
-    c.material.opacity += ((0.9+hv*0.1) - c.material.opacity)*Math.min(1,dt*8) ;
+    c.material.opacity += ((0.95+hv*0.05) - c.material.opacity)*Math.min(1,dt*8) ;
     // nudge hovered card toward viewer
     const targetR = R - hv*0.7;
     const dirv = c.userData;
