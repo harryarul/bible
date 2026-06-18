@@ -67,6 +67,20 @@
   .spine-inner{display:flex;align-items:center;gap:22px;max-width:1180px;margin:0 auto;padding:11px 26px;}
   .spine-mark{font-family:"Cormorant Garamond";font-size:1.15rem;color:var(--vellum);white-space:nowrap;letter-spacing:.02em;}
   .spine-mark b{color:var(--gold);font-weight:600;}
+  .spine-back{
+    display:inline-flex;align-items:center;gap:7px;flex:none;text-decoration:none;
+    font-family:"Spectral SC","Spectral",serif;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold-2);border:1px solid var(--line);border-radius:4px;padding:6px 11px;transition:.25s;white-space:nowrap;
+  }
+  .spine-back:hover{background:rgba(201,162,39,.1);border-color:var(--gold);color:var(--vellum);}
+  .spine-back .arw{font-size:1rem;line-height:1;transition:transform .25s;}
+  .spine-back:hover .arw{transform:translateX(-3px);}
+  .foot-back{
+    display:inline-block;margin-bottom:16px;text-decoration:none;
+    font-family:"Spectral SC","Spectral",serif;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold-2);border-bottom:1px solid var(--line);padding-bottom:3px;transition:.2s;
+  }
+  .foot-back:hover{color:var(--vellum);border-color:var(--gold);}
   .spine-nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto;}
   .spine-nav::-webkit-scrollbar{display:none;}
   .spine-nav a{
@@ -229,6 +243,7 @@
 <!-- ================= SPINE NAV ================= -->
 <nav class="spine">
   <div class="spine-inner">
+    <a class="spine-back" href="index.html" aria-label="Back to the Bible Study Library"><span class="arw">&larr;</span> Library</a>
     <span class="spine-mark"><b>Revelation</b> · the visions on Patmos</span>
     <div class="spine-nav">
       <a href="#m1">I · Patmos</a>
@@ -899,6 +914,7 @@
 </section>
 
 <footer class="wrap">
+  <a class="foot-back" href="index.html"><span aria-hidden="true">&larr;</span> Return to the Bible Study Library</a><br>
   Revelation 1–21 · the visions on Patmos, in sequence &nbsp;·&nbsp; scripture links open <a href="https://www.biblegateway.com/" target="_blank" rel="noopener">BibleGateway (NIV)</a>
 </footer>
 
