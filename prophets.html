@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Prophets — Bible Study Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Lato:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --parchment:#f5ecd8;
+  --parchment-2:#efe3c8;
+  --ink:#2e241a;
+  --ink-soft:#5a4d3a;
+  --wine:#6e1f2a;
+  --wine-deep:#511019;
+  --gold:#b08423;
+  --gold-soft:#caa242;
+  --line:#d8c79c;
+  --card:#fbf6e9;
+  --shadow:0 10px 30px rgba(54,34,18,.18);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Lato',system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 500px at 50% -200px, rgba(176,132,35,.18), transparent 60%),
+    var(--parchment);
+  line-height:1.65;
+}
+a{color:var(--wine)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* ---------- top bar ---------- */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;font-size:.9rem;color:var(--ink-soft);
+  border-bottom:1px solid var(--line);
+  background:rgba(245,236,216,.85);backdrop-filter:blur(4px);
+  position:sticky;top:0;z-index:30;
+}
+.topbar a{text-decoration:none;font-weight:700;color:var(--wine)}
+.topbar a:hover{color:var(--wine-deep)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;text-align:center;padding:70px 20px 50px;overflow:hidden}
+.hero .eyebrow{
+  font-family:'Caveat',cursive;font-size:1.7rem;color:var(--gold);
+  transform:rotate(-2deg);margin-bottom:6px;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.04;margin:.1em 0 .25em;
+  color:var(--wine-deep);letter-spacing:.5px;
+}
+.hero p.lead{
+  max-width:680px;margin:0 auto;font-size:1.12rem;color:var(--ink-soft);
+}
+.scroll-illustration{margin:26px auto 0;display:block;width:min(360px,80%)}
+
+/* ---------- section headers ---------- */
+.section{padding:34px 0 6px}
+.section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.section-head .num{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;
+  color:var(--gold);border:1px solid var(--gold-soft);border-radius:50%;
+  width:40px;height:40px;display:grid;place-items:center;flex:none;
+}
+.section-head h2{
+  font-family:'Playfair Display',serif;font-weight:800;
+  font-size:clamp(1.5rem,4vw,2.1rem);margin:0;color:var(--wine);
+}
+.section-head .sub{font-size:.95rem;color:var(--ink-soft);margin:2px 0 0}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:8px 0 24px}
+
+/* ---------- intro band ---------- */
+.intro{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:26px 28px;margin:6px 0 10px;box-shadow:var(--shadow);
+}
+.intro h3{font-family:'Playfair Display',serif;margin:.2em 0 .4em;color:var(--wine-deep)}
+.intro p{margin:.4em 0;color:var(--ink-soft)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:.85rem}
+.legend span{display:inline-flex;align-items:center;gap:7px;color:var(--ink-soft)}
+.dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.dot.major{background:var(--wine)}
+.dot.minor{background:var(--gold)}
+.dot.other{background:#7a8b5a}
+
+/* ---------- grid + tiles ---------- */
+.grid{
+  display:grid;gap:16px;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+}
+.tile{
+  position:relative;cursor:pointer;text-align:left;
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:18px 18px 16px;box-shadow:0 4px 14px rgba(54,34,18,.08);
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  display:flex;flex-direction:column;gap:8px;min-height:150px;
+  font:inherit;color:inherit;width:100%;
+}
+.tile:hover,.tile:focus-visible{
+  transform:translateY(-4px);box-shadow:var(--shadow);
+  border-color:var(--gold-soft);outline:none;
+}
+.tile:focus-visible{outline:2px solid var(--wine);outline-offset:2px}
+.tile .emblem{width:46px;height:46px}
+.tile h3{font-family:'Playfair Display',serif;font-size:1.32rem;margin:0;color:var(--wine-deep)}
+.tile .era{font-size:.82rem;color:var(--gold);font-weight:700;letter-spacing:.3px}
+.tile .tag{font-size:.92rem;color:var(--ink-soft);margin:0}
+.tile .ribbon{
+  position:absolute;top:14px;right:14px;font-size:.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.6px;padding:3px 9px;border-radius:999px;
+}
+.tile .ribbon.major{background:rgba(110,31,42,.12);color:var(--wine)}
+.tile .ribbon.minor{background:rgba(176,132,35,.16);color:#8a6512}
+.tile .ribbon.other{background:rgba(122,139,90,.16);color:#566b34}
+.tile.compact{min-height:auto}
+.tile.compact h3{font-size:1.12rem}
+
+/* ---------- overlay (detail + reader) ---------- */
+.overlay{
+  position:fixed;inset:0;z-index:50;display:none;
+  background:rgba(40,26,14,.55);backdrop-filter:blur(3px);
+  padding:0;
+}
+.overlay.open{display:block}
+.panel{
+  position:absolute;top:0;right:0;bottom:0;width:min(760px,100%);
+  background:var(--parchment);box-shadow:-12px 0 40px rgba(0,0,0,.3);
+  overflow-y:auto;animation:slidein .28s ease;
+}
+@keyframes slidein{from{transform:translateX(40px);opacity:.4}to{transform:none;opacity:1}}
+.panel-head{
+  position:sticky;top:0;z-index:2;
+  background:linear-gradient(180deg,var(--wine-deep),var(--wine));
+  color:#f7ead0;padding:22px 26px 20px;
+}
+.panel-head .close{
+  position:absolute;top:16px;right:18px;background:rgba(255,255,255,.14);
+  border:none;color:#f7ead0;width:38px;height:38px;border-radius:50%;
+  font-size:1.3rem;cursor:pointer;line-height:1;
+}
+.panel-head .close:hover{background:rgba(255,255,255,.28)}
+.panel-head .kicker{font-family:'Caveat',cursive;font-size:1.4rem;color:var(--gold-soft)}
+.panel-head h2{font-family:'Playfair Display',serif;font-size:2rem;margin:.05em 0 .15em}
+.panel-head .meta{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.86rem;opacity:.92;margin-top:6px}
+.panel-head .meta b{color:var(--gold-soft);font-weight:700}
+.panel-body{padding:24px 26px 60px}
+.block{margin:0 0 26px}
+.block h4{
+  font-family:'Playfair Display',serif;font-size:1.18rem;color:var(--wine);
+  margin:0 0 8px;display:flex;align-items:center;gap:9px;
+}
+.block h4 .ic{width:20px;height:20px;flex:none}
+.block p{margin:.35em 0;color:var(--ink-soft)}
+.block ul{margin:.3em 0;padding-left:1.1em}
+.block li{margin:.3em 0;color:var(--ink-soft)}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.ref{
+  display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+  background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:6px 13px;font-size:.86rem;font-weight:700;color:var(--wine);
+  font-family:inherit;transition:.15s;
+}
+.ref:hover{background:var(--wine);color:#f7ead0;border-color:var(--wine)}
+.ref::before{content:"📖";font-size:.85rem}
+.xref{
+  background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);
+  border-radius:8px;padding:11px 14px;margin:8px 0;
+}
+.xref .xref-ref{font-weight:700;color:var(--wine);cursor:pointer}
+.xref .xref-ref:hover{text-decoration:underline}
+.xref .xref-note{font-size:.9rem;color:var(--ink-soft);display:block;margin-top:2px}
+.media{
+  display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;
+}
+.media a{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:11px 15px;color:var(--ink);font-weight:700;font-size:.9rem;transition:.15s;
+}
+.media a:hover{border-color:var(--gold);box-shadow:var(--shadow)}
+.media a .ic{width:22px;height:22px;flex:none}
+.media a small{display:block;font-weight:400;color:var(--ink-soft);font-size:.78rem}
+.gw-link{
+  display:inline-flex;align-items:center;gap:8px;margin-top:4px;
+  background:var(--wine);color:#f7ead0!important;text-decoration:none;
+  border-radius:10px;padding:10px 16px;font-weight:700;font-size:.9rem;
+}
+.gw-link:hover{background:var(--wine-deep)}
+
+/* ---------- reader (second layer) ---------- */
+.reader{
+  position:fixed;inset:0;z-index:60;display:none;
+  background:rgba(40,26,14,.6);backdrop-filter:blur(4px);
+}
+.reader.open{display:grid;place-items:center;padding:18px}
+.reader-card{
+  background:var(--parchment);border-radius:18px;width:min(640px,100%);
+  max-height:88vh;display:flex;flex-direction:column;box-shadow:var(--shadow);
+  overflow:hidden;border:1px solid var(--line);
+}
+.reader-head{
+  background:linear-gradient(180deg,var(--wine-deep),var(--wine));color:#f7ead0;
+  padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.reader-head h3{font-family:'Playfair Display',serif;margin:0;font-size:1.3rem}
+.reader-head .close{background:rgba(255,255,255,.14);border:none;color:#f7ead0;
+  width:34px;height:34px;border-radius:50%;font-size:1.2rem;cursor:pointer}
+.reader-toggle{display:flex;gap:6px;padding:12px 20px 0}
+.reader-toggle button{
+  flex:1;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+  border-radius:8px;padding:8px;font:inherit;font-weight:700;cursor:pointer;font-size:.85rem;
+}
+.reader-toggle button.active{background:var(--wine);color:#f7ead0;border-color:var(--wine)}
+.reader-body{padding:14px 22px 20px;overflow-y:auto}
+.reader-body .v-num{font-size:.7rem;font-weight:700;color:var(--gold);vertical-align:super;margin-right:3px}
+.reader-body p{color:var(--ink);line-height:1.85}
+.reader-foot{padding:0 22px 20px}
+.reader-loading{color:var(--ink-soft);font-style:italic;padding:14px 0}
+
+/* ---------- footer ---------- */
+.foot{text-align:center;padding:50px 20px 60px;color:var(--ink-soft);font-size:.9rem}
+.foot .caveat{font-family:'Caveat',cursive;font-size:1.5rem;color:var(--gold);display:block;margin-bottom:6px}
+
+@media(max-width:560px){
+  .panel-head h2{font-size:1.6rem}
+  .panel-body{padding:20px 18px 50px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="./index.html">← Bible Study Library</a>
+  <span>The Prophets of Israel</span>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">voices that carried heaven's word</div>
+    <h1>The Prophets</h1>
+    <p class="lead">Men called out of fields, palaces and exile to speak for God — to warn, to comfort, and to point ahead to the coming Messiah. Tap any prophet to walk through their life, their message, the heart of their book, and the scriptures themselves.</p>
+    <svg class="scroll-illustration" viewBox="0 0 360 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M30 20c0-6 5-11 11-11h278c6 0 11 5 11 11v50c0 6-5 11-11 11H41c-6 0-11-5-11-11V20z" fill="#fbf6e9" stroke="#d8c79c" stroke-width="2"/>
+      <path d="M30 20c0-6-5-11-11-11S8 14 8 20v50c0 6 5 11 11 11s11-5 11-11" fill="#efe3c8" stroke="#caa242" stroke-width="2"/>
+      <path d="M330 20c0-6 5-11 11-11s11 5 11 11v50c0 6-5 11-11 11s-11-5-11-11" fill="#efe3c8" stroke="#caa242" stroke-width="2"/>
+      <line x1="60" y1="32" x2="300" y2="32" stroke="#caa242" stroke-width="1.5"/>
+      <line x1="60" y1="45" x2="300" y2="45" stroke="#d8c79c" stroke-width="1.2"/>
+      <line x1="60" y1="58" x2="240" y2="58" stroke="#d8c79c" stroke-width="1.2"/>
+    </svg>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="intro">
+    <h3>What is a prophet?</h3>
+    <p>A prophet (Hebrew <i>nabi</i>) was God's spokesman — someone who received His word and delivered it without softening it. They were watchmen calling a wandering nation back to covenant faithfulness, often at great personal cost. Some left written books; others (like Elijah) thundered in action rather than ink.</p>
+    <p>Their messages followed a rhythm you'll see again and again: <b>You have broken the covenant → judgment is coming → yet God will keep His promise and restore a remnant → and One is coming who will make all things right.</b></p>
+    <div class="legend">
+      <span><i class="dot major"></i> Major Prophets — longer books</span>
+      <span><i class="dot minor"></i> Minor Prophets — the Twelve (shorter, not lesser)</span>
+      <span><i class="dot other"></i> Other prophets — no book, but vital voices</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="num">I</span>
+      <div>
+        <h2>The Major Prophets</h2>
+        <p class="sub">Four towering books that span Judah's final years, the exile, and the hope beyond it.</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="grid" id="grid-major"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="num">II</span>
+      <div>
+        <h2>The Minor Prophets — the Twelve</h2>
+        <p class="sub">"Minor" only in length. Twelve concentrated, urgent books, from Hosea to Malachi.</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="grid" id="grid-minor"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="num">III</span>
+      <div>
+        <h2>Other Prophets of the Old Testament</h2>
+        <p class="sub">Mighty voices who left no book of their own, yet shaped Israel's story.</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="grid" id="grid-other"></div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span class="caveat">"Surely the Lord God does nothing without revealing his secret to his servants the prophets." — Amos 3:7</span>
+  Part of the Bible Study Library · Scripture reader uses the World English Bible &amp; KJV via bible-api.com, with NIV on BibleGateway.
+</footer>
+
+<!-- Detail overlay -->
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="panel" role="dialog" aria-modal="true" id="panel"></div>
+</div>
+
+<!-- Scripture reader overlay -->
+<div class="reader" id="reader" aria-hidden="true">
+  <div class="reader-card" role="dialog" aria-modal="true">
+    <div class="reader-head">
+      <h3 id="reader-ref">Reference</h3>
+      <button class="close" onclick="closeReader()" aria-label="Close reader">✕</button>
+    </div>
+    <div class="reader-toggle">
+      <button id="btn-web" class="active" onclick="setVersion('web')">World English Bible</button>
+      <button id="btn-kjv" onclick="setVersion('kjv')">King James (KJV)</button>
+    </div>
+    <div class="reader-body" id="reader-body"><p class="reader-loading">Loading…</p></div>
+    <div class="reader-foot"><a class="gw-link" id="reader-niv" href="#" target="_blank" rel="noopener">Read this passage in NIV on BibleGateway ↗</a></div>
+  </div>
+</div>
+
+<script>
+/* ===================== EMBLEMS (inline SVG, no hotlinking) ===================== */
+const EM = {
+  scroll:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><rect x="9" y="8" width="30" height="32" rx="3" fill="#fbf6e9" stroke="#6e1f2a" stroke-width="2"/><line x1="15" y1="16" x2="33" y2="16" stroke="#b08423" stroke-width="2"/><line x1="15" y1="22" x2="33" y2="22" stroke="#d8c79c" stroke-width="2"/><line x1="15" y1="28" x2="27" y2="28" stroke="#d8c79c" stroke-width="2"/></svg>',
+  tears:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><path d="M24 8c6 9 11 15 11 22a11 11 0 1 1-22 0c0-7 5-13 11-22z" fill="#6e1f2a" opacity=".15" stroke="#6e1f2a" stroke-width="2"/><circle cx="24" cy="30" r="4" fill="#6e1f2a"/></svg>',
+  wheel:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="14" fill="none" stroke="#6e1f2a" stroke-width="2"/><circle cx="24" cy="24" r="6" fill="none" stroke="#b08423" stroke-width="2"/><path d="M24 10v28M10 24h28M14 14l20 20M34 14L14 34" stroke="#b08423" stroke-width="1.5"/></svg>',
+  lion:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="13" fill="#b08423" opacity=".18" stroke="#b08423" stroke-width="2"/><circle cx="20" cy="22" r="1.8" fill="#6e1f2a"/><circle cx="28" cy="22" r="1.8" fill="#6e1f2a"/><path d="M19 29c2 2 8 2 10 0" stroke="#6e1f2a" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+  heart:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><path d="M24 36S10 27 10 18a7 7 0 0 1 14-2 7 7 0 0 1 14 2c0 9-14 18-14 18z" fill="#6e1f2a" opacity=".18" stroke="#6e1f2a" stroke-width="2"/></svg>',
+  locust:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="24" rx="6" ry="11" fill="#7a8b5a" opacity=".25" stroke="#566b34" stroke-width="2"/><path d="M24 13c6-3 11 0 13 5M24 13c-6-3-11 0-13 5M24 35c5 2 9-1 11-5M24 35c-5 2-9-1-11-5" stroke="#b08423" stroke-width="1.6" fill="none"/></svg>',
+  scales:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><path d="M24 9v30M12 39h24" stroke="#6e1f2a" stroke-width="2"/><path d="M10 16h28" stroke="#6e1f2a" stroke-width="2"/><path d="M10 16l-5 9a6 6 0 0 0 10 0zM38 16l5 9a6 6 0 0 1-10 0z" fill="#b08423" opacity=".18" stroke="#b08423" stroke-width="1.6"/></svg>',
+  sword:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><path d="M24 6l3 24-3 4-3-4 3-24z" fill="#b08423" opacity=".25" stroke="#6e1f2a" stroke-width="2"/><path d="M18 36h12M24 34v8" stroke="#6e1f2a" stroke-width="2"/></svg>',
+  fish:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><path d="M8 24c5-8 18-10 26-2 0 0-2-7 4-9-2 6 0 11 0 11s-2 5 0 11c-6-2-4-9-4-9-8 8-21 6-26-2z" fill="#6e1f2a" opacity=".15" stroke="#6e1f2a" stroke-width="2"/><circle cx="15" cy="22" r="1.6" fill="#6e1f2a"/></svg>',
+  mount:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><path d="M6 38l12-20 8 12 4-6 12 14z" fill="#7a8b5a" opacity=".25" stroke="#566b34" stroke-width="2"/><circle cx="18" cy="14" r="3" fill="#b08423"/></svg>',
+  fire:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><path d="M24 6c2 8 10 9 10 19a10 10 0 1 1-20 0c0-5 3-7 4-10 2 3 3 3 4 5 0-6-2-9-2-9 2 1 3 3 4 5 0-3-2-7 0-10z" fill="#b08423" opacity=".22" stroke="#6e1f2a" stroke-width="2"/></svg>',
+  question:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="14" fill="#b08423" opacity=".15" stroke="#6e1f2a" stroke-width="2"/><path d="M19 19a5 5 0 0 1 9 3c0 3-4 3-4 6" stroke="#6e1f2a" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="24" cy="33" r="1.6" fill="#6e1f2a"/></svg>',
+  trumpet:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><path d="M8 28l22-10 8 4-2 6-8 4-22-2z" fill="#b08423" opacity=".2" stroke="#6e1f2a" stroke-width="2"/><circle cx="10" cy="27" r="3" fill="#6e1f2a"/></svg>',
+  temple:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><path d="M24 8l16 9H8z" fill="#b08423" opacity=".2" stroke="#6e1f2a" stroke-width="2"/><path d="M12 19v17M20 19v17M28 19v17M36 19v17M8 38h32" stroke="#6e1f2a" stroke-width="2"/></svg>',
+  crown:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><path d="M10 32l-3-15 9 7 8-12 8 12 9-7-3 15z" fill="#b08423" opacity=".22" stroke="#6e1f2a" stroke-width="2"/><path d="M10 36h28" stroke="#6e1f2a" stroke-width="2"/></svg>',
+  staff:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><path d="M26 8c-8 0-10 6-10 10v22M26 8c5 0 7 3 7 6s-2 5-7 5" stroke="#6e1f2a" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+  star:'<svg class="emblem" viewBox="0 0 48 48" fill="none"><path d="M24 7l5 12 13 1-10 8 3 13-11-7-11 7 3-13-10-8 13-1z" fill="#b08423" opacity=".2" stroke="#6e1f2a" stroke-width="2"/></svg>',
+};
+
+/* ===================== PROPHET DATA ===================== */
+const PROPHETS = [
+/* ---------------- MAJOR ---------------- */
+{
+ id:'isaiah', name:'Isaiah', hebrew:'Yeshayahu — "The LORD saves"', type:'major',
+ book:'Isaiah', em:'scroll',
+ era:'~740–680 BC', region:'Judah / Jerusalem', audience:'Judah & the nations',
+ kings:'Uzziah, Jotham, Ahaz, Hezekiah',
+ tag:'The gospel prophet — judgment, comfort, and the Suffering Servant.',
+ life:[
+   'Isaiah ministered in Jerusalem for roughly half a century, advising kings during the terrifying rise of Assyria. He was likely of noble or even royal background, with ready access to the palace.',
+   'His call came in the year King Uzziah died: a vision of the LORD high and lifted up, the temple filled with smoke, seraphim crying "Holy, holy, holy." Undone by his own uncleanness, his lips were touched with a live coal and he answered, "Here am I; send me."',
+   'He counselled the faithless King Ahaz and the faithful King Hezekiah, and watched God deliver Jerusalem from Sennacherib\'s army. Jewish tradition holds he was martyred under the wicked king Manasseh, sawn in two.'
+ ],
+ preached:[
+   'The holiness of God and the smallness of human pride.',
+   'Trust God, not foreign alliances or military strength.',
+   'Real judgment is coming — but so is real comfort and restoration.',
+   'A child, a Servant, a King: the clearest Old Testament portrait of the Messiah.'
+ ],
+ highlights:[
+   'Two movements: chapters 1–39 (judgment, the Assyrian crisis) and 40–66 (comfort, restoration, the Servant).',
+   'The "Book of Immanuel" foretells a virgin\'s son (7:14) and a child who is "Mighty God, Everlasting Father, Prince of Peace" (9:6).',
+   'The four Servant Songs climax in chapter 53 — the Servant wounded for our transgressions.',
+   'Ends with the promise of new heavens and a new earth (65–66).'
+ ],
+ passages:['Isaiah 6:1-8','Isaiah 9:6-7','Isaiah 40:28-31','Isaiah 53'],
+ xrefs:[
+   {ref:'Matthew 1:22-23', note:'Matthew sees the virgin-born Immanuel (Isa 7:14) fulfilled in Jesus.'},
+   {ref:'Luke 4:17-21', note:'Jesus reads Isaiah 61 in Nazareth and says "Today this is fulfilled."'},
+   {ref:'Acts 8:32-35', note:'Philip explains Isaiah 53 to the Ethiopian — and preaches Jesus.'}
+ ],
+ video:'BibleProject Isaiah overview'
+},
+{
+ id:'jeremiah', name:'Jeremiah', hebrew:'Yirmeyahu', type:'major',
+ book:'Jeremiah', em:'tears',
+ era:'~627–580 BC', region:'Judah, then Egypt', audience:'Judah on the eve of exile',
+ kings:'Josiah → Zedekiah (the last kings of Judah)',
+ tag:'The weeping prophet who watched Jerusalem fall — and promised a new covenant.',
+ life:[
+   'Called as a youth from the priestly town of Anathoth, Jeremiah protested that he was too young — but God said, "Before I formed you in the womb I knew you." He served for forty heartbreaking years.',
+   'He preached an unwanted message: surrender to Babylon, for judgment is certain. For this he was beaten, put in stocks, thrown into a muddy cistern, and branded a traitor. Yet he could not stay silent — God\'s word was "a fire shut up in my bones."',
+   'He lived to see Jerusalem burned and the temple destroyed in 586 BC, then was dragged to Egypt by survivors who ignored his counsel. His tears flow through both Jeremiah and Lamentations.'
+ ],
+ preached:[
+   'Repent now — the covenant has been broken and judgment is at the door.',
+   'False prophets cry "Peace, peace" where there is no peace.',
+   'God is the potter; the nation is clay in His hands.',
+   'A New Covenant is coming — God\'s law written on the heart, sins remembered no more.'
+ ],
+ highlights:[
+   'The most personal of the prophets — we hear his complaints, fears, and laments directly.',
+   'The Potter\'s House (ch 18) and the seventy-year exile (ch 25, 29) — including "plans to give you a hope and a future" (29:11).',
+   'The New Covenant promise (31:31-34), quoted in Hebrews as fulfilled in Christ.',
+   'Often paired with Lamentations — five poems grieving the fallen city, yet "great is your faithfulness."'
+ ],
+ passages:['Jeremiah 1:4-10','Jeremiah 29:11-13','Jeremiah 31:31-34','Lamentations 3:22-26'],
+ xrefs:[
+   {ref:'Luke 22:20', note:'At the Last Supper Jesus calls the cup "the new covenant in my blood."'},
+   {ref:'Hebrews 8:8-12', note:'Hebrews quotes Jeremiah 31 in full to show the new covenant has come.'}
+ ],
+ video:'BibleProject Jeremiah overview'
+},
+{
+ id:'ezekiel', name:'Ezekiel', hebrew:'Yechezkel — "God strengthens"', type:'major',
+ book:'Ezekiel', em:'wheel',
+ era:'~593–571 BC', region:'Babylon (by the Chebar canal)', audience:'The exiles in Babylon',
+ kings:'Contemporary of the exile under Nebuchadnezzar',
+ tag:'Priest in exile — wild visions, dry bones, and the return of God\'s glory.',
+ life:[
+   'A priest deported to Babylon in 597 BC, Ezekiel never served at the temple he trained for. By the Chebar canal the heavens opened and he saw the glory of God on a storm-chariot of living creatures and wheels within wheels.',
+   'God made him a "watchman" for Israel, and his ministry was full of dramatic sign-acts: lying on his side for over a year, shaving his head, refusing to mourn his wife\'s death — his body itself became the sermon.',
+   'He spoke first of certain judgment, and after Jerusalem fell, his message turned to hope: God would gather, cleanse, and restore His scattered people.'
+ ],
+ preached:[
+   'God\'s glory will not stay where there is idolatry — but it will return.',
+   'Each person is responsible before God; the soul that sins shall die.',
+   'God gives a new heart and a new spirit, replacing hearts of stone.',
+   '"You shall know that I am the LORD" — the refrain of the whole book.'
+ ],
+ highlights:[
+   'The opening chariot vision and the departure (ch 10) and return (ch 43) of God\'s glory frame the book.',
+   'The Valley of Dry Bones (ch 37) — a dead nation breathed back to life.',
+   'Promise of a new heart and God\'s Spirit within (36:26-27).',
+   'A grand closing vision of a restored temple and a healing river (ch 40–48), the city named "The LORD Is There."'
+ ],
+ passages:['Ezekiel 1:4-14','Ezekiel 18:30-32','Ezekiel 36:26-27','Ezekiel 37:1-14'],
+ xrefs:[
+   {ref:'John 10:11-16', note:'Jesus is the Good Shepherd who fulfils Ezekiel 34\'s promise of one shepherd.'},
+   {ref:'Revelation 22:1-2', note:'The river and tree of life echo Ezekiel\'s healing river (ch 47).'}
+ ],
+ video:'BibleProject Ezekiel overview'
+},
+{
+ id:'daniel', name:'Daniel', hebrew:'Daniyyel — "God is my judge"', type:'major',
+ book:'Daniel', em:'lion',
+ era:'~605–536 BC', region:'Babylon & Persia', audience:'Exiles & the empires of the world',
+ kings:'Nebuchadnezzar, Belshazzar, Darius, Cyrus',
+ tag:'Faithful in a foreign court — lions\' den, fiery furnace, and visions of kingdoms.',
+ life:[
+   'Taken to Babylon as a teenager among the nobility, Daniel rose to serve at the highest levels of two empires while refusing to compromise his faith — beginning with his decision not to defile himself with the king\'s food.',
+   'God gave him wisdom and the gift of interpreting dreams. He read the writing on the wall, survived a night in the lions\' den for praying to God, and watched his three friends walk out of the fiery furnace untouched.',
+   'In old age he received sweeping visions of future kingdoms and the everlasting kingdom of the "Son of Man," interceding for his people with prayer and fasting.'
+ ],
+ preached:[
+   'God is sovereign over every empire; kingdoms rise and fall by His hand.',
+   'Faithfulness under pressure — obey God even when it is costly.',
+   'God humbles the proud and lifts the lowly (Nebuchadnezzar\'s lesson).',
+   'History is heading to one eternal kingdom that will never be destroyed.'
+ ],
+ highlights:[
+   'Chapters 1–6 are gripping court narratives; chapters 7–12 are apocalyptic visions.',
+   'The statue of four kingdoms and the stone "not cut by human hands" (ch 2).',
+   'The fiery furnace (ch 3) and the lions\' den (ch 6) — deliverance for the faithful.',
+   '"One like a son of man" given everlasting dominion (7:13-14) — a title Jesus claims for himself.'
+ ],
+ passages:['Daniel 3:16-18','Daniel 6:10-23','Daniel 7:13-14','Daniel 9:17-19'],
+ xrefs:[
+   {ref:'Matthew 24:15', note:'Jesus refers to the "abomination of desolation" spoken of by Daniel.'},
+   {ref:'Mark 14:61-62', note:'At his trial Jesus applies Daniel 7\'s "Son of Man coming on the clouds" to himself.'}
+ ],
+ video:'BibleProject Daniel overview'
+},
+/* ---------------- MINOR (THE TWELVE) ---------------- */
+{
+ id:'hosea', name:'Hosea', hebrew:'Hoshea — "salvation"', type:'minor',
+ book:'Hosea', em:'heart',
+ era:'~750–715 BC', region:'Northern Kingdom (Israel)', audience:'Israel before Assyria',
+ kings:'Jeroboam II and Israel\'s final kings',
+ tag:'A marriage as a living parable of God\'s relentless love.',
+ life:[
+   'God gave Hosea a startling command: marry Gomer, a woman who would be unfaithful. Their painful marriage became a picture of Israel\'s spiritual adultery and God\'s unbreakable covenant love.',
+   'Even after Gomer left him, God told Hosea to buy her back — to love her again. So Israel had betrayed God, yet He would still redeem her.',
+   'His children were given prophetic names ("Not Loved," "Not My People") that were later reversed into mercy: "You are my people."'
+ ],
+ preached:[
+   'God\'s covenant love (hesed) pursues even the unfaithful.',
+   '"I desire mercy, not sacrifice; the knowledge of God rather than burnt offerings."',
+   'Idolatry is spiritual adultery — it breaks God\'s heart, not just His law.',
+   'Judgment is real, but God\'s tenderness has the last word.'
+ ],
+ highlights:[
+   'The whole book is built on the marriage metaphor — intimate and aching.',
+   'Hosea 6:6 — the verse Jesus twice quotes against the Pharisees.',
+   'Chapter 11 reveals the divine heart: "How can I give you up, O Ephraim?"',
+   'Closes with the call to return and the promise of healing.'
+ ],
+ passages:['Hosea 6:1-3','Hosea 11:1-4','Hosea 14:1-4'],
+ xrefs:[
+   {ref:'Matthew 9:13', note:'Jesus quotes Hosea 6:6 — "I desire mercy, not sacrifice."'},
+   {ref:'Romans 9:25-26', note:'Paul applies Hosea\'s "not my people / my people" to the Gentiles.'}
+ ],
+ video:'BibleProject Hosea overview'
+},
+{
+ id:'joel', name:'Joel', hebrew:'Yoel — "The LORD is God"', type:'minor',
+ book:'Joel', em:'locust',
+ era:'date debated (~835 or ~500s BC)', region:'Judah', audience:'Judah / Jerusalem',
+ kings:'Uncertain',
+ tag:'A locust plague as a trumpet-blast: the Day of the LORD is near.',
+ life:[
+   'Little is known of Joel personally beyond his father\'s name, Pethuel. A devastating locust plague struck the land, stripping the fields bare.',
+   'Joel reads the disaster as a warning sign of the coming "Day of the LORD," and calls the whole nation — elders, children, even nursing infants — to fast, weep, and return to God.'
+ ],
+ preached:[
+   'Repent: "Rend your hearts and not your garments."',
+   'The Day of the LORD is both dreadful judgment and gracious opportunity.',
+   'God will restore "the years the locusts have eaten."',
+   'God will pour out His Spirit on all people.'
+ ],
+ highlights:[
+   'A short, vivid book — disaster, repentance, restoration, and outpouring.',
+   'Joel 2:28-32 — the prophecy Peter quotes on the Day of Pentecost.',
+   '"Everyone who calls on the name of the LORD will be saved" (2:32).'
+ ],
+ passages:['Joel 2:12-13','Joel 2:28-32'],
+ xrefs:[
+   {ref:'Acts 2:16-21', note:'Peter declares Joel 2 fulfilled when the Spirit falls at Pentecost.'},
+   {ref:'Romans 10:13', note:'Paul echoes Joel: "all who call on the name of the Lord will be saved."'}
+ ],
+ video:'BibleProject Joel overview'
+},
+{
+ id:'amos', name:'Amos', hebrew:'Amos — "burden-bearer"', type:'minor',
+ book:'Amos', em:'scales',
+ era:'~760–750 BC', region:'Preached to Northern Israel', audience:'Prosperous, complacent Israel',
+ kings:'Uzziah (Judah) & Jeroboam II (Israel)',
+ tag:'A shepherd from Tekoa who demanded justice "roll down like waters."',
+ life:[
+   'Amos was no professional prophet — he was a shepherd and tender of sycamore-fig trees from Tekoa in Judah, called by God to prophesy to the wealthy northern kingdom.',
+   'He arrived during a season of prosperity that masked deep corruption: the rich exploited the poor while keeping up a show of religion. Amos confronted it head-on at the royal sanctuary of Bethel and was told to go home.'
+ ],
+ preached:[
+   'God hates worship that ignores justice for the poor.',
+   '"Let justice roll down like waters, and righteousness like an ever-flowing stream."',
+   'Privilege brings greater responsibility, not exemption.',
+   'A coming "famine of hearing the words of the LORD."'
+ ],
+ highlights:[
+   'Opens by indicting the surrounding nations — then turns the spotlight on Israel.',
+   'Fierce social-justice preaching against exploitation and empty ritual (ch 5).',
+   'Ends with a promise to restore "David\'s fallen tent" (9:11).'
+ ],
+ passages:['Amos 5:21-24','Amos 9:11-15'],
+ xrefs:[
+   {ref:'Acts 15:16-17', note:'James quotes Amos 9 to show God is gathering the Gentiles too.'}
+ ],
+ video:'BibleProject Amos overview'
+},
+{
+ id:'obadiah', name:'Obadiah', hebrew:'Ovadyah — "servant of the LORD"', type:'minor',
+ book:'Obadiah', em:'sword',
+ era:'~586 BC (likely)', region:'Concerning Edom', audience:'Edom & the comforted remnant of Judah',
+ kings:'Around the fall of Jerusalem',
+ tag:'The shortest book in the Old Testament — a single chapter against Edom.',
+ life:[
+   'Obadiah ("servant of the LORD") delivers just 21 verses — the briefest book in the Old Testament. His oracle is directed at Edom, the nation descended from Esau, Jacob\'s brother.',
+   'When Jerusalem was attacked, Edom gloated and even helped the looters. Obadiah announces that their pride and betrayal will bring their downfall.'
+ ],
+ preached:[
+   'Pride goes before a fall — "though you soar like the eagle, I will bring you down."',
+   'How we treat God\'s people matters to God.',
+   '"The day of the LORD is near" for all the nations.',
+   '"The kingdom will be the LORD\'s."'
+ ],
+ highlights:[
+   'One chapter, two themes: Edom\'s judgment, and Zion\'s deliverance.',
+   'A sober warning against gloating over a neighbour\'s misfortune.'
+ ],
+ passages:['Obadiah 1:10-15'],
+ xrefs:[
+   {ref:'Genesis 27:41', note:'The ancient grudge between Esau (Edom) and Jacob lies behind the conflict.'}
+ ],
+ video:'BibleProject Obadiah overview'
+},
+{
+ id:'jonah', name:'Jonah', hebrew:'Yonah — "dove"', type:'minor',
+ book:'Jonah', em:'fish',
+ era:'~780 BC', region:'Sent to Nineveh (Assyria)', audience:'Israel — and Israel\'s enemies',
+ kings:'During the reign of Jeroboam II',
+ tag:'The runaway prophet who learned God\'s mercy reaches even our enemies.',
+ life:[
+   'Sent to preach to Nineveh, the brutal capital of Assyria, Jonah did the opposite — he boarded a ship sailing the other way. A great storm and a great fish brought him back.',
+   'From the belly of the fish he prayed, was delivered, and finally went to Nineveh. To his dismay, the whole city repented — and God spared it.',
+   'The book ends with Jonah sulking under a withered plant while God gently exposes his hard heart, asking, "Should I not have compassion on that great city?"'
+ ],
+ preached:[
+   'God\'s mercy is wider than our prejudice — even toward our enemies.',
+   'You cannot run from God\'s presence or His call.',
+   'Repentance is always possible; God relents from judgment.',
+   'A reluctant prophet can still be used by God.'
+ ],
+ highlights:[
+   'A narrative, not a book of oracles — its story is the sermon.',
+   'The great fish (ch 1–2), the great city\'s repentance (ch 3), and Jonah\'s great anger (ch 4).',
+   'Jesus called Jonah\'s three days in the fish a "sign" of His own resurrection.'
+ ],
+ passages:['Jonah 2:1-9','Jonah 4:1-11'],
+ xrefs:[
+   {ref:'Matthew 12:39-41', note:'Jesus points to "the sign of Jonah" — three days and nights, pointing to his resurrection.'}
+ ],
+ video:'BibleProject Jonah overview'
+},
+{
+ id:'micah', name:'Micah', hebrew:'Mikhah — "Who is like the LORD?"', type:'minor',
+ book:'Micah', em:'mount',
+ era:'~735–700 BC', region:'Judah (and Israel)', audience:'Both kingdoms',
+ kings:'Jotham, Ahaz, Hezekiah',
+ tag:'Contemporary of Isaiah — justice, mercy, and Bethlehem.',
+ life:[
+   'Micah was a country prophet from Moresheth who spoke for the ordinary poor against the corrupt elites, priests, and prophets-for-hire of both Israel and Judah.',
+   'A contemporary of Isaiah, his preaching was so weighty that, a century later, the elders remembered how it had moved King Hezekiah to seek the LORD (Jeremiah 26:18-19).'
+ ],
+ preached:[
+   'God requires justice, mercy, and humility — not mere ritual.',
+   '"What does the LORD require of you but to do justly, love mercy, and walk humbly with your God?"',
+   'Judgment for oppression, but restoration for a faithful remnant.',
+   'A ruler will come from Bethlehem.'
+ ],
+ highlights:[
+   'Micah 6:8 — perhaps the Old Testament\'s clearest summary of true religion.',
+   'Micah 5:2 names Bethlehem as the Messiah\'s birthplace, 700 years early.',
+   'Beautiful closing on God\'s pardoning grace: "Who is a God like you, pardoning iniquity?"'
+ ],
+ passages:['Micah 5:2','Micah 6:6-8','Micah 7:18-19'],
+ xrefs:[
+   {ref:'Matthew 2:4-6', note:'The chief priests quote Micah 5:2 to locate the Messiah\'s birth in Bethlehem.'}
+ ],
+ video:'BibleProject Micah overview'
+},
+{
+ id:'nahum', name:'Nahum', hebrew:'Nachum — "comfort"', type:'minor',
+ book:'Nahum', em:'sword',
+ era:'~660–630 BC', region:'Concerning Nineveh', audience:'Judah, comforted by Nineveh\'s fall',
+ kings:'Before the fall of Nineveh (612 BC)',
+ tag:'The sequel to Jonah — Nineveh\'s mercy expired; judgment came.',
+ life:[
+   'A century after Jonah, Nineveh had returned to cruelty and now ruled a vast, vicious empire. Nahum ("comfort") announces its certain fall.',
+   'For Judah, long terrorised by Assyria, this was good news: the tyrant would not stand forever, because God is just.'
+ ],
+ preached:[
+   'God is slow to anger but will by no means clear the guilty.',
+   'No empire, however mighty, is beyond God\'s reach.',
+   'God is "a stronghold in the day of trouble" for those who trust Him.',
+   'Justice delayed is not justice denied.'
+ ],
+ highlights:[
+   'A poetic counterpoint to Jonah — same city, opposite outcome.',
+   'Holds together God\'s patience and His justice.'
+ ],
+ passages:['Nahum 1:3-7'],
+ xrefs:[
+   {ref:'Jonah 3:10', note:'Read alongside Jonah: Nineveh once repented; now its reprieve has ended.'}
+ ],
+ video:'BibleProject Nahum overview'
+},
+{
+ id:'habakkuk', name:'Habakkuk', hebrew:'Chavaqquq', type:'minor',
+ book:'Habakkuk', em:'question',
+ era:'~620–605 BC', region:'Judah', audience:'Judah facing Babylon',
+ kings:'Late in Judah\'s history, before the exile',
+ tag:'An honest argument with God that ends in trembling faith.',
+ life:[
+   'Habakkuk does something unusual — he questions God directly. Why does evil go unpunished? And when God answers that He will use Babylon to judge Judah, Habakkuk asks an even harder question: how can a holy God use a nation worse than us?',
+   'God\'s reply reshapes him: the proud will fall, but "the righteous shall live by his faith." The book ends with one of Scripture\'s great statements of trust amid disaster.'
+ ],
+ preached:[
+   'It is faithful, not faithless, to bring honest questions to God.',
+   '"The righteous shall live by his faith" — the verse that fired the Reformation.',
+   'God\'s ways are higher and His timing is not ours.',
+   'Joy in God can survive even when everything else fails.'
+ ],
+ highlights:[
+   'Structured as a dialogue: two complaints, two answers, and a closing psalm.',
+   'Habakkuk 2:4 is quoted three times in the New Testament.',
+   'The final hymn (ch 3): "though the fig tree does not blossom… yet I will rejoice in the LORD."'
+ ],
+ passages:['Habakkuk 2:1-4','Habakkuk 3:17-19'],
+ xrefs:[
+   {ref:'Romans 1:17', note:'Paul builds the gospel on Habakkuk: "the righteous shall live by faith."'},
+   {ref:'Hebrews 10:38', note:'Quoted again to urge persevering faith.'}
+ ],
+ video:'BibleProject Habakkuk overview'
+},
+{
+ id:'zephaniah', name:'Zephaniah', hebrew:'Tsefanyah — "The LORD hides/protects"', type:'minor',
+ book:'Zephaniah', em:'trumpet',
+ era:'~640–609 BC', region:'Judah', audience:'Judah under King Josiah',
+ kings:'Josiah',
+ tag:'The Day of the LORD — darkness for the proud, singing for the humble.',
+ life:[
+   'Of royal descent (a great-great-grandson of King Hezekiah), Zephaniah preached during Josiah\'s reign, likely helping spark Josiah\'s great reforms.',
+   'His theme is the "Day of the LORD" — a sweeping day of reckoning over Judah and the nations, after which a humble remnant will be gathered and God Himself will rejoice over His people with singing.'
+ ],
+ preached:[
+   'The Day of the LORD is coming for the complacent and the proud.',
+   'Seek the LORD, seek humility, seek righteousness.',
+   'God preserves a humble remnant who take refuge in Him.',
+   'God "rejoices over you with singing."'
+ ],
+ highlights:[
+   'Moves from thunderous judgment (ch 1) to tender joy (ch 3).',
+   'Zephaniah 3:17 — one of the warmest verses about God\'s delight in His people.'
+ ],
+ passages:['Zephaniah 2:3','Zephaniah 3:14-17'],
+ xrefs:[
+   {ref:'2 Kings 22:1-2', note:'Set during Josiah\'s reign, the king whose reforms Zephaniah likely encouraged.'}
+ ],
+ video:'BibleProject Zephaniah overview'
+},
+{
+ id:'haggai', name:'Haggai', hebrew:'Chaggai — "festive"', type:'minor',
+ book:'Haggai', em:'temple',
+ era:'520 BC', region:'Jerusalem (after the return)', audience:'Returned exiles',
+ kings:'Under Persian Darius; with Zerubbabel & Joshua',
+ tag:'"Build the house" — a call to rebuild the temple and renew priorities.',
+ life:[
+   'After the exiles returned from Babylon, work on the temple stalled for years while people built their own comfortable homes. In 520 BC Haggai delivered four dated messages over a few months to get the work moving again.',
+   'His preaching worked: the people resumed building, and God promised His presence and a future glory greater than the former temple.'
+ ],
+ preached:[
+   'Put God first — "Consider your ways."',
+   'Misplaced priorities leave us empty and unsatisfied.',
+   '"I am with you, declares the LORD" — His presence empowers the work.',
+   'The glory of the latter house will be greater than the former.'
+ ],
+ highlights:[
+   'Short, precisely dated, and intensely practical.',
+   'A timeless challenge about what we put first.'
+ ],
+ passages:['Haggai 1:2-8','Haggai 2:6-9'],
+ xrefs:[
+   {ref:'Ezra 5:1-2', note:'Ezra records that Haggai and Zechariah\'s preaching restarted the temple work.'}
+ ],
+ video:'BibleProject Haggai overview'
+},
+{
+ id:'zechariah', name:'Zechariah', hebrew:'Zekharyah — "The LORD remembers"', type:'minor',
+ book:'Zechariah', em:'crown',
+ era:'520–518 BC (and later)', region:'Jerusalem (after the return)', audience:'Returned exiles',
+ kings:'Contemporary of Haggai; with Zerubbabel',
+ tag:'Night-visions and the clearest minor-prophet glimpses of the Messiah.',
+ life:[
+   'A priest as well as a prophet, Zechariah ministered alongside Haggai to encourage the temple rebuilders — but with a wider lens, looking far ahead to God\'s ultimate king.',
+   'He received eight symbolic night-visions and a series of Messianic prophecies remarkable for their detail: a king coming humble on a donkey, a shepherd sold for thirty pieces of silver, one who is pierced.'
+ ],
+ preached:[
+   '"Return to me, and I will return to you."',
+   'God is at work even through small, discouraging beginnings.',
+   'A coming King — humble, peaceful, and pierced for His people.',
+   '"Not by might nor by power, but by my Spirit."'
+ ],
+ highlights:[
+   'Chapters 1–6 are apocalyptic visions; 7–14 look to the messianic future.',
+   'Zechariah 9:9 — the Palm Sunday prophecy of the king on a donkey.',
+   'Zechariah 12:10 — "they will look on me, the one they have pierced."'
+ ],
+ passages:['Zechariah 4:6','Zechariah 9:9','Zechariah 12:10'],
+ xrefs:[
+   {ref:'Matthew 21:4-5', note:'Jesus enters Jerusalem on a donkey, fulfilling Zechariah 9:9.'},
+   {ref:'John 19:37', note:'John applies "they will look on the one they pierced" to the crucifixion.'}
+ ],
+ video:'BibleProject Zechariah overview'
+},
+{
+ id:'malachi', name:'Malachi', hebrew:'Malakhi — "my messenger"', type:'minor',
+ book:'Malachi', em:'fire',
+ era:'~430 BC', region:'Jerusalem', audience:'A spiritually cold post-exile community',
+ kings:'Persian period (era of Ezra & Nehemiah)',
+ tag:'The last word of the Old Testament — and a promise of the messenger to come.',
+ life:[
+   'A century after the return, the fire had gone out. Priests offered blemished animals, men divorced their wives, tithes were withheld, and people muttered that serving God was pointless. Malachi answers their cynicism point by point.',
+   'His closing words point forward: a messenger will prepare the way, and "Elijah" will come before the great Day of the LORD. Then four centuries of silence — until John the Baptist.'
+ ],
+ preached:[
+   'God loves His people, even when they doubt it.',
+   'Half-hearted, leftover worship dishonours God.',
+   'Be faithful in marriage, giving, and worship.',
+   'A messenger is coming to prepare the way of the Lord.'
+ ],
+ highlights:[
+   'Structured as a series of disputes — God\'s charge, the people\'s objection, God\'s reply.',
+   'Promises a coming "messenger" and an "Elijah" (3:1; 4:5-6).',
+   'The Old Testament\'s final verse looks ahead to reconciliation — and then to the Gospels.'
+ ],
+ passages:['Malachi 3:1-3','Malachi 3:6-10','Malachi 4:5-6'],
+ xrefs:[
+   {ref:'Mark 1:2-4', note:'Mark opens by quoting Malachi 3:1 — the messenger is John the Baptist.'},
+   {ref:'Matthew 11:13-14', note:'Jesus identifies John as the promised "Elijah" of Malachi.'}
+ ],
+ video:'BibleProject Malachi overview'
+},
+/* ---------------- OTHER PROPHETS (no book) ---------------- */
+{
+ id:'moses', name:'Moses', type:'other', book:null, em:'staff',
+ era:'~15th–13th c. BC', region:'Egypt → wilderness', audience:'Israel at the Exodus',
+ kings:'Pharaoh of Egypt',
+ tag:'The prophet like no other — "whom the LORD knew face to face."',
+ life:[
+   'Rescued from the Nile and raised in Pharaoh\'s house, Moses fled to Midian, met God at the burning bush, and returned to lead Israel out of slavery through the parted sea.',
+   'At Sinai he received the Law and spoke with God "face to face." Scripture calls him uniquely a prophet (Deuteronomy 34:10), and he foretold a future Prophet like himself whom the people must heed.'
+ ],
+ preached:[
+   'The LORD alone is God; love Him with all your heart.',
+   'God redeems His people and binds Himself to them by covenant.',
+   'A greater Prophet is coming — "listen to him."'
+ ],
+ highlights:[
+   'No book bears his name, but his voice fills Genesis–Deuteronomy.',
+   'Deuteronomy 18:15-19 — the promise of a coming Prophet, applied to Jesus.'
+ ],
+ passages:['Deuteronomy 18:15-19','Deuteronomy 34:10-12'],
+ xrefs:[
+   {ref:'Acts 3:22-23', note:'Peter declares Jesus the "Prophet like Moses" Israel must obey.'}
+ ],
+ video:'BibleProject Exodus overview'
+},
+{
+ id:'samuel', name:'Samuel', type:'other', book:null, em:'staff',
+ era:'~11th c. BC', region:'Israel', audience:'Israel from judges to monarchy',
+ kings:'Anointed Saul and David',
+ tag:'The last judge and first of the prophets — kingmaker for Israel.',
+ life:[
+   'Given to God by his mother Hannah, the boy Samuel heard God call in the night with the words "Speak, for your servant is listening." He grew into the prophet who bridged the age of judges and the age of kings.',
+   'He anointed Israel\'s first king, Saul, and later the shepherd boy David, looking past appearance because "the LORD looks at the heart."'
+ ],
+ preached:[
+   '"To obey is better than sacrifice."',
+   'God weighs the heart, not the outward appearance.',
+   'Israel\'s true King is the LORD Himself.'
+ ],
+ highlights:[
+   'His story fills 1 Samuel, though he wrote no prophetic book.',
+   'Called the first in the line of the prophets (Acts 3:24).'
+ ],
+ passages:['1 Samuel 3:1-10','1 Samuel 15:22','1 Samuel 16:7'],
+ xrefs:[
+   {ref:'Acts 3:24', note:'Peter names Samuel as the first of the prophets who foretold these days.'}
+ ],
+ video:'BibleProject 1 Samuel overview'
+},
+{
+ id:'elijah', name:'Elijah', type:'other', book:null, em:'fire',
+ era:'~9th c. BC', region:'Northern Kingdom (Israel)', audience:'Idolatrous Israel under Ahab',
+ kings:'Ahab & Jezebel',
+ tag:'Fire from heaven on Mount Carmel — the prophet of bold confrontation.',
+ life:[
+   'Elijah the Tishbite burst onto the scene to confront King Ahab and Queen Jezebel\'s Baal worship. On Mount Carmel he challenged 450 prophets of Baal, and the fire of the LORD fell.',
+   'Worn down and afraid, he met God not in wind, earthquake, or fire, but in a gentle whisper. He never died an ordinary death — he was taken up in a whirlwind by a chariot of fire.'
+ ],
+ preached:[
+   '"How long will you waver between two opinions?" — choose the LORD.',
+   'God answers by fire; the idols are nothing.',
+   'God meets the weary in a gentle whisper, not only in spectacle.'
+ ],
+ highlights:[
+   'His story is told in 1 Kings 17 – 2 Kings 2.',
+   'Malachi promised "Elijah" would come again — fulfilled in John the Baptist.',
+   'He appeared with Moses at the Transfiguration of Jesus.'
+ ],
+ passages:['1 Kings 18:21-39','1 Kings 19:11-13'],
+ xrefs:[
+   {ref:'Matthew 17:1-4', note:'Elijah appears with Moses and Jesus at the Transfiguration.'},
+   {ref:'James 5:17-18', note:'James holds up Elijah\'s prayers as a model of effective, fervent prayer.'}
+ ],
+ video:'BibleProject 1 Kings overview'
+},
+{
+ id:'elisha', name:'Elisha', type:'other', book:null, em:'staff',
+ era:'~9th c. BC', region:'Northern Kingdom (Israel)', audience:'Israel',
+ kings:'Successor to Elijah',
+ tag:'The double portion — a ministry overflowing with miracles of mercy.',
+ life:[
+   'Called from plowing his field, Elisha left everything to follow Elijah and asked for a "double portion" of his spirit. When Elijah was taken up, Elisha took up his mantle.',
+   'His ministry brimmed with miracles of compassion: purifying water, multiplying oil for a widow, raising a child, healing Naaman the leper, feeding the hungry.'
+ ],
+ preached:[
+   'God\'s power serves God\'s mercy — meeting real human needs.',
+   'Even an enemy commander (Naaman) can be humbled and healed.',
+   'Those with us are more than those against us (the armies of fire).'
+ ],
+ highlights:[
+   'His story runs through 2 Kings 2 – 13.',
+   'His many miracles foreshadow the healing ministry of Jesus.'
+ ],
+ passages:['2 Kings 2:9-14','2 Kings 5:9-14'],
+ xrefs:[
+   {ref:'Luke 4:27', note:'Jesus recalls Elisha healing Naaman the Syrian to show God\'s grace reaches outsiders.'}
+ ],
+ video:'BibleProject 2 Kings overview'
+},
+{
+ id:'nathan', name:'Nathan', type:'other', book:null, em:'crown',
+ era:'~10th c. BC', region:'Jerusalem', audience:'King David\'s court',
+ kings:'David & Solomon',
+ tag:'The prophet who told a king, "You are the man."',
+ life:[
+   'Nathan was the court prophet who delivered God\'s covenant promise to David — an everlasting throne — and then, after David\'s sin with Bathsheba, confronted him with a parable that ended in the piercing words, "You are the man!"',
+   'David repented, and Nathan later helped secure Solomon\'s succession.'
+ ],
+ preached:[
+   'God\'s covenant with David points to an eternal King.',
+   'No one is above God\'s law — not even the king.',
+   'Genuine repentance finds mercy.'
+ ],
+ highlights:[
+   'His confrontation in 2 Samuel 12 is a masterclass in speaking truth to power.',
+   'The Davidic covenant (2 Samuel 7) shapes all later messianic hope.'
+ ],
+ passages:['2 Samuel 7:12-16','2 Samuel 12:1-13'],
+ xrefs:[
+   {ref:'Luke 1:32-33', note:'The angel tells Mary her son will receive "the throne of David" forever.'}
+ ],
+ video:'BibleProject 2 Samuel overview'
+},
+{
+ id:'deborah', name:'Deborah', type:'other', book:null, em:'star',
+ era:'~12th c. BC', region:'Israel', audience:'Israel in the time of the judges',
+ kings:'Era of the Judges',
+ tag:'Prophetess and judge — leader, deliverer, and singer of victory.',
+ life:[
+   'Deborah was both a prophetess and a judge of Israel, holding court under a palm tree. When the people were oppressed, she summoned Barak and announced God\'s plan of deliverance.',
+   'After the victory she composed one of the oldest poems in Scripture, the Song of Deborah, praising the LORD.'
+ ],
+ preached:[
+   'God raises up unexpected leaders to deliver His people.',
+   'Courage and faith over fear.',
+   'Give the LORD the glory for every victory.'
+ ],
+ highlights:[
+   'Her account fills Judges 4–5, including her triumphant song.',
+   'One of several women named as prophets in Scripture.'
+ ],
+ passages:['Judges 4:4-9','Judges 5:1-3'],
+ xrefs:[
+   {ref:'Hebrews 11:32', note:'The "hall of faith" remembers the judges\' era of God\'s deliverance.'}
+ ],
+ video:'BibleProject Judges overview'
+}
+];
+
+/* ===================== RENDER TILES ===================== */
+function emblem(id){return EM[id]||EM.scroll;}
+function tileHTML(p){
+  const ribbon = p.type==='major'?'major':p.type==='minor'?'minor':'other';
+  const label = p.type==='major'?'Major':p.type==='minor'?'Minor':'Prophet';
+  return `<button class="tile ${p.type==='other'?'compact':''}" onclick="openProphet('${p.id}')" aria-label="Open ${p.name}">
+    <span class="ribbon ${ribbon}">${label}</span>
+    ${emblem(p.em)}
+    <div class="era">${p.era}</div>
+    <h3>${p.name}</h3>
+    <p class="tag">${p.tag}</p>
+  </button>`;
+}
+function fill(id,type){
+  document.getElementById(id).innerHTML =
+    PROPHETS.filter(p=>p.type===type).map(tileHTML).join('');
+}
+fill('grid-major','major');
+fill('grid-minor','minor');
+fill('grid-other','other');
+
+/* ===================== DETAIL PANEL ===================== */
+const overlay=document.getElementById('overlay');
+const panel=document.getElementById('panel');
+
+function ic(d){return `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#b08423" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;}
+const ICONS={
+ life:'<circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/>',
+ preach:'<path d="M3 11l18-7-7 18-2-7-9-4z"/>',
+ book:'<path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M18 3v18"/>',
+ key:'<path d="M4 12h8"/><path d="M4 9v6"/><circle cx="17" cy="12" r="4"/>',
+ link:'<path d="M9 12h6"/><path d="M10 7H7a5 5 0 0 0 0 10h3"/><path d="M14 7h3a5 5 0 0 1 0 10h-3"/>',
+ play:'<circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z"/>'
+};
+
+function refChip(ref){
+  return `<button class="ref" onclick="openReader('${ref.replace(/'/g,"\\'")}')">${ref}</button>`;
+}
+
+function openProphet(id){
+  const p=PROPHETS.find(x=>x.id===id);
+  if(!p) return;
+  const bookLine = p.book
+    ? `<a class="gw-link" href="https://www.biblegateway.com/passage/?search=${encodeURIComponent(p.book)}&version=NIV" target="_blank" rel="noopener">Read the whole book of ${p.book} (NIV) ↗</a>`
+    : `<p style="color:var(--ink-soft);font-style:italic">This prophet left no book of his or her own — their story is told within the narrative books of the Old Testament.</p>`;
+
+  panel.innerHTML = `
+    <div class="panel-head">
+      <button class="close" onclick="closeProphet()" aria-label="Close">✕</button>
+      <div class="kicker">${p.book?('the book of '+p.book):'a prophet of Israel'}</div>
+      <h2>${p.name}</h2>
+      ${p.hebrew?`<div style="font-size:.9rem;opacity:.85;font-style:italic">${p.hebrew}</div>`:''}
+      <div class="meta">
+        <span><b>When:</b> ${p.era}</span>
+        <span><b>Where:</b> ${p.region}</span>
+        ${p.kings?`<span><b>Setting:</b> ${p.kings}</span>`:''}
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <div class="block">
+        <h4>${ic(ICONS.life)} Life &amp; calling</h4>
+        ${p.life.map(t=>`<p>${t}</p>`).join('')}
+      </div>
+
+      <div class="block">
+        <h4>${ic(ICONS.preach)} What they preached</h4>
+        <ul>${p.preached.map(t=>`<li>${t}</li>`).join('')}</ul>
+      </div>
+
+      <div class="block">
+        <h4>${ic(ICONS.book)} ${p.book?('Heart of the book'):('Key themes')}</h4>
+        <ul>${p.highlights.map(t=>`<li>${t}</li>`).join('')}</ul>
+        ${bookLine}
+      </div>
+
+      <div class="block">
+        <h4>${ic(ICONS.key)} Key passages — tap to read</h4>
+        <div class="pill-row">${p.passages.map(refChip).join('')}</div>
+      </div>
+
+      ${p.xrefs&&p.xrefs.length?`
+      <div class="block">
+        <h4>${ic(ICONS.link)} Cross references</h4>
+        ${p.xrefs.map(x=>`<div class="xref">
+            <span class="xref-ref" onclick="openReader('${x.ref.replace(/'/g,"\\'")}')">📖 ${x.ref}</span>
+            <span class="xref-note">${x.note}</span>
+          </div>`).join('')}
+      </div>`:''}
+
+      <div class="block">
+        <h4>${ic(ICONS.play)} Watch &amp; explore</h4>
+        <div class="media">
+          <a href="https://www.youtube.com/results?search_query=${encodeURIComponent(p.video)}" target="_blank" rel="noopener">
+            ${ic(ICONS.play)} <span>Video overview<small>BibleProject on YouTube</small></span>
+          </a>
+          ${p.book?`<a href="https://www.biblegateway.com/passage/?search=${encodeURIComponent(p.book)}&version=NIV" target="_blank" rel="noopener">
+            ${ic(ICONS.book)} <span>Full text (NIV)<small>BibleGateway</small></span>
+          </a>`:''}
+        </div>
+      </div>
+
+    </div>`;
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden','false');
+  panel.scrollTop=0;
+  document.body.style.overflow='hidden';
+}
+function closeProphet(){
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeProphet();});
+
+/* ===================== SCRIPTURE READER ===================== */
+const reader=document.getElementById('reader');
+let currentRef='', currentVersion='web';
+
+function openReader(ref){
+  currentRef=ref; currentVersion='web';
+  document.getElementById('reader-ref').textContent=ref;
+  document.getElementById('reader-niv').href=
+    'https://www.biblegateway.com/passage/?search='+encodeURIComponent(ref)+'&version=NIV';
+  setVersionButtons('web');
+  reader.classList.add('open');
+  reader.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  loadPassage();
+}
+function closeReader(){
+  reader.classList.remove('open');
+  reader.setAttribute('aria-hidden','true');
+  // keep detail panel scroll locked if it's open
+  if(!overlay.classList.contains('open')) document.body.style.overflow='';
+}
+function setVersion(v){currentVersion=v;setVersionButtons(v);loadPassage();}
+function setVersionButtons(v){
+  document.getElementById('btn-web').classList.toggle('active',v==='web');
+  document.getElementById('btn-kjv').classList.toggle('active',v==='kjv');
+}
+async function loadPassage(){
+  const body=document.getElementById('reader-body');
+  body.innerHTML='<p class="reader-loading">Loading…</p>';
+  try{
+    const url='https://bible-api.com/'+encodeURIComponent(currentRef)+'?translation='+currentVersion;
+    const res=await fetch(url);
+    if(!res.ok) throw new Error('not ok');
+    const data=await res.json();
+    if(!data.verses||!data.verses.length){throw new Error('empty');}
+    let html='';
+    data.verses.forEach(v=>{
+      html+=`<span class="v-num">${v.verse}</span>${v.text.trim()} `;
+    });
+    body.innerHTML=`<p>${html}</p>
+      <p style="font-size:.78rem;color:var(--ink-soft);margin-top:14px;border-top:1px solid var(--line);padding-top:10px">
+      ${data.translation_name||(currentVersion==='kjv'?'King James Version':'World English Bible')} · via bible-api.com</p>`;
+  }catch(err){
+    body.innerHTML=`<p style="color:var(--wine)">Couldn't load this passage automatically.</p>
+      <p style="color:var(--ink-soft)">You can still read <b>${currentRef}</b> directly on
+      <a href="https://www.biblegateway.com/passage/?search=${encodeURIComponent(currentRef)}&version=NIV" target="_blank" rel="noopener">BibleGateway</a>.</p>`;
+  }
+}
+reader.addEventListener('click',e=>{if(e.target===reader)closeReader();});
+
+/* ESC closes whichever layer is on top */
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape') return;
+  if(reader.classList.contains('open')) closeReader();
+  else if(overlay.classList.contains('open')) closeProphet();
+});
+</script>
+</body>
+</html>
