@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Promises of God &amp; of Jesus — A Scripture Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14131d;          /* night sky ground */
+    --ink-2:#1d1c2b;
+    --parchment:#f7f1e1;    /* card */
+    --parchment-2:#efe6cf;
+    --text:#2b2620;         /* verse ink */
+    --muted:#6f6552;
+    --gold:#c9a227;         /* illuminated promise */
+    --gold-soft:#f0d98a;
+    --gold-wash:rgba(201,162,39,.22);
+    --wine:#7c2d3a;         /* OT badge / accents */
+    --redletter:#b3303a;    /* Christ's words */
+    --redletter-wash:rgba(179,48,58,.14);
+    --line:rgba(247,241,225,.14);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--ink);color:var(--parchment);
+    font-family:"EB Garamond",Georgia,serif;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(240,217,138,.35), transparent),
+      radial-gradient(1px 1px at 70% 12%, rgba(240,217,138,.30), transparent),
+      radial-gradient(1px 1px at 85% 55%, rgba(255,255,255,.18), transparent),
+      radial-gradient(1px 1px at 35% 70%, rgba(240,217,138,.22), transparent),
+      radial-gradient(1px 1px at 55% 88%, rgba(255,255,255,.14), transparent),
+      radial-gradient(1200px 600px at 50% -10%, #20203a, transparent);
+    background-attachment:fixed;
+  }
+
+  /* ---- top bar ---- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    padding:.85rem clamp(1rem,4vw,2.5rem);
+    background:rgba(20,19,29,.82);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.15rem;letter-spacing:.02em}
+  .brand .seal{color:var(--gold)}
+  .topnav{display:flex;gap:.4rem;font-family:"Inter",sans-serif;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+  .topnav a{color:var(--parchment);text-decoration:none;opacity:.72;padding:.35rem .55rem;border-radius:999px;transition:.2s}
+  .topnav a:hover{opacity:1;background:rgba(247,241,225,.08)}
+
+  /* ---- hero ---- */
+  .hero{padding:clamp(3.5rem,9vw,7rem) clamp(1.2rem,5vw,2.5rem) clamp(2.5rem,6vw,4rem);max-width:1000px;margin:0 auto;text-align:center}
+  .eyebrow{font-family:"Inter",sans-serif;font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-soft);opacity:.85}
+  .thesis{
+    font-family:"Cormorant Garamond",serif;font-weight:500;font-style:italic;
+    font-size:clamp(1.9rem,6vw,3.6rem);line-height:1.18;margin:1.4rem auto 0;max-width:18ch;
+    color:var(--parchment);
+  }
+  .thesis .yea{color:var(--gold);font-style:normal}
+  .thesis-ref{font-family:"Inter",sans-serif;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:1.4rem;color:#a99e85}
+  .hero-lead{max-width:46ch;margin:1.8rem auto 0;font-size:1.12rem;line-height:1.6;color:rgba(247,241,225,.78)}
+  .scroll-cue{margin-top:2.6rem;font-family:"Inter",sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#8d8369}
+  .scroll-cue span{display:block;margin-top:.5rem;font-size:1.1rem;color:var(--gold);animation:bob 2.4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+  /* ---- blocks ---- */
+  main{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem) 3rem}
+  .block{padding-top:clamp(2.5rem,6vw,4.5rem);scroll-margin-top:64px}
+  .block-head{max-width:62ch;margin:0 auto 2rem;text-align:center}
+  .part{font-family:"Inter",sans-serif;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-soft)}
+  .block h2{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:clamp(2rem,5.5vw,3.1rem);margin:.5rem 0 0;letter-spacing:.01em}
+  .block .lead{font-size:1.08rem;line-height:1.6;color:rgba(247,241,225,.74);margin:1rem auto 0;max-width:52ch}
+  .rule{width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1.6rem auto 0}
+
+  /* ---- filter ---- */
+  .filter{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin:1.8rem 0 0;font-family:"Inter",sans-serif}
+  .chip{
+    cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--parchment);
+    font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .95rem;border-radius:999px;transition:.18s;
+  }
+  .chip:hover{border-color:var(--gold);color:var(--gold-soft)}
+  .chip[aria-pressed="true"]{background:var(--gold);color:#231d05;border-color:var(--gold);font-weight:600}
+  .count{font-family:"Inter",sans-serif;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:#8d8369;text-align:center;margin-top:1rem}
+
+  /* ---- grid + cards ---- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.1rem;margin-top:2rem}
+  .card{
+    background:var(--parchment);color:var(--text);border-radius:14px;padding:1.5rem 1.5rem 1.2rem;
+    box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 18px 40px -28px rgba(0,0,0,.8);
+    border:1px solid var(--parchment-2);display:flex;flex-direction:column;
+    position:relative;overflow:hidden;
+  }
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}
+  .jesus .card::before{background:var(--redletter)}
+  .card-top{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;margin-bottom:.85rem}
+  .ref{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:1.18rem;color:#3a3327;letter-spacing:.01em}
+  .badge{font-family:"Inter",sans-serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:.28rem .5rem;border-radius:999px;white-space:nowrap;font-weight:600;flex-shrink:0}
+  .badge.ot{background:rgba(124,45,58,.12);color:var(--wine)}
+  .badge.nt{background:var(--gold-wash);color:#8a6f17}
+  .badge.book{background:rgba(179,48,58,.1);color:var(--redletter)}
+  .verse{font-size:1.08rem;line-height:1.56;margin:0;color:var(--text)}
+  .verse mark{background:linear-gradient(transparent 58%, var(--gold-wash) 58%);color:#5a4710;font-weight:600;padding:0 .05em;border-radius:1px}
+  .jesus .verse{color:#4a342f}
+  .jesus .verse mark{background:linear-gradient(transparent 58%, var(--redletter-wash) 58%);color:var(--redletter);font-weight:600}
+  .card-foot{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:1.1rem;padding-top:.85rem;border-top:1px solid var(--parchment-2)}
+  .theme{font-family:"Inter",sans-serif;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .read{font-family:"Inter",sans-serif;font-size:.7rem;letter-spacing:.04em;color:var(--wine);text-decoration:none;font-weight:500;white-space:nowrap;transition:.15s}
+  .jesus .read{color:var(--redletter)}
+  .read:hover{text-decoration:underline}
+
+  /* ---- footer ---- */
+  footer{max-width:60ch;margin:0 auto;padding:3rem clamp(1.2rem,5vw,2.5rem) 4rem;text-align:center;color:rgba(247,241,225,.6);font-size:.98rem;line-height:1.6}
+  footer a{color:var(--gold-soft)}
+  .totop{display:inline-block;margin-top:1.5rem;font-family:"Inter",sans-serif;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#8d8369;text-decoration:none}
+  .totop:hover{color:var(--gold)}
+
+  @media (max-width:560px){
+    .topnav a:first-child{display:none}
+    .grid{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="seal">✦</span> The Promises</div>
+  <nav class="topnav">
+    <a href="#top">Top</a>
+    <a href="#god">Of God</a>
+    <a href="#jesus">Of Jesus</a>
+  </nav>
+</div>
+
+<header class="hero" id="top">
+  <p class="eyebrow">A Scripture Study</p>
+  <h1 class="thesis">For all the promises of God in him are <span class="yea">yea</span>, and in him <span class="yea">Amen</span></h1>
+  <p class="thesis-ref">2 Corinthians 1:20 · KJV</p>
+  <p class="hero-lead">Every promise God has spoken finds its "Yes" in Christ. Below are the covenant promises of God across both Testaments, and then the promises Jesus spoke with his own lips — set, by tradition, in red.</p>
+  <p class="scroll-cue">Begin<span>↓</span></p>
+</header>
+
+<main>
+  <section class="block" id="god">
+    <div class="block-head">
+      <p class="part">Part One</p>
+      <h2>The Promises of God</h2>
+      <p class="lead">From the first promise of redemption in Eden to the new heaven and new earth — the vows of the One who cannot lie.</p>
+      <div class="rule"></div>
+      <div class="filter" id="god-filter">
+        <button class="chip" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" data-f="OT" aria-pressed="false">Old Testament</button>
+        <button class="chip" data-f="NT" aria-pressed="false">New Testament</button>
+      </div>
+      <p class="count" id="god-count"></p>
+    </div>
+    <div class="grid" id="god-grid"></div>
+  </section>
+
+  <section class="block jesus" id="jesus">
+    <div class="block-head">
+      <p class="part">Part Two</p>
+      <h2>The Promises of Jesus</h2>
+      <p class="lead">The words of Christ himself, spoken throughout the Gospels and to his church — shown here in the traditional red letter.</p>
+      <div class="rule"></div>
+      <p class="count" id="jesus-count"></p>
+    </div>
+    <div class="grid" id="jesus-grid"></div>
+  </section>
+</main>
+
+<footer>
+  All passages quoted from the <strong>King James Version</strong> (public domain). Tap any reference to read it in the NIV on
+  <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a>.
+  This is a curated selection of the major promises — not an exhaustive list.
+  <a class="totop" href="#top">↑ Back to top</a>
+</footer>
+
+<script>
+/* Promise format: [reference, testament/book-label, badge-class, verse-with-[[promise]]-marked, theme] */
+const GOD = [
+  ["Genesis 3:15","OT","ot","And I will put enmity between thee and the woman, and between thy seed and her seed; [[it shall bruise thy head]], and thou shalt bruise his heel.","The First Promise"],
+  ["Genesis 9:11","OT","ot","And I will establish my covenant with you; [[neither shall there any more be a flood to destroy the earth]].","Covenant"],
+  ["Genesis 12:2–3","OT","ot","And I will make of thee a great nation, and I will bless thee… and [[in thee shall all families of the earth be blessed]].","Blessing"],
+  ["Genesis 15:1","OT","ot","Fear not, Abram: [[I am thy shield, and thy exceeding great reward]].","Protection"],
+  ["Genesis 28:15","OT","ot","And, behold, [[I am with thee, and will keep thee in all places whither thou goest]], and will bring thee again into this land.","Presence"],
+  ["Exodus 14:14","OT","ot","[[The LORD shall fight for you]], and ye shall hold your peace.","Deliverance"],
+  ["Deuteronomy 31:6","OT","ot","Be strong and of a good courage… for the LORD thy God, he it is that doth go with thee; [[he will not fail thee, nor forsake thee]].","Presence"],
+  ["Joshua 1:9","OT","ot","Be strong and of a good courage; be not afraid… for [[the LORD thy God is with thee whithersoever thou goest]].","Courage"],
+  ["2 Chronicles 7:14","OT","ot","If my people… shall humble themselves, and pray… [[then will I hear from heaven, and will forgive their sin, and will heal their land]].","Restoration"],
+  ["Psalm 23:1","OT","ot","[[The LORD is my shepherd; I shall not want]].","Provision"],
+  ["Psalm 27:1","OT","ot","[[The LORD is my light and my salvation; whom shall I fear?]] the LORD is the strength of my life.","Security"],
+  ["Psalm 32:8","OT","ot","[[I will instruct thee and teach thee in the way which thou shalt go]]: I will guide thee with mine eye.","Guidance"],
+  ["Psalm 34:18","OT","ot","[[The LORD is nigh unto them that are of a broken heart]]; and saveth such as be of a contrite spirit.","Comfort"],
+  ["Psalm 37:4","OT","ot","Delight thyself also in the LORD; and [[he shall give thee the desires of thine heart]].","Reward"],
+  ["Psalm 46:1","OT","ot","[[God is our refuge and strength, a very present help in trouble]].","Refuge"],
+  ["Psalm 55:22","OT","ot","[[Cast thy burden upon the LORD, and he shall sustain thee]]: he shall never suffer the righteous to be moved.","Sustenance"],
+  ["Psalm 91:11","OT","ot","For [[he shall give his angels charge over thee, to keep thee in all thy ways]].","Protection"],
+  ["Psalm 121:7–8","OT","ot","[[The LORD shall preserve thee from all evil]]: he shall preserve thy soul… thy going out and thy coming in.","Keeping"],
+  ["Proverbs 3:5–6","OT","ot","Trust in the LORD with all thine heart… in all thy ways acknowledge him, and [[he shall direct thy paths]].","Guidance"],
+  ["Isaiah 26:3","OT","ot","[[Thou wilt keep him in perfect peace, whose mind is stayed on thee]]: because he trusteth in thee.","Peace"],
+  ["Isaiah 40:31","OT","ot","But they that wait upon the LORD shall renew their strength; [[they shall mount up with wings as eagles]]; they shall run, and not be weary.","Strength"],
+  ["Isaiah 41:10","OT","ot","Fear thou not; for I am with thee… [[I will strengthen thee; yea, I will help thee; yea, I will uphold thee]].","Strength"],
+  ["Isaiah 43:2","OT","ot","When thou passest through the waters, [[I will be with thee]]; and through the rivers, they shall not overflow thee.","Presence"],
+  ["Isaiah 54:17","OT","ot","[[No weapon that is formed against thee shall prosper]]; and every tongue that shall rise against thee… thou shalt condemn.","Vindication"],
+  ["Jeremiah 29:11","OT","ot","For I know the thoughts that I think toward you… [[thoughts of peace, and not of evil, to give you an expected end]].","Hope"],
+  ["Jeremiah 33:3","OT","ot","[[Call unto me, and I will answer thee]], and shew thee great and mighty things, which thou knowest not.","Answered Prayer"],
+  ["Lamentations 3:22–23","OT","ot","It is of the LORD's mercies that we are not consumed… [[They are new every morning]]: great is thy faithfulness.","Mercy"],
+  ["Ezekiel 36:26","OT","ot","[[A new heart also will I give you, and a new spirit will I put within you]]: and I will take away the stony heart.","New Life"],
+  ["Joel 2:28","OT","ot","And it shall come to pass afterward, that [[I will pour out my spirit upon all flesh]].","The Spirit"],
+  ["Nahum 1:7","OT","ot","[[The LORD is good, a strong hold in the day of trouble]]; and he knoweth them that trust in him.","Refuge"],
+  ["Zephaniah 3:17","OT","ot","The LORD thy God in the midst of thee is mighty… [[he will rejoice over thee with joy]]; he will rest in his love.","Delight"],
+  ["Malachi 3:10","OT","ot","Prove me now herewith, saith the LORD of hosts, if I will not [[open you the windows of heaven, and pour you out a blessing]].","Provision"],
+  ["Romans 8:28","NT","nt","And we know that [[all things work together for good to them that love God]], to them who are the called according to his purpose.","Sovereignty"],
+  ["Romans 8:38–39","NT","nt","For I am persuaded, that… [[nothing… shall be able to separate us from the love of God]], which is in Christ Jesus our Lord.","Love"],
+  ["Romans 10:13","NT","nt","For [[whosoever shall call upon the name of the Lord shall be saved]].","Salvation"],
+  ["1 Corinthians 2:9","NT","nt","Eye hath not seen, nor ear heard… [[the things which God hath prepared for them that love him]].","Glory"],
+  ["1 Corinthians 10:13","NT","nt","God is faithful, who will not suffer you to be tempted above that ye are able; but will… [[make a way to escape]].","Faithfulness"],
+  ["2 Corinthians 9:8","NT","nt","And [[God is able to make all grace abound toward you]]; that ye… may abound to every good work.","Grace"],
+  ["2 Corinthians 12:9","NT","nt","And he said unto me, [[My grace is sufficient for thee: for my strength is made perfect in weakness]].","Grace"],
+  ["Philippians 4:7","NT","nt","And [[the peace of God, which passeth all understanding, shall keep your hearts and minds]] through Christ Jesus.","Peace"],
+  ["Philippians 4:19","NT","nt","But [[my God shall supply all your need according to his riches in glory]] by Christ Jesus.","Provision"],
+  ["Hebrews 13:5","NT","nt","…for he hath said, [[I will never leave thee, nor forsake thee]].","Presence"],
+  ["James 1:5","NT","nt","If any of you lack wisdom, let him ask of God, that giveth to all men liberally… and [[it shall be given him]].","Wisdom"],
+  ["James 4:8","NT","nt","[[Draw nigh to God, and he will draw nigh to you]].","Nearness"],
+  ["1 Peter 5:7","NT","nt","[[Casting all your care upon him; for he careth for you]].","Comfort"],
+  ["1 John 1:9","NT","nt","[[If we confess our sins, he is faithful and just to forgive us our sins]], and to cleanse us from all unrighteousness.","Forgiveness"],
+  ["1 John 5:14","NT","nt","And this is the confidence that we have in him, that, [[if we ask any thing according to his will, he heareth us]].","Answered Prayer"],
+  ["2 Peter 3:9","NT","nt","The Lord is… [[not willing that any should perish, but that all should come to repentance]].","Patience"],
+  ["Revelation 21:4","NT","nt","And [[God shall wipe away all tears from their eyes]]; and there shall be no more death, neither sorrow, nor crying.","New Creation"]
+];
+
+const JESUS = [
+  ["Matthew 6:33","Matthew","book","But [[seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you]].","Provision"],
+  ["Matthew 7:7","Matthew","book","[[Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you]].","Answered Prayer"],
+  ["Matthew 11:28","Matthew","book","[[Come unto me, all ye that labour and are heavy laden, and I will give you rest]].","Rest"],
+  ["Matthew 18:20","Matthew","book","For [[where two or three are gathered together in my name, there am I in the midst of them]].","Presence"],
+  ["Matthew 28:20","Matthew","book","…and, lo, [[I am with you alway, even unto the end of the world]]. Amen.","Presence"],
+  ["Mark 11:24","Mark","book","What things soever ye desire, when ye pray, believe that ye receive them, and [[ye shall have them]].","Faith"],
+  ["Luke 11:13","Luke","book","…how much more shall your heavenly Father [[give the Holy Spirit to them that ask him]]?","The Spirit"],
+  ["John 3:16","John","book","For God so loved the world… that [[whosoever believeth in him should not perish, but have everlasting life]].","Eternal Life"],
+  ["John 4:14","John","book","…the water that I shall give him shall be in him [[a well of water springing up into everlasting life]].","Eternal Life"],
+  ["John 5:24","John","book","He that heareth my word, and believeth on him that sent me, [[hath everlasting life, and shall not come into condemnation]].","Eternal Life"],
+  ["John 6:35","John","book","I am the bread of life: [[he that cometh to me shall never hunger; and he that believeth on me shall never thirst]].","Satisfaction"],
+  ["John 6:37","John","book","…and [[him that cometh to me I will in no wise cast out]].","Acceptance"],
+  ["John 8:12","John","book","I am the light of the world: [[he that followeth me shall not walk in darkness, but shall have the light of life]].","Guidance"],
+  ["John 10:10","John","book","…I am come that [[they might have life, and that they might have it more abundantly]].","Abundant Life"],
+  ["John 10:28","John","book","And [[I give unto them eternal life; and they shall never perish, neither shall any man pluck them out of my hand]].","Security"],
+  ["John 11:25–26","John","book","I am the resurrection, and the life… and [[whosoever liveth and believeth in me shall never die]].","Resurrection"],
+  ["John 14:1–3","John","book","…I go to prepare a place for you. And… [[I will come again, and receive you unto myself; that where I am, there ye may be also]].","Heaven"],
+  ["John 14:14","John","book","[[If ye shall ask any thing in my name, I will do it]].","Answered Prayer"],
+  ["John 14:16","John","book","And I will pray the Father, and [[he shall give you another Comforter, that he may abide with you for ever]].","The Spirit"],
+  ["John 14:27","John","book","[[Peace I leave with you, my peace I give unto you]]: not as the world giveth, give I unto you.","Peace"],
+  ["John 15:7","John","book","If ye abide in me, and my words abide in you, [[ye shall ask what ye will, and it shall be done unto you]].","Answered Prayer"],
+  ["John 16:24","John","book","…ask, and ye shall receive, [[that your joy may be full]].","Joy"],
+  ["John 16:33","John","book","…in me ye might have peace… be of good cheer; [[I have overcome the world]].","Victory"],
+  ["Acts 1:8","Acts","book","But [[ye shall receive power, after that the Holy Ghost is come upon you]]: and ye shall be witnesses unto me.","Power"],
+  ["Revelation 3:20","Revelation","book","Behold, I stand at the door, and knock: if any man hear my voice, and open the door, [[I will come in to him]].","Fellowship"],
+  ["Revelation 22:12","Revelation","book","And, behold, [[I come quickly; and my reward is with me]], to give every man according as his work shall be.","Return"]
+];
+
+function mark(t){return t.replace(/\[\[(.+?)\]\]/g,'<mark>$1</mark>');}
+function bg(ref){return 'https://www.biblegateway.com/passage/?search='+encodeURIComponent(ref.replace(/–/g,'-'))+'&version=NIV';}
+
+function card([ref,label,cls,verse,theme]){
+  const badge = cls==='ot'?'Old Testament':cls==='nt'?'New Testament':label;
+  const test = cls==='ot'?'OT':cls==='nt'?'NT':'NT';
+  return `<article class="card" data-test="${test}">
+    <div class="card-top"><span class="ref">${ref}</span><span class="badge ${cls}">${badge}</span></div>
+    <p class="verse">${mark(verse)}</p>
+    <div class="card-foot"><span class="theme">${theme}</span><a class="read" href="${bg(ref)}" target="_blank" rel="noopener">Read NIV ↗</a></div>
+  </article>`;
+}
+
+const godGrid=document.getElementById('god-grid');
+const jesusGrid=document.getElementById('jesus-grid');
+godGrid.innerHTML=GOD.map(card).join('');
+jesusGrid.innerHTML=JESUS.map(card).join('');
+document.getElementById('jesus-count').textContent=JESUS.length+' promises';
+
+function updateGodCount(f){
+  const n = f==='all'?GOD.length:GOD.filter(p=>p[1]===f).length;
+  document.getElementById('god-count').textContent=n+' promises'+(f==='all'?'':' · '+(f==='OT'?'Old Testament':'New Testament'));
+}
+updateGodCount('all');
+
+document.getElementById('god-filter').addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b) return;
+  const f=b.dataset.f;
+  document.querySelectorAll('#god-filter .chip').forEach(c=>c.setAttribute('aria-pressed', c===b?'true':'false'));
+  godGrid.querySelectorAll('.card').forEach(c=>{
+    c.style.display = (f==='all'||c.dataset.test===f)?'flex':'none';
+  });
+  updateGodCount(f);
+});
+</script>
+</body>
+</html>
