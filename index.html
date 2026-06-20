@@ -59,6 +59,11 @@ a{text-decoration:none;color:inherit}
 .bp-watch{display:inline-flex;align-items:center;gap:.35rem;margin-top:.55rem;font-size:.74rem;font-weight:700;color:var(--rd)}
 .bp-watch:hover{text-decoration:underline}
 .bp-cap{display:block;margin-top:.3rem;font-family:'Playfair Display',serif;font-style:italic;font-size:.72rem;color:var(--md)}
+.bp-links{display:flex;flex-wrap:wrap;gap:.15rem 1.1rem;margin-top:.55rem}
+.bp-links .bp-watch{margin-top:0}
+.bp-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.55rem}
+.bp-chip{display:inline-block;background:var(--gp);border:1px solid var(--gd);color:var(--md);font-size:.72rem;font-weight:700;padding:.3rem .62rem;border-radius:13px;transition:background .15s}
+.bp-chip:hover{background:var(--gl)}
 
 /* COMING SOON CARD */
 .soon{background:var(--p2);border:1.5px dashed var(--tn);border-radius:16px;padding:1.5rem;opacity:.8}
@@ -283,8 +288,11 @@ a{text-decoration:none;color:inherit}
       </button>
       <div class="bp-panel" hidden>
         <div class="bp-embed"></div>
-        <a class="bp-watch" href="https://www.youtube.com/watch?v=3Dv4-n6OYGI" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
-        <span class="bp-cap">BibleProject &middot; &ldquo;Gospel of Matthew Summary&rdquo; (Pt 1)</span>
+        <div class="bp-links">
+          <a class="bp-watch" href="https://www.youtube.com/watch?v=3Dv4-n6OYGI" target="_blank" rel="noopener">Part 1 &#8599;</a>
+          <a class="bp-watch" href="https://www.youtube.com/watch?v=GGCF3OPWN14" target="_blank" rel="noopener">Part 2 &#8599;</a>
+        </div>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Gospel of Matthew Summary&rdquo; (Pt 1 of 2)</span>
       </div>
     </div>
 
@@ -321,8 +329,11 @@ a{text-decoration:none;color:inherit}
       </button>
       <div class="bp-panel" hidden>
         <div class="bp-embed"></div>
-        <a class="bp-watch" href="https://www.youtube.com/watch?v=XIb_dCIxzr0" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
-        <span class="bp-cap">BibleProject &middot; &ldquo;Gospel of Luke Summary&rdquo; (Pt 1)</span>
+        <div class="bp-links">
+          <a class="bp-watch" href="https://www.youtube.com/watch?v=XIb_dCIxzr0" target="_blank" rel="noopener">Part 1 &#8599;</a>
+          <a class="bp-watch" href="https://www.youtube.com/watch?v=26z_KhwNdD8" target="_blank" rel="noopener">Part 2 &#8599;</a>
+        </div>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Gospel of Luke Summary&rdquo; (Pt 1 of 2)</span>
       </div>
     </div>
 
@@ -340,8 +351,11 @@ a{text-decoration:none;color:inherit}
       </button>
       <div class="bp-panel" hidden>
         <div class="bp-embed"></div>
-        <a class="bp-watch" href="https://www.youtube.com/watch?v=G-2e9mMf7E8" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
-        <span class="bp-cap">BibleProject &middot; &ldquo;Gospel of John Summary&rdquo; (Pt 1)</span>
+        <div class="bp-links">
+          <a class="bp-watch" href="https://www.youtube.com/watch?v=G-2e9mMf7E8" target="_blank" rel="noopener">Part 1 &#8599;</a>
+          <a class="bp-watch" href="https://www.youtube.com/watch?v=RUfh_wOsauk" target="_blank" rel="noopener">Part 2 &#8599;</a>
+        </div>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Gospel of John Summary&rdquo; (Pt 1 of 2)</span>
       </div>
     </div>
 
@@ -367,22 +381,48 @@ a{text-decoration:none;color:inherit}
       </button>
       <div class="bp-panel" hidden>
         <div class="bp-embed"></div>
-        <a class="bp-watch" href="https://www.youtube.com/watch?v=ej_6dVdJSIU" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
-        <span class="bp-cap">BibleProject &middot; &ldquo;Book of Romans Summary&rdquo; (Pt 1)</span>
+        <div class="bp-links">
+          <a class="bp-watch" href="https://www.youtube.com/watch?v=ej_6dVdJSIU" target="_blank" rel="noopener">Part 1 &#8599;</a>
+          <a class="bp-watch" href="https://www.youtube.com/watch?v=0SVTl4Xa5fY" target="_blank" rel="noopener">Part 2 &#8599;</a>
+        </div>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Book of Romans Summary&rdquo; (Pt 1 of 2)</span>
       </div>
     </div>
 
-    <a class="card" href="paul/">
-      <span class="emoji">&#9993;&#65039;</span>
-      <div class="ctitle">&#9993;&#65039; The Apostle Paul &mdash; Life, Letters &amp; Legacy</div>
-      <div class="cdesc">An illustrated journey through Paul&rsquo;s life &mdash; from persecutor to apostle &mdash; with his conversion, missionary journeys, teaching, suffering, martyrdom, and a full guide to all 13 of his letters.</div>
-      <div class="meta">
-        <span class="tag">13 Letters</span>
-        <span class="tag">Life &amp; Journeys</span>
-        <span class="tag">Images + Video</span>
+    <div class="card">
+      <a class="card-link" href="paul/">
+        <span class="emoji">&#9993;&#65039;</span>
+        <div class="ctitle">&#9993;&#65039; The Apostle Paul &mdash; Life, Letters &amp; Legacy</div>
+        <div class="cdesc">An illustrated journey through Paul&rsquo;s life &mdash; from persecutor to apostle &mdash; with his conversion, missionary journeys, teaching, suffering, martyrdom, and a full guide to all 13 of his letters.</div>
+        <div class="meta">
+          <span class="tag">13 Letters</span>
+          <span class="tag">Life &amp; Journeys</span>
+          <span class="tag">Images + Video</span>
+        </div>
+        <span class="open">Explore &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false">
+        <span class="tri"></span> BibleProject &middot; all 13 letters <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden>
+        <span class="bp-cap" style="margin-top:0">Watch each letter&rsquo;s overview on BibleProject:</span>
+        <div class="bp-chips">
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=ej_6dVdJSIU" target="_blank" rel="noopener">Romans &#8599;</a>
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=yiHf8klCCc4" target="_blank" rel="noopener">1 Corinthians &#8599;</a>
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=3lfPK2vfC54" target="_blank" rel="noopener">2 Corinthians &#8599;</a>
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=vmx4UjRFp0M" target="_blank" rel="noopener">Galatians &#8599;</a>
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=Y71r-T98E2Q" target="_blank" rel="noopener">Ephesians &#8599;</a>
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=oE9qqW1-BkU" target="_blank" rel="noopener">Philippians &#8599;</a>
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=pXTXlDxQsvc" target="_blank" rel="noopener">Colossians &#8599;</a>
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=No7Nq6IX23c" target="_blank" rel="noopener">1 Thessalonians &#8599;</a>
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=kbPBDKOn1cc" target="_blank" rel="noopener">2 Thessalonians &#8599;</a>
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=7RoqnGcEjcs" target="_blank" rel="noopener">1 Timothy &#8599;</a>
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=urlvnxCaL00" target="_blank" rel="noopener">2 Timothy &#8599;</a>
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=PUEYCVXJM3k" target="_blank" rel="noopener">Titus &#8599;</a>
+          <a class="bp-chip" href="https://www.youtube.com/watch?v=aW9Q3Jt6Yvk" target="_blank" rel="noopener">Philemon &#8599;</a>
+        </div>
       </div>
-      <span class="open">Explore &rarr;</span>
-    </a>
+    </div>
 
     <!--
       HOW TO ADD ANOTHER STUDY: copy a card block above. For a plain card use
@@ -414,8 +454,11 @@ a{text-decoration:none;color:inherit}
       </button>
       <div class="bp-panel" hidden>
         <div class="bp-embed"></div>
-        <a class="bp-watch" href="https://www.youtube.com/watch?v=5nvVVcYD-0w" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
-        <span class="bp-cap">BibleProject &middot; &ldquo;Book of Revelation Summary&rdquo; (Pt 1)</span>
+        <div class="bp-links">
+          <a class="bp-watch" href="https://www.youtube.com/watch?v=5nvVVcYD-0w" target="_blank" rel="noopener">Part 1 &#8599;</a>
+          <a class="bp-watch" href="https://www.youtube.com/watch?v=QpnIrbq2bKo" target="_blank" rel="noopener">Part 2 &#8599;</a>
+        </div>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Book of Revelation Summary&rdquo; (Pt 1 of 2)</span>
       </div>
     </div>
 
