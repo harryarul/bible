@@ -30,7 +30,7 @@ a{text-decoration:none;color:inherit}
 /* STUDY GRID */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem}
 
-/* AVAILABLE STUDY CARD (a link) */
+/* AVAILABLE STUDY CARD */
 .card{display:block;background:var(--wh);border:1.5px solid var(--tn);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
 .card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--gd);border-radius:16px 16px 0 0}
 .card:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(44,24,16,.18)}
@@ -41,6 +41,24 @@ a{text-decoration:none;color:inherit}
 .tag{background:var(--gp);border:1px solid var(--gd);color:var(--md);font-size:.68rem;padding:.2rem .55rem;border-radius:14px;font-weight:700}
 .card .open{display:inline-flex;align-items:center;gap:.4rem;background:var(--dk);color:var(--gl);font-size:.82rem;font-weight:700;padding:.5rem .9rem;border-radius:9px;transition:background .15s}
 .card:hover .open{background:var(--md)}
+
+/* CARD = container; study link sits inside so the BibleProject button can be a separate tap target */
+.card-link{display:block;color:inherit}
+
+/* BIBLEPROJECT in-card video */
+.bp-toggle{display:flex;width:100%;align-items:center;gap:.5rem;margin-top:.9rem;background:transparent;border:1.5px solid var(--gd);color:var(--md);font-family:Lato,sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.01em;padding:.55rem .8rem;border-radius:9px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.bp-toggle:hover{background:var(--gp)}
+.bp-toggle .tri{width:0;height:0;border-style:solid;border-width:5px 0 5px 8px;border-color:transparent transparent transparent currentColor;flex:none}
+.bp-toggle .chev{margin-left:auto;font-size:.7rem;line-height:1;transition:transform .2s}
+.card.open-bp .bp-toggle{background:var(--dk);color:var(--gl);border-color:var(--dk)}
+.card.open-bp .bp-toggle .chev{transform:rotate(180deg)}
+.bp-panel{margin-top:.75rem}
+.bp-embed{position:relative;width:100%;aspect-ratio:16/9;border-radius:9px;overflow:hidden;background:#0b0b0b;box-shadow:0 6px 18px rgba(44,24,16,.22)}
+.bp-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.bp-embed:empty{display:none}
+.bp-watch{display:inline-flex;align-items:center;gap:.35rem;margin-top:.55rem;font-size:.74rem;font-weight:700;color:var(--rd)}
+.bp-watch:hover{text-decoration:underline}
+.bp-cap{display:block;margin-top:.3rem;font-family:'Playfair Display',serif;font-style:italic;font-size:.72rem;color:var(--md)}
 
 /* COMING SOON CARD */
 .soon{background:var(--p2);border:1.5px dashed var(--tn);border-radius:16px;padding:1.5rem;opacity:.8}
@@ -129,17 +147,27 @@ a{text-decoration:none;color:inherit}
   <p class="foursub">From the first promise in Eden to the New Jerusalem &mdash; God&rsquo;s covenant promises across both Testaments, and the promises Jesus spoke with his own lips.</p>
   <div class="grid">
 
-    <a class="card pr" href="promises.html">
-      <span class="emoji">&#127752;</span>
-      <div class="ctitle">&#127752; The Promises of God &amp; of Jesus</div>
-      <div class="cdesc">Every covenant promise of God across both Testaments, illuminated in gold &mdash; and the promises of Jesus himself, set in the traditional red letter. King James text, with NIV reading links.</div>
-      <div class="meta">
-        <span class="tag">75 Promises</span>
-        <span class="tag">Gold &amp; Red-Letter</span>
-        <span class="tag">NIV link + KJV</span>
+    <div class="card pr">
+      <a class="card-link" href="promises.html">
+        <span class="emoji">&#127752;</span>
+        <div class="ctitle">&#127752; The Promises of God &amp; of Jesus</div>
+        <div class="cdesc">Every covenant promise of God across both Testaments, illuminated in gold &mdash; and the promises of Jesus himself, set in the traditional red letter. King James text, with NIV reading links.</div>
+        <div class="meta">
+          <span class="tag">75 Promises</span>
+          <span class="tag">Gold &amp; Red-Letter</span>
+          <span class="tag">NIV link + KJV</span>
+        </div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="6HjlGvl8ljM">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden>
+        <div class="bp-embed"></div>
+        <a class="bp-watch" href="https://www.youtube.com/watch?v=6HjlGvl8ljM" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
+        <span class="bp-cap">BibleProject &middot; &ldquo;The Covenants&rdquo;</span>
       </div>
-      <span class="open">Open Study &rarr;</span>
-    </a>
+    </div>
 
   </div>
 
@@ -147,53 +175,93 @@ a{text-decoration:none;color:inherit}
   <p class="foursub">The Hebrew Scriptures &mdash; the law, the writings and the prophets, all pointing forward to Christ. The Torah and the poets to begin with; more books on the way.</p>
   <div class="grid">
 
-    <a class="card" href="pentateuch/">
-      <span class="emoji">&#128220;</span>
-      <div class="ctitle">&#128220; The Pentateuch &mdash; The Five Books of the Torah</div>
-      <div class="cdesc">Genesis to Deuteronomy &mdash; the foundation of Scripture, with 21 character cards, a Torah timeline, typology pointing to Christ, and tappable scripture references.</div>
-      <div class="meta">
-        <span class="tag">5 Books</span>
-        <span class="tag">Torah Timeline</span>
-        <span class="tag">21 Characters</span>
+    <div class="card">
+      <a class="card-link" href="pentateuch/">
+        <span class="emoji">&#128220;</span>
+        <div class="ctitle">&#128220; The Pentateuch &mdash; The Five Books of the Torah</div>
+        <div class="cdesc">Genesis to Deuteronomy &mdash; the foundation of Scripture, with 21 character cards, a Torah timeline, typology pointing to Christ, and tappable scripture references.</div>
+        <div class="meta">
+          <span class="tag">5 Books</span>
+          <span class="tag">Torah Timeline</span>
+          <span class="tag">21 Characters</span>
+        </div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="3BGO9Mmd_cU">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden>
+        <div class="bp-embed"></div>
+        <a class="bp-watch" href="https://www.youtube.com/watch?v=3BGO9Mmd_cU" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
+        <span class="bp-cap">BibleProject &middot; &ldquo;The Law&rdquo; (Torah / Pentateuch)</span>
       </div>
-      <span class="open">Open Study &rarr;</span>
-    </a>
+    </div>
 
-    <a class="card" href="psalms/">
-      <span class="emoji">&#127931;</span>
-      <div class="ctitle">&#127931; The Psalms &mdash; Songs of Praise, Lament &amp; Trust</div>
-      <div class="cdesc">Fifteen essential psalms &mdash; themes, key verses, reflection questions, NIV reading links, and worship songs built on each one.</div>
-      <div class="meta">
-        <span class="tag">15 Psalms</span>
-        <span class="tag">NIV link + KJV</span>
-        <span class="tag">&#127925; Songs</span>
+    <div class="card">
+      <a class="card-link" href="psalms/">
+        <span class="emoji">&#127931;</span>
+        <div class="ctitle">&#127931; The Psalms &mdash; Songs of Praise, Lament &amp; Trust</div>
+        <div class="cdesc">Fifteen essential psalms &mdash; themes, key verses, reflection questions, NIV reading links, and worship songs built on each one.</div>
+        <div class="meta">
+          <span class="tag">15 Psalms</span>
+          <span class="tag">NIV link + KJV</span>
+          <span class="tag">&#127925; Songs</span>
+        </div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="j9phNEaPrv8">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden>
+        <div class="bp-embed"></div>
+        <a class="bp-watch" href="https://www.youtube.com/watch?v=j9phNEaPrv8" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Book of Psalms Summary&rdquo;</span>
       </div>
-      <span class="open">Open Study &rarr;</span>
-    </a>
+    </div>
 
-    <a class="card" href="prophets.html">
-      <span class="emoji">&#128293;</span>
-      <div class="ctitle">&#128293; The Prophets &mdash; Voices That Carried Heaven&rsquo;s Word</div>
-      <div class="cdesc">Every Old Testament prophet &mdash; the four Major, the twelve Minor and mighty voices like Moses and Elijah. Each life, message and book, with tappable passages, cross-references and NIV reading links.</div>
-      <div class="meta">
-        <span class="tag">22 Prophets</span>
-        <span class="tag">Major &amp; Minor</span>
-        <span class="tag">NIV link + KJV</span>
+    <div class="card">
+      <a class="card-link" href="prophets.html">
+        <span class="emoji">&#128293;</span>
+        <div class="ctitle">&#128293; The Prophets &mdash; Voices That Carried Heaven&rsquo;s Word</div>
+        <div class="cdesc">Every Old Testament prophet &mdash; the four Major, the twelve Minor and mighty voices like Moses and Elijah. Each life, message and book, with tappable passages, cross-references and NIV reading links.</div>
+        <div class="meta">
+          <span class="tag">22 Prophets</span>
+          <span class="tag">Major &amp; Minor</span>
+          <span class="tag">NIV link + KJV</span>
+        </div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="edcqUu_BtN0">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden>
+        <div class="bp-embed"></div>
+        <a class="bp-watch" href="https://www.youtube.com/watch?v=edcqUu_BtN0" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
+        <span class="bp-cap">BibleProject &middot; &ldquo;How to Read the Prophets&rdquo;</span>
       </div>
-      <span class="open">Open Study &rarr;</span>
-    </a>
+    </div>
 
-    <a class="card" href="songofsolomon/">
-      <span class="emoji">&#127801;</span>
-      <div class="ctitle">&#127801; Song of Solomon &mdash; The Song of Songs</div>
-      <div class="cdesc">Chapter by chapter through the Song of Songs &mdash; bride, bridegroom and the seal upon the heart &mdash; with inline illustrations and reflection questions.</div>
-      <div class="meta">
-        <span class="tag">8 Chapters</span>
-        <span class="tag">Bride &amp; Bridegroom</span>
-        <span class="tag">Reflections</span>
+    <div class="card">
+      <a class="card-link" href="songofsolomon/">
+        <span class="emoji">&#127801;</span>
+        <div class="ctitle">&#127801; Song of Solomon &mdash; The Song of Songs</div>
+        <div class="cdesc">Chapter by chapter through the Song of Songs &mdash; bride, bridegroom and the seal upon the heart &mdash; with inline illustrations and reflection questions.</div>
+        <div class="meta">
+          <span class="tag">8 Chapters</span>
+          <span class="tag">Bride &amp; Bridegroom</span>
+          <span class="tag">Reflections</span>
+        </div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="4KC7xE4fgOw">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden>
+        <div class="bp-embed"></div>
+        <a class="bp-watch" href="https://www.youtube.com/watch?v=4KC7xE4fgOw" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Overview: Song of Songs&rdquo;</span>
       </div>
-      <span class="open">Open Study &rarr;</span>
-    </a>
+    </div>
 
   </div>
 
@@ -201,58 +269,108 @@ a{text-decoration:none;color:inherit}
   <p class="foursub">Four witnesses, one Saviour. Walk through the events of Jesus&rsquo; life &mdash; birth, miracles, the final days, the cross, the seven last words and the resurrection. Every shared miracle and event is <strong>interlinked</strong>, so you can leap from one Gospel to the parallel account in another.</p>
   <div class="grid">
 
-    <a class="card gm" href="gospels/matthew.html">
-      <span class="sym">&#128100;</span>
-      <div class="creature">The Winged Man &middot; &Kappa;&alpha;&tau;&#8049; &Mu;&alpha;&theta;&theta;&alpha;&#8150;&omicron;&nu;</div>
-      <div class="ctitle">The Gospel of Matthew</div>
-      <div class="cdesc">Jesus the promised <b>King</b> &mdash; Son of David, Son of Abraham. The wise men, the Sermon on the Mount, and the Great Commission &mdash; &ldquo;I am with you always.&rdquo;</div>
-      <div class="meta"><span class="tag">28 Chapters</span><span class="tag">King &amp; Messiah</span><span class="tag">Interlinked</span></div>
-      <span class="open">Enter Matthew &rarr;</span>
-    </a>
+    <div class="card gm">
+      <a class="card-link" href="gospels/matthew.html">
+        <span class="sym">&#128100;</span>
+        <div class="creature">The Winged Man &middot; &Kappa;&alpha;&tau;&#8049; &Mu;&alpha;&theta;&theta;&alpha;&#8150;&omicron;&nu;</div>
+        <div class="ctitle">The Gospel of Matthew</div>
+        <div class="cdesc">Jesus the promised <b>King</b> &mdash; Son of David, Son of Abraham. The wise men, the Sermon on the Mount, and the Great Commission &mdash; &ldquo;I am with you always.&rdquo;</div>
+        <div class="meta"><span class="tag">28 Chapters</span><span class="tag">King &amp; Messiah</span><span class="tag">Interlinked</span></div>
+        <span class="open">Enter Matthew &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="3Dv4-n6OYGI">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden>
+        <div class="bp-embed"></div>
+        <a class="bp-watch" href="https://www.youtube.com/watch?v=3Dv4-n6OYGI" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Gospel of Matthew Summary&rdquo; (Pt 1)</span>
+      </div>
+    </div>
 
-    <a class="card gk" href="gospels/mark.html">
-      <span class="sym">&#129409;</span>
-      <div class="creature">The Lion &middot; &Kappa;&alpha;&tau;&#8049; &Mu;&#8118;&rho;&kappa;&omicron;&nu;</div>
-      <div class="ctitle">The Gospel of Mark</div>
-      <div class="cdesc">Jesus the suffering <b>Servant</b> &mdash; the shortest, fastest Gospel, always on the move. Home of the Great Commission of <b>Mark 16</b>: &ldquo;Go into all the world.&rdquo;</div>
-      <div class="meta"><span class="tag">16 Chapters</span><span class="tag">The Servant</span><span class="tag">Mark 16</span></div>
-      <span class="open">Enter Mark &rarr;</span>
-    </a>
+    <div class="card gk">
+      <a class="card-link" href="gospels/mark.html">
+        <span class="sym">&#129409;</span>
+        <div class="creature">The Lion &middot; &Kappa;&alpha;&tau;&#8049; &Mu;&#8118;&rho;&kappa;&omicron;&nu;</div>
+        <div class="ctitle">The Gospel of Mark</div>
+        <div class="cdesc">Jesus the suffering <b>Servant</b> &mdash; the shortest, fastest Gospel, always on the move. Home of the Great Commission of <b>Mark 16</b>: &ldquo;Go into all the world.&rdquo;</div>
+        <div class="meta"><span class="tag">16 Chapters</span><span class="tag">The Servant</span><span class="tag">Mark 16</span></div>
+        <span class="open">Enter Mark &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="HGHqu9-DtXk">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden>
+        <div class="bp-embed"></div>
+        <a class="bp-watch" href="https://www.youtube.com/watch?v=HGHqu9-DtXk" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Gospel of Mark Summary&rdquo;</span>
+      </div>
+    </div>
 
-    <a class="card gl" href="gospels/luke.html">
-      <span class="sym">&#128002;</span>
-      <div class="creature">The Ox &middot; &Kappa;&alpha;&tau;&#8049; &Lambda;&omicron;&upsilon;&kappa;&#8118;&nu;</div>
-      <div class="ctitle">The Gospel of Luke</div>
-      <div class="cdesc">Jesus the <b>Saviour of all</b> &mdash; the physician&rsquo;s detailed nativity, the Prodigal Son, the Good Samaritan, and a mercy that reaches the lost.</div>
-      <div class="meta"><span class="tag">24 Chapters</span><span class="tag">Saviour of All</span><span class="tag">Interlinked</span></div>
-      <span class="open">Enter Luke &rarr;</span>
-    </a>
+    <div class="card gl">
+      <a class="card-link" href="gospels/luke.html">
+        <span class="sym">&#128002;</span>
+        <div class="creature">The Ox &middot; &Kappa;&alpha;&tau;&#8049; &Lambda;&omicron;&upsilon;&kappa;&#8118;&nu;</div>
+        <div class="ctitle">The Gospel of Luke</div>
+        <div class="cdesc">Jesus the <b>Saviour of all</b> &mdash; the physician&rsquo;s detailed nativity, the Prodigal Son, the Good Samaritan, and a mercy that reaches the lost.</div>
+        <div class="meta"><span class="tag">24 Chapters</span><span class="tag">Saviour of All</span><span class="tag">Interlinked</span></div>
+        <span class="open">Enter Luke &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="XIb_dCIxzr0">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden>
+        <div class="bp-embed"></div>
+        <a class="bp-watch" href="https://www.youtube.com/watch?v=XIb_dCIxzr0" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Gospel of Luke Summary&rdquo; (Pt 1)</span>
+      </div>
+    </div>
 
-    <a class="card gj" href="gospels/john.html">
-      <span class="sym">&#129413;</span>
-      <div class="creature">The Eagle &middot; &Kappa;&alpha;&tau;&#8049; &#7992;&omega;&#8049;&nu;&nu;&eta;&nu;</div>
-      <div class="ctitle">The Gospel of John</div>
-      <div class="cdesc">Jesus the eternal <b>Son of God</b> &mdash; &ldquo;In the beginning was the Word.&rdquo; Seven signs, seven &ldquo;I AM&rdquo; sayings, Lazarus raised, written &ldquo;that you may believe.&rdquo;</div>
-      <div class="meta"><span class="tag">21 Chapters</span><span class="tag">Son of God</span><span class="tag">7 Signs</span></div>
-      <span class="open">Enter John &rarr;</span>
-    </a>
+    <div class="card gj">
+      <a class="card-link" href="gospels/john.html">
+        <span class="sym">&#129413;</span>
+        <div class="creature">The Eagle &middot; &Kappa;&alpha;&tau;&#8049; &#7992;&omega;&#8049;&nu;&nu;&eta;&nu;</div>
+        <div class="ctitle">The Gospel of John</div>
+        <div class="cdesc">Jesus the eternal <b>Son of God</b> &mdash; &ldquo;In the beginning was the Word.&rdquo; Seven signs, seven &ldquo;I AM&rdquo; sayings, Lazarus raised, written &ldquo;that you may believe.&rdquo;</div>
+        <div class="meta"><span class="tag">21 Chapters</span><span class="tag">Son of God</span><span class="tag">7 Signs</span></div>
+        <span class="open">Enter John &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="G-2e9mMf7E8">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden>
+        <div class="bp-embed"></div>
+        <a class="bp-watch" href="https://www.youtube.com/watch?v=G-2e9mMf7E8" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Gospel of John Summary&rdquo; (Pt 1)</span>
+      </div>
+    </div>
 
   </div>
 
   <div class="sec-title"><span class="sec-icon">&#128214;</span> New Testament &middot; Letters &amp; Apostles</div>
   <div class="grid">
 
-    <a class="card" href="romans-study.html">
-      <span class="emoji">&#128220;</span>
-      <div class="ctitle">&#128220; The Book of Romans &mdash; Interactive Bible Study</div>
-      <div class="cdesc">All 16 chapters of Paul&rsquo;s letter to Rome &mdash; concept cards, key verses, teaching notes, discussion questions, and full-text reading.</div>
-      <div class="meta">
-        <span class="tag">16 Chapters</span>
-        <span class="tag">Small Group</span>
-        <span class="tag">NIV link + KJV</span>
+    <div class="card">
+      <a class="card-link" href="romans-study.html">
+        <span class="emoji">&#128220;</span>
+        <div class="ctitle">&#128220; The Book of Romans &mdash; Interactive Bible Study</div>
+        <div class="cdesc">All 16 chapters of Paul&rsquo;s letter to Rome &mdash; concept cards, key verses, teaching notes, discussion questions, and full-text reading.</div>
+        <div class="meta">
+          <span class="tag">16 Chapters</span>
+          <span class="tag">Small Group</span>
+          <span class="tag">NIV link + KJV</span>
+        </div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="ej_6dVdJSIU">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden>
+        <div class="bp-embed"></div>
+        <a class="bp-watch" href="https://www.youtube.com/watch?v=ej_6dVdJSIU" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Book of Romans Summary&rdquo; (Pt 1)</span>
       </div>
-      <span class="open">Open Study &rarr;</span>
-    </a>
+    </div>
 
     <a class="card" href="paul/">
       <span class="emoji">&#9993;&#65039;</span>
@@ -267,9 +385,10 @@ a{text-decoration:none;color:inherit}
     </a>
 
     <!--
-      HOW TO ADD ANOTHER STUDY: copy a <a class="card"> ... </a> block above,
-      change href/emoji/title/description/tags, and drop it into the matching
-      testament grid (Old Testament or New Testament).
+      HOW TO ADD ANOTHER STUDY: copy a card block above. For a plain card use
+      <a class="card" href="...">...</a>. To add a BibleProject overview, use the
+      <div class="card"> wrapper with an inner <a class="card-link"> plus the
+      <button class="bp-toggle" data-yt="VIDEO_ID"> and matching <div class="bp-panel">.
     -->
 
   </div>
@@ -278,17 +397,27 @@ a{text-decoration:none;color:inherit}
   <p class="foursub">The unveiling of Jesus Christ &mdash; John&rsquo;s visions on the island of Patmos, where all of history bends toward the throne and the city of gold. The last word of Scripture, and its brightest hope.</p>
   <div class="grid">
 
-    <a class="card" href="revelation.html">
-      <span class="emoji">&#128081;</span>
-      <div class="ctitle">&#128081; The Revelation &mdash; The Visions on Patmos</div>
-      <div class="cdesc">John&rsquo;s apocalypse, chapters 1 to 21 &mdash; every vision in sequence, from the seven golden lampstands through the seals, trumpets and bowls to the New Jerusalem, the city of gold.</div>
-      <div class="meta">
-        <span class="tag">Chapters 1&ndash;21</span>
-        <span class="tag">Seals &middot; Trumpets &middot; Bowls</span>
-        <span class="tag">NIV link</span>
+    <div class="card">
+      <a class="card-link" href="revelation.html">
+        <span class="emoji">&#128081;</span>
+        <div class="ctitle">&#128081; The Revelation &mdash; The Visions on Patmos</div>
+        <div class="cdesc">John&rsquo;s apocalypse, chapters 1 to 21 &mdash; every vision in sequence, from the seven golden lampstands through the seals, trumpets and bowls to the New Jerusalem, the city of gold.</div>
+        <div class="meta">
+          <span class="tag">Chapters 1&ndash;21</span>
+          <span class="tag">Seals &middot; Trumpets &middot; Bowls</span>
+          <span class="tag">NIV link</span>
+        </div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="5nvVVcYD-0w">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden>
+        <div class="bp-embed"></div>
+        <a class="bp-watch" href="https://www.youtube.com/watch?v=5nvVVcYD-0w" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
+        <span class="bp-cap">BibleProject &middot; &ldquo;Book of Revelation Summary&rdquo; (Pt 1)</span>
       </div>
-      <span class="open">Open Study &rarr;</span>
-    </a>
+    </div>
 
   </div>
 
@@ -300,6 +429,35 @@ a{text-decoration:none;color:inherit}
   <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a>.<br>
   <em>To God be the glory &mdash; Romans 16:27</em>
 </footer>
+
+<script>
+/* In-card BibleProject overview: event-delegated toggle (iOS Safari safe).
+   Lazy-loads the YouTube embed on open; clears it on close so audio stops. */
+document.addEventListener('click', function (e) {
+  var btn = e.target.closest('.bp-toggle');
+  if (!btn) return;
+  var card = btn.closest('.card');
+  if (!card) return;
+  var panel = card.querySelector('.bp-panel');
+  var isOpen = card.classList.toggle('open-bp');
+  btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  if (!panel) return;
+  var embed = panel.querySelector('.bp-embed');
+  if (isOpen) {
+    panel.hidden = false;
+    var id = btn.getAttribute('data-yt');
+    if (embed && id && !embed.firstChild) {
+      embed.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id +
+        '?rel=0" title="BibleProject overview" loading="lazy" ' +
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+        'allowfullscreen></iframe>';
+    }
+  } else {
+    panel.hidden = true;
+    if (embed) embed.innerHTML = '';
+  }
+});
+</script>
 
 </body>
 </html>
