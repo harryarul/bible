@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Every Book of the Bible &mdash; Bible Study Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--p:#FBF5E6;--p2:#F5EDD4;--wh:#FFFDF7;--dk:#2C1810;--md:#6B4423;--gd:#C4872A;--gl:#E8C97A;--gp:#FBF0D0;--tn:#D4B896;--tl:#EBD9BE;--rd:#8B3A3A;--tl2:#2A7B6B;--in:#3A4A8B;--pl:#6B3A7B}
+body{font-family:Lato,sans-serif;background:var(--p);color:var(--dk);min-height:100vh;display:flex;flex-direction:column}
+a{text-decoration:none;color:inherit}
+.hdr{background:var(--dk);color:#FDF8EE;padding:1rem 1.5rem;display:flex;align-items:center;gap:.9rem;position:sticky;top:0;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.hdr .back{font-size:.78rem;color:var(--gl);border:1px solid var(--gd);padding:.3rem .7rem;border-radius:20px;white-space:nowrap}
+.hdr .back:hover{background:rgba(196,135,42,.2)}
+.logo{font-family:Caveat,cursive;font-size:1.6rem;font-weight:700;color:var(--gl);line-height:1}
+.sub{font-size:.68rem;color:#C4A47A;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+.bdg{margin-left:auto;background:rgba(196,135,42,.25);border:1px solid var(--gd);color:var(--gl);font-size:.68rem;padding:.25rem .6rem;border-radius:20px;letter-spacing:.06em;text-transform:uppercase}
+.hero{text-align:center;padding:2.6rem 1.5rem 1.4rem;max-width:760px;margin:0 auto}
+.hero h1{font-family:Caveat,cursive;font-size:2.8rem;color:var(--dk);margin-bottom:.5rem;line-height:1.1}
+.hero p{font-family:'Playfair Display',serif;font-style:italic;font-size:1.12rem;color:var(--md);line-height:1.7}
+.wrap{flex:1;max-width:980px;width:100%;margin:0 auto;padding:0 1.5rem 3rem}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-family:Caveat,cursive;font-size:1.5rem;color:var(--dk);font-weight:700;margin:1.8rem 0 .6rem}
+.sec-icon{width:30px;height:30px;background:var(--dk);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.foursub{font-family:'Playfair Display',serif;font-style:italic;color:var(--md);font-size:.95rem;line-height:1.7;margin:0 0 1.2rem;max-width:680px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem}
+.card{display:block;background:var(--wh);border:1.5px solid var(--tn);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--gd);border-radius:16px 16px 0 0}
+.card:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(44,24,16,.18)}
+.card .emoji{font-size:2.4rem;display:block;margin-bottom:.6rem}
+.card .ctitle{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--dk);line-height:1.25;margin-bottom:.4rem}
+.card .cdesc{font-size:.85rem;color:var(--md);line-height:1.65;margin-bottom:1rem}
+.card .meta{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.tag{background:var(--gp);border:1px solid var(--gd);color:var(--md);font-size:.68rem;padding:.2rem .55rem;border-radius:14px;font-weight:700}
+.card .open{display:inline-flex;align-items:center;gap:.4rem;background:var(--dk);color:var(--gl);font-size:.82rem;font-weight:700;padding:.5rem .9rem;border-radius:9px;transition:background .15s}
+.card:hover .open{background:var(--md)}
+.card-link{display:block;color:inherit}
+.bp-toggle{display:flex;width:100%;align-items:center;gap:.5rem;margin-top:.9rem;background:transparent;border:1.5px solid var(--gd);color:var(--md);font-family:Lato,sans-serif;font-weight:700;font-size:.78rem;padding:.55rem .8rem;border-radius:9px;cursor:pointer;transition:.15s}
+.bp-toggle:hover{background:var(--gp)}
+.bp-toggle .tri{width:0;height:0;border-style:solid;border-width:5px 0 5px 8px;border-color:transparent transparent transparent currentColor;flex:none}
+.bp-toggle .chev{margin-left:auto;font-size:.7rem;line-height:1;transition:transform .2s}
+.card.open-bp .bp-toggle{background:var(--dk);color:var(--gl);border-color:var(--dk)}
+.card.open-bp .bp-toggle .chev{transform:rotate(180deg)}
+.bp-panel{margin-top:.75rem}
+.bp-embed{position:relative;width:100%;aspect-ratio:16/9;border-radius:9px;overflow:hidden;background:#0b0b0b;box-shadow:0 6px 18px rgba(44,24,16,.22)}
+.bp-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.bp-embed:empty{display:none}
+.bp-watch{display:inline-flex;align-items:center;gap:.35rem;margin-top:.55rem;font-size:.74rem;font-weight:700;color:var(--rd)}
+.bp-watch:hover{text-decoration:underline}
+.bp-cap{display:block;margin-top:.3rem;font-family:'Playfair Display',serif;font-style:italic;font-size:.72rem;color:var(--md)}
+.bp-links{display:flex;flex-wrap:wrap;gap:.15rem 1.1rem;margin-top:.55rem}
+.bp-links .bp-watch{margin-top:0}
+.foot{background:var(--dk);color:#C4A47A;text-align:center;padding:1.4rem;font-size:.78rem;line-height:1.7}
+.foot a{color:var(--gl);text-decoration:underline}
+@media(max-width:600px){.hero h1{font-size:2.1rem}.hero p{font-size:1rem}.wrap{padding:0 1rem 2rem}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <a class="back" href="../">&larr; Library</a>
+  <div>
+    <div class="logo">&#128218; Every Book of the Bible</div>
+    <div class="sub">Book-by-book studies &middot; the remaining books</div>
+  </div>
+  <span class="bdg">Free &amp; Offline-Ready</span>
+</header>
+
+<section class="hero">
+  <h1>Every Book of the Bible</h1>
+  <p>Standalone studies for the books not yet covered by the main collections &mdash; each with an overview, key themes, a key verse, an in-page reader, NIV links and a BibleProject video.</p>
+</section>
+
+<main class="wrap">
+
+  <div class="sec-title"><span class="sec-icon">📜</span> Old Testament · History</div>
+  <p class="foursub">From the conquest of the land to the return from exile &mdash; Israel&rsquo;s long story of kings, covenants, faithfulness and failure.</p>
+  <div class="grid">
+
+    <div class="card">
+      <a class="card-link" href="joshua.html">
+        <span class="emoji">🎺</span>
+        <div class="ctitle">🎺 Joshua</div>
+        <div class="cdesc">Crossing the Jordan into the Promised Land &mdash; Jericho, the conquest, the tribal allotments, and &ldquo;choose this day whom you will serve.&rdquo;</div>
+        <div class="meta"><span class="tag">24 Chapters</span><span class="tag">Conquest</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="JqOqJlFF_eU">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=JqOqJlFF_eU" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="judges.html">
+        <span class="emoji">🌀</span>
+        <div class="ctitle">🌀 Judges</div>
+        <div class="cdesc">Israel&rsquo;s downward spiral through cycles of sin and rescue &mdash; Deborah, Gideon and Samson, when everyone did what was right in their own eyes.</div>
+        <div class="meta"><span class="tag">21 Chapters</span><span class="tag">Cycles</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="kOYy8iCfIJ4">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=kOYy8iCfIJ4" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="ruth.html">
+        <span class="emoji">🌾</span>
+        <div class="ctitle">🌾 Ruth</div>
+        <div class="cdesc">Loyalty, loss and redemption in the days of the Judges &mdash; Ruth, Naomi, and Boaz the kinsman-redeemer in the line of David.</div>
+        <div class="meta"><span class="tag">4 Chapters</span><span class="tag">Redemption</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="0h1eoBeR4Jk">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=0h1eoBeR4Jk" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="1-samuel.html">
+        <span class="emoji">👑</span>
+        <div class="ctitle">👑 1 Samuel</div>
+        <div class="cdesc">From Samuel to Saul to David &mdash; the rise of the monarchy, David and Goliath, and a God who looks upon the heart.</div>
+        <div class="meta"><span class="tag">31 Chapters</span><span class="tag">The First King</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="QJOju5Dw0V0">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=QJOju5Dw0V0" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="2-samuel.html">
+        <span class="emoji">🏰</span>
+        <div class="ctitle">🏰 2 Samuel</div>
+        <div class="cdesc">The reign of David &mdash; the ark in Jerusalem, the eternal covenant of an everlasting throne, and the cost of his great sin.</div>
+        <div class="meta"><span class="tag">24 Chapters</span><span class="tag">Davidic Covenant</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="YvoWDXNDJgs">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=YvoWDXNDJgs" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="1-kings.html">
+        <span class="emoji">🏛️</span>
+        <div class="ctitle">🏛️ 1 Kings</div>
+        <div class="cdesc">Solomon&rsquo;s temple and splendour, the kingdom torn in two, and Elijah on Mount Carmel &mdash; &ldquo;if the LORD be God, follow him.&rdquo;</div>
+        <div class="meta"><span class="tag">22 Chapters</span><span class="tag">Temple &amp; Division</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="bVFW3wbi9pk">
+        <span class="tri"></span> 1–2 Kings overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=bVFW3wbi9pk" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; 1–2 Kings overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="2-kings.html">
+        <span class="emoji">🪔</span>
+        <div class="ctitle">🪔 2 Kings</div>
+        <div class="cdesc">Elisha&rsquo;s ministry and the long slide into exile &mdash; Israel falls to Assyria, Judah to Babylon, and a flicker of hope remains.</div>
+        <div class="meta"><span class="tag">25 Chapters</span><span class="tag">Exile</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="bVFW3wbi9pk">
+        <span class="tri"></span> 1–2 Kings overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=bVFW3wbi9pk" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; 1–2 Kings overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="1-chronicles.html">
+        <span class="emoji">📜</span>
+        <div class="ctitle">📜 1 Chronicles</div>
+        <div class="cdesc">Israel&rsquo;s story retold for the returned exiles &mdash; genealogies from Adam and David&rsquo;s heart for worship and the temple.</div>
+        <div class="meta"><span class="tag">29 Chapters</span><span class="tag">David &amp; Worship</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="HR7xaHv3Ias">
+        <span class="tri"></span> 1–2 Chronicles overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=HR7xaHv3Ias" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; 1–2 Chronicles overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="2-chronicles.html">
+        <span class="emoji">🙏</span>
+        <div class="ctitle">🙏 2 Chronicles</div>
+        <div class="cdesc">The temple, the kings of Judah, and a call to return &mdash; &ldquo;if my people will humble themselves and pray.&rdquo;</div>
+        <div class="meta"><span class="tag">36 Chapters</span><span class="tag">Revival</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="HR7xaHv3Ias">
+        <span class="tri"></span> 1–2 Chronicles overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=HR7xaHv3Ias" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; 1–2 Chronicles overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="ezra.html">
+        <span class="emoji">🧱</span>
+        <div class="ctitle">🧱 Ezra</div>
+        <div class="cdesc">Return from exile and the rebuilding of the temple &mdash; Zerubbabel&rsquo;s altar and Ezra&rsquo;s call back to God&rsquo;s law.</div>
+        <div class="meta"><span class="tag">10 Chapters</span><span class="tag">Rebuilding</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="MkETkRv9tG8">
+        <span class="tri"></span> Ezra–Nehemiah overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=MkETkRv9tG8" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; Ezra–Nehemiah overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="nehemiah.html">
+        <span class="emoji">🛠️</span>
+        <div class="ctitle">🛠️ Nehemiah</div>
+        <div class="cdesc">Rebuilding Jerusalem&rsquo;s walls in fifty-two days against fierce opposition &mdash; prayerful leadership and covenant renewal.</div>
+        <div class="meta"><span class="tag">13 Chapters</span><span class="tag">The Walls</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="MkETkRv9tG8">
+        <span class="tri"></span> Ezra–Nehemiah overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=MkETkRv9tG8" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; Ezra–Nehemiah overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="esther.html">
+        <span class="emoji">👸</span>
+        <div class="ctitle">👸 Esther</div>
+        <div class="cdesc">&ldquo;For such a time as this&rdquo; &mdash; a Jewish queen risks everything to save her people, and God&rsquo;s hidden hand turns the tables.</div>
+        <div class="meta"><span class="tag">10 Chapters</span><span class="tag">Providence</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="JydNSlufRIs">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=JydNSlufRIs" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+  </div>
+
+  <div class="sec-title"><span class="sec-icon">🦉</span> Old Testament · Wisdom &amp; Poetry</div>
+  <p class="foursub">The poets and sages of Israel wrestle with suffering, wisdom, the meaning of life, and the right way to grieve before God.</p>
+  <div class="grid">
+
+    <div class="card">
+      <a class="card-link" href="job.html">
+        <span class="emoji">🌪️</span>
+        <div class="ctitle">🌪️ Job</div>
+        <div class="cdesc">Suffering and the sovereignty of God &mdash; a blameless man&rsquo;s anguish, his friends&rsquo; answers, and God&rsquo;s voice from the whirlwind.</div>
+        <div class="meta"><span class="tag">42 Chapters</span><span class="tag">Wisdom</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="xQwnH8th_fs">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=xQwnH8th_fs" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="proverbs.html">
+        <span class="emoji">🦉</span>
+        <div class="ctitle">🦉 Proverbs</div>
+        <div class="cdesc">The skill of godly living &mdash; wise sayings on speech, money, work and friendship, rooted in the fear of the LORD.</div>
+        <div class="meta"><span class="tag">31 Chapters</span><span class="tag">Wisdom</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="AzmYV8GNAIM">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=AzmYV8GNAIM" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="ecclesiastes.html">
+        <span class="emoji">⏳</span>
+        <div class="ctitle">⏳ Ecclesiastes</div>
+        <div class="cdesc">Meaning &ldquo;under the sun&rdquo; &mdash; the Preacher&rsquo;s search through pleasure, work and wealth, ending in: fear God and keep His commands.</div>
+        <div class="meta"><span class="tag">12 Chapters</span><span class="tag">Wisdom</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="lrsQ1tc-2wk">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=lrsQ1tc-2wk" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="lamentations.html">
+        <span class="emoji">🥀</span>
+        <div class="ctitle">🥀 Lamentations</div>
+        <div class="cdesc">Five poems weeping over fallen Jerusalem &mdash; raw grief, yet mercies new every morning: great is Thy faithfulness.</div>
+        <div class="meta"><span class="tag">5 Chapters</span><span class="tag">Lament</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="p8GDFPdaQZQ">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=p8GDFPdaQZQ" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+  </div>
+
+  <div class="sec-title"><span class="sec-icon">🕊️</span> New Testament · History</div>
+  <p class="foursub">Luke&rsquo;s account of the risen Jesus at work by His Spirit, as the good news breaks out of Jerusalem and across the Roman world.</p>
+  <div class="grid">
+
+    <div class="card">
+      <a class="card-link" href="acts.html">
+        <span class="emoji">🕊️</span>
+        <div class="ctitle">🕊️ Acts</div>
+        <div class="cdesc">The Spirit and the birth of the Church &mdash; Pentecost, Peter and Paul, and the gospel spreading to the ends of the earth.</div>
+        <div class="meta"><span class="tag">28 Chapters</span><span class="tag">The Church</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="CGbNw855ksw">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><div class="bp-links"><a class="bp-watch" href="https://www.youtube.com/watch?v=CGbNw855ksw" target="_blank" rel="noopener">Part 1 &#8599;</a><a class="bp-watch" href="https://www.youtube.com/watch?v=Z-17KxpjL0Q" target="_blank" rel="noopener">Part 2 &#8599;</a></div><span class="bp-cap">BibleProject &middot; &ldquo;Acts Summary&rdquo; (Pt 1 of 2)</span></div>
+    </div>
+
+  </div>
+
+  <div class="sec-title"><span class="sec-icon">✉️</span> New Testament · General Epistles</div>
+  <p class="foursub">Letters from Peter, John, James, Jude and the writer to the Hebrews &mdash; on the supremacy of Christ, living faith, love, hope and holding to the truth.</p>
+  <div class="grid">
+
+    <div class="card">
+      <a class="card-link" href="hebrews.html">
+        <span class="emoji">✝️</span>
+        <div class="ctitle">✝️ Hebrews</div>
+        <div class="cdesc">Jesus is greater &mdash; superior to angels, Moses and the priesthood, our great High Priest and once-for-all sacrifice.</div>
+        <div class="meta"><span class="tag">13 Chapters</span><span class="tag">Christ Supreme</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="z9wqN-nwSzE">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=z9wqN-nwSzE" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="james.html">
+        <span class="emoji">⚖️</span>
+        <div class="ctitle">⚖️ James</div>
+        <div class="cdesc">Faith that works &mdash; trials, the tongue, true wisdom and caring for the poor: the &ldquo;Proverbs of the New Testament.&rdquo;</div>
+        <div class="meta"><span class="tag">5 Chapters</span><span class="tag">Faith &amp; Works</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="qn-hLHWwRYY">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=qn-hLHWwRYY" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="1-peter.html">
+        <span class="emoji">🪨</span>
+        <div class="ctitle">🪨 1 Peter</div>
+        <div class="cdesc">Hope in the midst of suffering &mdash; a living hope through the resurrection and grace for exiles under pressure.</div>
+        <div class="meta"><span class="tag">5 Chapters</span><span class="tag">Living Hope</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="WhP7AZQlzCg">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=WhP7AZQlzCg" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="2-peter.html">
+        <span class="emoji">⚠️</span>
+        <div class="ctitle">⚠️ 2 Peter</div>
+        <div class="cdesc">Guard the truth and await His coming &mdash; warnings against false teachers and the certainty of Christ&rsquo;s return.</div>
+        <div class="meta"><span class="tag">3 Chapters</span><span class="tag">Stay True</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="wWLv_ITyKYc">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=wWLv_ITyKYc" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="1-john.html">
+        <span class="emoji">❤️</span>
+        <div class="ctitle">❤️ 1 John</div>
+        <div class="cdesc">God is love; walk in the light &mdash; assurance of eternal life through right belief, obedience and love for one another.</div>
+        <div class="meta"><span class="tag">5 Chapters</span><span class="tag">God Is Love</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="l3QkE6nKylM">
+        <span class="tri"></span> 1–3 John overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=l3QkE6nKylM" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; 1–3 John overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="2-john.html">
+        <span class="emoji">💌</span>
+        <div class="ctitle">💌 2 John</div>
+        <div class="cdesc">Walking in truth and love &mdash; a short letter holding the two together while watching out for deceivers.</div>
+        <div class="meta"><span class="tag">1 Chapter</span><span class="tag">Truth &amp; Love</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="l3QkE6nKylM">
+        <span class="tri"></span> 1–3 John overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=l3QkE6nKylM" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; 1–3 John overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="3-john.html">
+        <span class="emoji">📩</span>
+        <div class="ctitle">📩 3 John</div>
+        <div class="cdesc">Faithfulness, hospitality and truth &mdash; commending Gaius, rebuking proud Diotrephes, and welcoming gospel workers.</div>
+        <div class="meta"><span class="tag">1 Chapter</span><span class="tag">Hospitality</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="l3QkE6nKylM">
+        <span class="tri"></span> 1–3 John overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=l3QkE6nKylM" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; 1–3 John overview</span></div>
+    </div>
+
+    <div class="card">
+      <a class="card-link" href="jude.html">
+        <span class="emoji">🛡️</span>
+        <div class="ctitle">🛡️ Jude</div>
+        <div class="cdesc">Contend for the faith &mdash; a sharp warning against false teachers, closing with one of Scripture&rsquo;s great doxologies.</div>
+        <div class="meta"><span class="tag">1 Chapter</span><span class="tag">Contend</span><span class="tag">NIV + KJV</span></div>
+        <span class="open">Open Study &rarr;</span>
+      </a>
+      <button class="bp-toggle" type="button" aria-expanded="false" data-yt="6UoCmakZmys">
+        <span class="tri"></span> BibleProject overview <span class="chev">&#9662;</span>
+      </button>
+      <div class="bp-panel" hidden><div class="bp-embed"></div><a class="bp-watch" href="https://www.youtube.com/watch?v=6UoCmakZmys" target="_blank" rel="noopener">Watch on YouTube &#8599;</a><span class="bp-cap">BibleProject &middot; BibleProject overview</span></div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="foot">
+  Bible Study Library &middot; Built for Christian maturity and small-group study<br>
+  Embedded scripture is public domain (World English Bible). NIV text is linked via
+  <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a>.<br>
+  <em>To God be the glory &mdash; Romans 16:27</em>
+</footer>
+
+<script>
+document.addEventListener('click', function (e) {
+  var btn = e.target.closest('.bp-toggle');
+  if (!btn) return;
+  var card = btn.closest('.card');
+  if (!card) return;
+  var panel = card.querySelector('.bp-panel');
+  var isOpen = card.classList.toggle('open-bp');
+  btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  if (!panel) return;
+  var embed = panel.querySelector('.bp-embed');
+  if (isOpen) {
+    panel.hidden = false;
+    var id = btn.getAttribute('data-yt');
+    if (embed && id && !embed.firstChild) {
+      embed.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id +
+        '?rel=0" title="BibleProject overview" loading="lazy" ' +
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+        'allowfullscreen></iframe>';
+    }
+  } else {
+    panel.hidden = true;
+    if (embed) embed.innerHTML = '';
+  }
+});
+</script>
+
+</body>
+</html>
